@@ -43,8 +43,8 @@ export const rsvp = (() => {
         const invitationType = document.getElementById('form-invitation-type');
         const email = document.getElementById('form-email');
         const address = document.getElementById('form-address');
-        const isAttending = presence && presence.value === '1';
-        const message = isAttending ? document.getElementById('form-message') : document.getElementById('form-message-decline');
+        const isAttending = presence && presence.value === 'attending';
+        const message = document.getElementById('form-message');
         const honeypot = document.getElementById('form-website');
         const alertWrapper = document.getElementById('rsvp-alert');
 
@@ -70,14 +70,13 @@ export const rsvp = (() => {
             return;
         }
 
-        if (presence && presence.value === '0') {
+        if (!presence || !presence.value) {
             alertWrapper.innerHTML = alertMarkup('warning', 'Please select your attendance status.<br><span style="font-size: 0.85rem; letter-spacing: 0.1rem;">請選擇是否出席</span>');
             return;
         }
 
-        // Check invitation preference if attending
-        if (isAttending && invitationType && (!invitationType.value || invitationType.value === '')) {
-            alertWrapper.innerHTML = alertMarkup('warning', 'Please select your invitation preference.<br><span style="font-size: 0.85rem; letter-spacing: 0.1rem;">請選擇喜帖寄送方式</span>');
+        if (isAttending && (!guestCount || !guestCount.value)) {
+            alertWrapper.innerHTML = alertMarkup('warning', 'Please select your party size.<br><span style="font-size: 0.85rem; letter-spacing: 0.1rem;">請選擇同行人數</span>');
             return;
         }
 
@@ -93,7 +92,9 @@ export const rsvp = (() => {
         // Disable form
         const btn = util.disableButton(button, 'Sending... 送出中...', true);
         [name, presence, ...attendanceOptions, guestCount, ...partyOptions, invitationType, ...invitationOptions, email, address, message].forEach((el) => {
-            if (el) el.disabled = true;
+            if (el) {
+                el.disabled = true;
+            }
         });
 
         try {
@@ -105,11 +106,11 @@ export const rsvp = (() => {
 
             const body = new URLSearchParams({
                 name: name.value.trim(),
-                attendance: presence ? (presence.value === '1' ? 'yes' : 'no') : 'yes',
-                guest_count: guestCount ? guestCount.value : '1',
-                invitation_type: invitationType ? invitationType.value : '',
-                email: email ? email.value.trim() : '',
-                address: address ? address.value.trim() : '',
+                attendance: isAttending ? 'yes' : 'no',
+                guest_count: isAttending && guestCount ? guestCount.value : '1',
+                invitation_type: isAttending && invitationType ? invitationType.value : '',
+                email: isAttending && email ? email.value.trim() : '',
+                address: isAttending && address ? address.value.trim() : '',
                 message: message ? message.value.trim() : '',
                 recaptcha_token: recaptchaToken,
             });
@@ -127,11 +128,10 @@ export const rsvp = (() => {
             } else {
                 alertWrapper.innerHTML = '';
                 information.set('name', name.value.trim());
-                information.set('presence', presence ? presence.value === '1' : true);
+                information.set('presence', isAttending);
                 information.set('submitted', true);
 
                 // Toggle modal content based on attendance
-                const isAttending = presence && presence.value === '1';
                 document.getElementById('modal-attending').classList.toggle('d-none', !isAttending);
                 document.getElementById('modal-declined').classList.toggle('d-none', isAttending);
 
@@ -147,7 +147,9 @@ export const rsvp = (() => {
         // Re-enable form
         btn.restore();
         [name, presence, ...attendanceOptions, guestCount, ...partyOptions, invitationType, ...invitationOptions, email, address, message].forEach((el) => {
-            if (el) el.disabled = false;
+            if (el) {
+                el.disabled = false;
+            }
         });
     };
 

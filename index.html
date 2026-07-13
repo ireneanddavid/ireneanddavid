@@ -139,55 +139,45 @@
                 </section>
 
                 <!-- Wedding Date & Events -->
-                <section class="bg-white-black position-relative overflow-hidden d-flex flex-column" id="wedding-date" style="min-height: 100vh;">
+                <section class="wedding-day-section bg-white-black position-relative overflow-hidden" id="wedding-date">
                     <img src="./assets/images/placeholder.webp" data-src="./assets/images/wedding-day-bg.jpeg?v=4" alt="bg" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; object-fit: cover; object-position: center 70%; opacity: 0.15; z-index: 0; mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);">
 
-                    <div class="container text-center position-relative pt-4" style="z-index: 1;">
-                        <h2 class="font-esthetic pt-4 mb-1" style="font-size: 2.25rem;">Wedding Day</h2>
-                        <p class="zh-subline mb-4">婚禮資訊</p>
-                        <p class="m-0 fw-bold" style="font-size: 1.35rem;">2026.11.29</p>
-                        <p class="zh-subline mt-1 mb-0">Sunday · 星期日</p>
+                    <div class="wedding-day-content container text-center position-relative" style="z-index: 1;">
+                        <header class="section-header wedding-day-header">
+                            <h2 class="section-header-title wedding-day-title">Wedding Day</h2>
+                            <p class="section-header-subtitle wedding-day-subtitle">婚禮資訊</p>
+                        </header>
+                        <div class="wedding-date-group">
+                            <p class="wedding-date mb-0">2026.11.29</p>
+                            <p class="wedding-day mb-0">Sunday · 星期日</p>
+                        </div>
 
-                        <hr class="mx-auto my-3 opacity-25" style="max-width: 120px;">
+                        <div class="wedding-countdown border">
+                            <div class="wedding-countdown-item"><span id="day">0</span><small>Days</small></div>
+                            <div class="wedding-countdown-item"><span id="hour">0</span><small>Hrs</small></div>
+                            <div class="wedding-countdown-item"><span id="minute">0</span><small>Min</small></div>
+                            <div class="wedding-countdown-item"><span id="second">0</span><small>Sec</small></div>
+                        </div>
 
-                        <div class="wedding-countdown border rounded-pill shadow-sm py-1 px-2 mb-4">
-                            <div class="row justify-content-center">
-                                <div class="col-3 p-1">
-                                    <p class="d-inline m-0 p-0" style="font-size: 1.1rem;" id="day">0</p><small class="ms-1 me-0 my-0 p-0 d-inline">Days</small>
-                                </div>
-                                <div class="col-3 p-1">
-                                    <p class="d-inline m-0 p-0" style="font-size: 1.1rem;" id="hour">0</p><small class="ms-1 me-0 my-0 p-0 d-inline">Hrs</small>
-                                </div>
-                                <div class="col-3 p-1">
-                                    <p class="d-inline m-0 p-0" style="font-size: 1.1rem;" id="minute">0</p><small class="ms-1 me-0 my-0 p-0 d-inline">Min</small>
-                                </div>
-                                <div class="col-3 p-1">
-                                    <p class="d-inline m-0 p-0" style="font-size: 1.1rem;" id="second">0</p><small class="ms-1 me-0 my-0 p-0 d-inline">Sec</small>
-                                </div>
+                        <div class="wedding-schedule">
+                            <div class="wedding-schedule-item" data-aos="fade-right" data-aos-duration="1500">
+                                <p class="wedding-schedule-time mb-1">11:30 AM</p>
+                                <h3 class="wedding-schedule-label mb-1">Guest Check-in</h3>
+                                <p class="wedding-schedule-zh mb-0">賓客報到</p>
+                            </div>
+                            <div class="wedding-schedule-item" data-aos="fade-left" data-aos-duration="1500">
+                                <p class="wedding-schedule-time mb-1">12:00 PM</p>
+                                <h3 class="wedding-schedule-label mb-1">Reception</h3>
+                                <p class="wedding-schedule-zh mb-0">宴客開始</p>
                             </div>
                         </div>
 
-                        <div class="overflow-x-hidden mb-3">
-                            <div class="py-2" data-aos="fade-right" data-aos-duration="1500">
-                                <p class="m-0 fw-bold" style="font-size: 1.35rem;">11:30 AM</p>
-                                <h3 class="font-esthetic m-0 pt-1" style="font-size: 1.7rem;">Guest Check-in</h3>
-                                <p class="zh-subline mb-0">賓客報到</p>
-                            </div>
-                            <div class="py-2" data-aos="fade-left" data-aos-duration="1500">
-                                <p class="m-0 fw-bold" style="font-size: 1.35rem;">12:00 PM</p>
-                                <h3 class="font-esthetic m-0 pt-1" style="font-size: 1.7rem;">Reception</h3>
-                                <p class="zh-subline mb-0">宴客開始</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="container text-center position-relative pb-4" style="z-index: 1;">
-                        <div class="py-2" data-aos="fade-down" data-aos-duration="1500">
-                            <p class="fw-bold mb-0" style="font-size: 1rem;">Taipei Marriott Hotel</p>
-                            <p class="mb-0" style="font-size: 0.85rem; letter-spacing: 0.1rem;">台北萬豪酒店</p>
-                            <p class="mb-3" style="font-size: 0.85rem;">36F <span style="letter-spacing: 0.1rem;">寰宇廳</span></p>
-                            <div class="d-flex flex-column align-items-center gap-2">
-                                <button class="btn btn-sm rounded-pill px-4" style="border: 1px solid #b8976a; color: #fff; background-color: #b8976a;" data-calendar="true"
+                        <div class="wedding-venue-block" data-aos="fade-down" data-aos-duration="1500">
+                            <p class="wedding-venue-en mb-0">Taipei Marriott Hotel</p>
+                            <p class="wedding-venue-zh mb-0">台北萬豪酒店 · 36F 寰宇廳</p>
+                            <div class="wedding-actions d-flex flex-column align-items-center">
+                                <a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" class="wedding-map-link"><i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i>View on Google Maps</a>
+                                <button class="add-calendar-button btn btn-sm rounded-pill px-4" data-calendar="true"
                                     data-cal-title="Wedding of Minchi & David"
                                     data-cal-start="2026-11-29 11:30"
                                     data-cal-end="2026-11-29 15:00"
@@ -195,7 +185,6 @@
                                     data-cal-details="We look forward to celebrating with you!">
                                     <i class="fa-regular fa-calendar-plus me-1" aria-hidden="true"></i>Add to Calendar
                                 </button>
-                                <a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" style="font-size: 0.8rem; color: #b8976a; text-decoration: none;"><i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i>View on Google Maps</a>
                             </div>
                         </div>
                     </div>
@@ -204,9 +193,9 @@
                 <!-- Our Story -->
                 <section class="story-section bg-light-dark position-relative py-5" id="our-story">
                     <div class="container px-3">
-                        <header class="text-center mb-4">
-                            <h2 class="font-esthetic mb-1" style="font-size: 2.5rem;">Our Story</h2>
-                            <p class="zh-subline mb-0">我們的故事</p>
+                        <header class="section-header text-center mb-4">
+                            <h2 class="section-header-title">Our Story</h2>
+                            <p class="section-header-subtitle">我們的故事</p>
                         </header>
 
                         <img src="./assets/images/placeholder.webp" data-src="./assets/images/our-story.jpeg" alt="Minchi and David sharing a moment" data-image-modal role="button" tabindex="0" aria-label="Open Our Story photo" class="story-hero w-100 shadow-sm cursor-pointer mb-5">
@@ -279,7 +268,10 @@
                     <div class="container">
                         <div class="border rounded-5 shadow p-3">
 
-                            <h2 class="font-esthetic text-center py-2 m-0" style="font-size: 2.25rem;">Gallery</h2>
+                            <header class="section-header text-center py-2">
+                                <h2 class="section-header-title">Gallery</h2>
+                                <p class="section-header-subtitle">婚紗相簿</p>
+                            </header>
 
                             <!-- TODO: Replace gallery images -->
                             <div id="carousel-image-one" data-aos="fade-up" data-aos-duration="1500" class="carousel slide mt-4" data-bs-ride="carousel">
@@ -349,7 +341,10 @@
                 <section class="rsvp-section my-0 pt-3 position-relative overflow-hidden" id="rsvp" style="min-height: 100vh;">
                     <img src="./assets/images/placeholder.webp" data-src="./assets/images/rsvp-bg.jpeg" alt="bg" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: 0; mask-image: linear-gradient(to bottom, transparent, black 15%, black 60%, transparent 100%);">
                     <div class="container position-relative px-4" style="z-index: 1;">
-                        <h2 class="font-esthetic text-center mt-2 mb-1" style="font-size: 2.25rem;">RSVP</h2>
+                        <header class="section-header text-center mt-2 mb-1">
+                            <h2 class="section-header-title">RSVP</h2>
+                            <p class="section-header-subtitle">回覆出席</p>
+                        </header>
                         <p class="text-center mb-1" style="font-size: 1rem;">We'd love to celebrate with you.</p>
                         <p class="text-center mb-4" style="font-size: 0.9rem; font-weight: 500; letter-spacing: 0.1rem;">誠摯邀請您與我們一同見證這美好的時刻。</p>
 
@@ -358,44 +353,48 @@
                                 background: rgba(255,255,255,0.3) !important;
                                 border: 1px solid #b8976a !important;
                                 color: inherit !important;
+                                font-size: 16px !important;
+                                font-weight: 400;
+                                line-height: 1.4;
                             }
-                            .rsvp-input::placeholder { color: rgba(0,0,0,0.4) !important; font-size: 0.85rem !important; }
+                            .rsvp-input::placeholder { color: rgba(0,0,0,0.4) !important; font-size: 16px !important; font-weight: 400; line-height: 1.4; }
                             .rsvp-input:focus { box-shadow: 0 0 0 0.2rem rgba(184,151,106,0.3) !important; }
                             select.rsvp-input { font-size: 0.85rem !important; }
                             html[data-bs-theme="dark"] .rsvp-input { background: rgba(0,0,0,0.3) !important; }
                             html[data-bs-theme="dark"] .rsvp-input::placeholder { color: rgba(255,255,255,0.4) !important; }
-                            .rsvp-conditional { display: none !important; }
-                            .rsvp-conditional.show { display: block !important; }
+                            .rsvp-conditional { max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: max-height 220ms ease, opacity 200ms ease, transform 200ms ease; }
+                            .rsvp-conditional:not(.show) { margin-top: 0 !important; margin-bottom: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; border-width: 0 !important; }
+                            .rsvp-conditional.show { max-height: 1200px; opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
                         </style>
 
                         <section>
                             <div class="rsvp-field">
                                 <label for="form-name" class="rsvp-field-label">
-                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-person" aria-hidden="true"></i><span>Name</span><span class="rsvp-field-subheading">姓名</span></span>
+                                    <span class="rsvp-field-heading bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-person" aria-hidden="true"></i><span class="bilingual-field-label-en">Name</span><span class="rsvp-field-subheading bilingual-field-label-zh">姓名</span></span>
                                 </label>
                                 <input dir="auto" type="text" class="form-control rounded-4 rsvp-input" id="form-name" minlength="2" maxlength="50" placeholder="Name" autocomplete="name" data-offline-disabled="false">
                             </div>
 
-                            <fieldset class="rsvp-field border-0 p-0" id="party-size-field">
+                            <fieldset class="rsvp-field rsvp-conditional border-0 p-0" id="party-size-field">
                                 <legend class="rsvp-field-label">
-                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-users" aria-hidden="true"></i><span>Party Size</span><span class="rsvp-field-subheading">同行人數</span></span>
+                                    <span class="rsvp-field-heading bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-users" aria-hidden="true"></i><span class="bilingual-field-label-en">Party Size</span><span class="rsvp-field-subheading bilingual-field-label-zh">同行人數</span></span>
                                 </legend>
-                                <input type="hidden" id="form-guest-count" value="1">
+                                <input type="hidden" id="form-guest-count" value="">
                                 <div class="rsvp-party-options">
                                     <label class="rsvp-choice rsvp-party-choice rounded-4" for="party-size-1">
-                                        <input class="form-check-input me-2" type="radio" name="party-size-choice" id="party-size-1" value="1" checked>
-                                        <span>1</span>
+                                        <input class="form-check-input me-2" type="radio" name="party-size-choice" id="party-size-1" value="1">
+                                        <span class="rsvp-party-size-text">1</span>
                                     </label>
                                     <label class="rsvp-choice rsvp-party-choice rounded-4" for="party-size-2">
                                         <input class="form-check-input me-2" type="radio" name="party-size-choice" id="party-size-2" value="2">
-                                        <span>2</span>
+                                        <span class="rsvp-party-size-text">2</span>
                                     </label>
                                     <label class="rsvp-choice rsvp-party-choice rounded-4" for="party-size-3">
                                         <input class="form-check-input me-2" type="radio" name="party-size-choice" id="party-size-3" value="3">
-                                        <span>3+</span>
+                                        <span class="rsvp-party-size-text">3+</span>
                                     </label>
                                 </div>
-                                <p class="form-text mt-2 mb-0">Include yourself; for 3+, leave us a message.<span class="rsvp-helper-zh d-block">請包含您本人；超過 3 位請於留言告知。</span></p>
+                                <p class="bilingual-helper-text mt-2 mb-0"><span class="bilingual-helper-text-en">Include yourself; for 3+, leave us a message.</span><span class="bilingual-helper-text-zh">請包含您本人；超過 3 位請於留言告知。</span></p>
                                 <script>
                                     var guestCountEl = document.getElementById('form-guest-count');
                                     document.querySelectorAll('input[name="party-size-choice"]').forEach(function(option) {
@@ -410,23 +409,23 @@
                         <section>
                             <fieldset class="rsvp-field border-0 p-0" id="attendance-field">
                                 <legend class="rsvp-field-label">
-                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-person-circle-question" aria-hidden="true"></i><span>Attendance</span><span class="rsvp-field-subheading">是否出席</span></span>
+                                    <span class="rsvp-field-heading bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-person-circle-question" aria-hidden="true"></i><span class="bilingual-field-label-en">Attendance</span><span class="rsvp-field-subheading bilingual-field-label-zh">是否出席</span></span>
                                 </legend>
-                                <input type="hidden" id="form-presence" value="0">
+                                <input type="hidden" id="form-presence" value="">
 
                                 <label class="rsvp-choice rounded-4 mb-2" for="attendance-yes">
-                                    <input class="form-check-input me-3" type="radio" name="attendance-choice" id="attendance-yes" value="1">
-                                    <span><span class="d-block">Yes, I'd love to attend</span><span class="zh-form-label">我很期待參加</span></span>
+                                    <input class="form-check-input me-3" type="radio" name="attendance-choice" id="attendance-yes" value="attending">
+                                    <span class="bilingual-option-text"><span class="bilingual-option-text-en">Yes, I'd love to attend</span><span class="bilingual-option-text-zh">我很期待參加</span></span>
                                 </label>
 
                                 <label class="rsvp-choice rounded-4" for="attendance-no">
-                                    <input class="form-check-input me-3" type="radio" name="attendance-choice" id="attendance-no" value="2">
-                                    <span><span class="d-block">Sorry, I can't make it</span><span class="zh-form-label">很遺憾無法出席</span></span>
+                                    <input class="form-check-input me-3" type="radio" name="attendance-choice" id="attendance-no" value="declined">
+                                    <span class="bilingual-option-text"><span class="bilingual-option-text-en">Sorry, I can't make it</span><span class="bilingual-option-text-zh">很遺憾無法出席</span></span>
                                 </label>
 
                                 <script>
                                     var presenceEl = document.getElementById('form-presence');
-                                    presenceEl.value = '0';
+                                    presenceEl.value = '';
                                     document.querySelectorAll('input[name="attendance-choice"]').forEach(function(option) {
                                         option.checked = false;
                                         option.addEventListener('change', function() {
@@ -436,9 +435,27 @@
                                     });
                                     presenceEl.addEventListener('change', function() {
                                         var v = this.value;
-                                        document.getElementById('attending-fields').classList.toggle('show', v === '1');
-                                        document.getElementById('not-attending-message').classList.toggle('show', v === '2');
-                                        document.getElementById('rsvp-submit').classList.toggle('show', v !== '0');
+                                        var isAttending = v === 'attending';
+                                        var hasResponded = v === 'attending' || v === 'declined';
+                                        var guestCount = document.getElementById('form-guest-count');
+                                        var invitationType = document.getElementById('form-invitation-type');
+                                        var address = document.getElementById('form-address');
+
+                                        document.querySelectorAll('input[name="party-size-choice"], input[name="paper-choice"]').forEach(function(option) {
+                                            option.checked = false;
+                                        });
+                                        guestCount.value = '';
+                                        invitationType.value = '';
+                                        address.value = '';
+                                        document.getElementById('form-email').value = '';
+                                        document.getElementById('invitation-details').classList.remove('show');
+                                        document.getElementById('field-address').classList.remove('show');
+                                        document.getElementById('rsvp-alert').innerHTML = '';
+
+                                        document.getElementById('party-size-field').classList.toggle('show', isAttending);
+                                        document.getElementById('response-message-field').classList.toggle('show', hasResponded);
+                                        document.getElementById('attending-fields').classList.toggle('show', isAttending);
+                                        document.getElementById('rsvp-submit').classList.toggle('show', hasResponded);
                                     });
                                 </script>
                             </fieldset>
@@ -454,25 +471,18 @@
                         </section>
 
                         <section id="attending-fields" class="rsvp-conditional">
-                            <div class="rsvp-field">
-                                <label for="form-email" class="rsvp-field-label">
-                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-envelope" aria-hidden="true"></i><span>Email (Optional)</span><span class="rsvp-field-subheading">電子郵件（選填）</span></span>
-                                </label>
-                                <input type="email" class="form-control rounded-4 rsvp-input" id="form-email" placeholder="Email address" autocomplete="email" data-offline-disabled="false">
-                            </div>
-
                             <fieldset class="rsvp-field border-0 p-0">
                                 <legend class="rsvp-field-label">
-                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-envelope-circle-check" aria-hidden="true"></i><span>Paper Invitation (Optional)</span><span class="rsvp-field-subheading">紙本喜帖（選填）</span></span>
+                                    <span class="rsvp-field-heading bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-envelope-circle-check" aria-hidden="true"></i><span class="bilingual-field-label-en">Paper Invitation (Optional)</span><span class="rsvp-field-subheading bilingual-field-label-zh">紙本喜帖（選填）</span></span>
                                 </legend>
-                                <input type="hidden" id="form-invitation-type" value="none">
+                                <input type="hidden" id="form-invitation-type" value="">
                                 <label class="rsvp-choice rounded-4 mb-2" for="paper-no">
-                                    <input class="form-check-input me-3" type="radio" name="paper-choice" id="paper-no" value="none" checked>
-                                    <span><span class="d-block">No, thank you</span><span class="zh-form-label">不需要紙本喜帖</span></span>
+                                    <input class="form-check-input me-3" type="radio" name="paper-choice" id="paper-no" value="none">
+                                    <span class="bilingual-option-text"><span class="bilingual-option-text-en">No, thank you</span><span class="bilingual-option-text-zh">不需要紙本喜帖</span></span>
                                 </label>
                                 <label class="rsvp-choice rounded-4" for="paper-yes">
                                     <input class="form-check-input me-3" type="radio" name="paper-choice" id="paper-yes" value="yes-paper">
-                                    <span><span class="d-block">Yes, please mail one</span><span class="zh-form-label">麻煩寄送紙本喜帖</span></span>
+                                    <span class="bilingual-option-text"><span class="bilingual-option-text-en">Yes, please mail one</span><span class="bilingual-option-text-zh">麻煩寄送紙本喜帖</span></span>
                                 </label>
                                 <script>
                                     var invitationTypeEl = document.getElementById('form-invitation-type');
@@ -490,34 +500,28 @@
                             <div id="invitation-details" class="rsvp-conditional">
                                 <div id="field-address" class="rsvp-field rsvp-conditional">
                                     <label for="form-address" class="rsvp-field-label">
-                                        <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-location-dot" aria-hidden="true"></i><span>Address</span><span class="rsvp-field-subheading">收件地址</span></span>
+                                        <span class="rsvp-field-heading bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-location-dot" aria-hidden="true"></i><span class="bilingual-field-label-en">Address</span><span class="rsvp-field-subheading bilingual-field-label-zh">收件地址</span></span>
                                     </label>
                                     <input type="text" class="form-control rounded-4 rsvp-input" id="form-address" placeholder="Mailing address" autocomplete="street-address" data-offline-disabled="false">
-                                    <p class="form-text mb-0">Used only to mail your invitation.</p>
-                                    <p class="rsvp-helper-zh mb-0">地址僅用於寄送喜帖。</p>
+                                    <p class="bilingual-helper-text mb-0"><span class="bilingual-helper-text-en">Used only to mail your invitation.</span><span class="bilingual-helper-text-zh">地址僅用於寄送喜帖。</span></p>
                                 </div>
                             </div>
 
-                            <div class="rsvp-field">
-                                <label for="form-message" class="rsvp-field-label">
-                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-comment" aria-hidden="true"></i><span>Message (Optional)</span><span class="rsvp-field-subheading">留言（選填）</span></span>
+                            <div class="rsvp-field rsvp-email-field">
+                                <label for="form-email" class="rsvp-field-label">
+                                    <span class="rsvp-field-heading bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-envelope" aria-hidden="true"></i><span class="bilingual-field-label-en">Email (Optional)</span><span class="rsvp-field-subheading bilingual-field-label-zh">電子郵件（選填）</span></span>
                                 </label>
-                                <p class="form-text mb-0">Anything you'd like us to know?</p>
-                                <p class="rsvp-helper-zh mb-2">有任何想告訴我們的事嗎？</p>
-                                <textarea dir="auto" class="form-control rounded-4 rsvp-input" id="form-message" rows="4" maxlength="500" placeholder="Additional guests, dietary needs, arrival notes, or a message&#10;同行人數、飲食需求、抵達時間或祝福留言" autocomplete="off" data-offline-disabled="false"></textarea>
+                                <p class="bilingual-helper-text mb-0"><span class="bilingual-helper-text-en">For wedding updates and reminders only.</span><span class="bilingual-helper-text-zh">僅用於寄送婚禮最新消息與行前提醒。</span></p>
+                                <input type="email" class="form-control rounded-4 rsvp-input rsvp-email-input" id="form-email" placeholder="Email address　電子郵件地址" autocomplete="email" data-offline-disabled="false">
                             </div>
                         </section>
 
-                        <section id="not-attending-message" class="rsvp-conditional">
-                            <div class="rsvp-field">
-                                <label for="form-message-decline" class="rsvp-field-label">
-                                    <span class="rsvp-field-heading"><i class="rsvp-field-icon fa-solid fa-comment" aria-hidden="true"></i><span>Message (Optional)</span><span class="rsvp-field-subheading">留言（選填）</span></span>
-                                </label>
-                                <p class="form-text mb-0">Anything you'd like us to know?</p>
-                                <p class="rsvp-helper-zh mb-2">有任何想告訴我們的事嗎？</p>
-                                <textarea dir="auto" class="form-control rounded-4 rsvp-input" id="form-message-decline" rows="4" maxlength="500" placeholder="A short message for the couple&#10;給新人的一句話" autocomplete="off" data-offline-disabled="false"></textarea>
-                            </div>
-                        </section>
+                        <div class="rsvp-field rsvp-conditional" id="response-message-field">
+                            <label for="form-message" class="rsvp-field-label">
+                                <span class="rsvp-field-heading bilingual-field-label"><i class="rsvp-field-icon fa-solid fa-comment" aria-hidden="true"></i><span class="bilingual-field-label-en">Message (Optional)</span><span class="rsvp-field-subheading bilingual-field-label-zh">留言（選填）</span></span>
+                            </label>
+                            <textarea dir="auto" class="form-control rounded-3 rsvp-input rsvp-message-input" id="form-message" rows="4" maxlength="500" placeholder="Leave us a note or well wishes.&#10;想對我們說的話，或任何想讓我們知道的事。" autocomplete="off" data-offline-disabled="false"></textarea>
+                        </div>
 
                         <!-- Honeypot field — hidden from real users, bots fill it -->
                         <div class="rsvp-honeypot" aria-hidden="true">
@@ -528,9 +532,9 @@
                         <div id="rsvp-alert"></div>
 
                         <div id="rsvp-submit" class="d-grid mt-3 rsvp-conditional">
-                            <button class="btn btn-sm rounded-pill m-1" style="background-color: #b8976a; border: none; color: #fff; padding: 8px 30px;" onclick="undangan.rsvp.send(this)" data-offline-disabled="false">
-                                <span class="d-block"><i class="fa-solid fa-paper-plane me-2" aria-hidden="true"></i>Confirm RSVP</span>
-                                <span class="d-block" style="font-size: 0.78rem; letter-spacing: 0.1rem;">確認回覆</span>
+                            <button class="btn btn-sm rounded-pill m-1 rsvp-submit-button" onclick="undangan.rsvp.send(this)" data-offline-disabled="false">
+                                <span class="rsvp-submit-en"><i class="fa-solid fa-paper-plane me-2" aria-hidden="true"></i>Confirm RSVP</span>
+                                <span class="rsvp-submit-zh">確認回覆</span>
                             </button>
                         </div>
                     </div>
