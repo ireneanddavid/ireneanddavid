@@ -282,23 +282,60 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     width: 100%;
     max-width: 100%;
     min-width: 0;
-    margin-bottom: 1.1rem;
+    margin-bottom: 32px;
     box-sizing: border-box;
 }
 
-.rsvp-group {
-    margin-bottom: 1.5rem;
+.rsvp-field-label {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
-.rsvp-group-title {
+.rsvp-field-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 1.05rem;
+    font-size: 22px;
     font-weight: 600;
+    line-height: 1.2;
+}
+
+.rsvp-field-subheading {
+    display: block;
+    margin-top: 6px;
+    margin-bottom: 18px;
+    color: inherit;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.1rem;
+}
+
+.rsvp-field-icon {
+    flex: 0 0 22px;
+    width: 22px !important;
+    height: 22px;
+    font-size: 22px;
+    line-height: 22px;
+    text-align: center;
+    opacity: 0.72;
+}
+
+.rsvp-section .form-text {
+    font-size: 0.9rem;
+    line-height: 1.45;
 }
 
 .rsvp-helper-zh {
     color: var(--bs-secondary-color);
-    font-size: 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
     letter-spacing: 0.08rem;
 }
 
@@ -319,6 +356,8 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     padding: 0.65rem 0.8rem;
     border: 1px solid #b8976a;
     background-color: rgb(255 255 255 / 30%);
+    font-size: 1.1rem;
+    font-weight: 500;
     cursor: pointer;
     transition: background-color 200ms ease, box-shadow 200ms ease;
 }
@@ -345,11 +384,6 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     box-sizing: border-box;
 }
 
-.rsvp-group legend > i {
-    font-size: 0.85rem;
-    opacity: 0.72;
-}
-
 .rsvp-section {
     --bottom-nav-height: 4.25rem;
 
@@ -372,6 +406,17 @@ html[data-bs-theme="dark"] .rsvp-choice {
 .rsvp-choice:has(.form-check-input:checked) {
     background-color: rgb(184 151 106 / 15%);
     box-shadow: 0 0 0 0.15rem rgb(184 151 106 / 25%);
+}
+
+@media screen and (max-width: 360px) {
+    .rsvp-section .form-text,
+    .rsvp-helper-zh {
+        font-size: 0.88rem;
+    }
+
+    .rsvp-choice {
+        font-size: 1rem;
+    }
 }
 
 .img-center-crop {
