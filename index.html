@@ -523,9 +523,11 @@
                     </div>
                 </section>
 
-                <!-- Dress Code -->
-                <section id="transport" class="bg-white-black py-5">
+                <!-- Wedding Guide -->
+                <section id="wedding-guide" class="bg-white-black py-5">
                     <div class="container text-center">
+                        <h2 class="mb-1" style="font-size: 1.5rem;">Wedding Guide</h2>
+                        <p class="mb-4" style="font-size: 0.85rem; letter-spacing: 0.1rem;">婚禮指南</p>
                         <p class="mb-1" style="font-size: 0.95rem;">Semi-formal attire is warmly encouraged.</p>
                         <p class="mb-0" style="font-size: 0.85rem; letter-spacing: 0.1rem;">歡迎以半正式風格服裝出席，<br>享受這場溫暖而輕鬆的聚會。</p>
 
@@ -561,6 +563,17 @@
                 </section>
             </main>
 
+            <script>
+                (function arrangeWeddingSections() {
+                    var main = document.querySelector('main');
+                    var rsvp = document.getElementById('rsvp');
+                    var story = document.getElementById('our-story');
+                    if (main && rsvp && story) {
+                        main.insertBefore(rsvp, story);
+                    }
+                })();
+            </script>
+
             <!-- Navbar Bottom -->
             <nav class="navbar navbar-expand sticky-bottom rounded-top-4 border-top p-0" id="navbar-menu">
                 <ul class="navbar-nav nav-justified w-100 align-items-center">
@@ -577,6 +590,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#rsvp">
+                            <i class="fa-solid fa-envelope-open-text"></i>
+                            <span class="d-block" style="font-size: 0.7rem;">RSVP</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#our-story">
                             <i class="fa-solid fa-heart"></i>
                             <span class="d-block" style="font-size: 0.7rem;">Story</span>
@@ -586,12 +605,6 @@
                         <a class="nav-link" href="#gallery">
                             <i class="fa-solid fa-images"></i>
                             <span class="d-block" style="font-size: 0.7rem;">Gallery</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#rsvp">
-                            <i class="fa-solid fa-envelope-open-text"></i>
-                            <span class="d-block" style="font-size: 0.7rem;">RSVP</span>
                         </a>
                     </li>
                 </ul>
