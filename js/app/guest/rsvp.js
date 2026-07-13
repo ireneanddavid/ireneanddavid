@@ -36,6 +36,9 @@ export const rsvp = (() => {
     const send = async (button) => {
         const name = document.getElementById('form-name');
         const presence = document.getElementById('form-presence');
+        const attendanceOptions = Array.from(document.querySelectorAll('input[name="attendance-choice"]'));
+        const partyOptions = Array.from(document.querySelectorAll('input[name="party-size-choice"]'));
+        const invitationOptions = Array.from(document.querySelectorAll('input[name="paper-choice"]'));
         const guestCount = document.getElementById('form-guest-count');
         const invitationType = document.getElementById('form-invitation-type');
         const email = document.getElementById('form-email');
@@ -89,7 +92,7 @@ export const rsvp = (() => {
 
         // Disable form
         const btn = util.disableButton(button, 'Sending... 送出中...', true);
-        [name, presence, guestCount, invitationType, email, address, message].forEach((el) => {
+        [name, presence, ...attendanceOptions, guestCount, ...partyOptions, invitationType, ...invitationOptions, email, address, message].forEach((el) => {
             if (el) el.disabled = true;
         });
 
@@ -143,7 +146,7 @@ export const rsvp = (() => {
 
         // Re-enable form
         btn.restore();
-        [name, presence, guestCount, invitationType, email, address, message].forEach((el) => {
+        [name, presence, ...attendanceOptions, guestCount, ...partyOptions, invitationType, ...invitationOptions, email, address, message].forEach((el) => {
             if (el) el.disabled = false;
         });
     };

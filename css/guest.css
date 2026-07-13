@@ -19,6 +19,325 @@ html {
     font-family: 'Noto Naskh Arabic', serif !important;
 }
 
+.zh-subline {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: normal;
+    letter-spacing: 0.1rem;
+}
+
+.zh-form-label {
+    display: block;
+    margin-top: 0.15rem;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: normal;
+    letter-spacing: 0.1rem;
+}
+
+[data-image-modal]:focus-visible {
+    outline: 0.2rem solid #b8976a;
+    outline-offset: 0.2rem;
+}
+
+.home-heading-zh {
+    padding-bottom: 1.25rem;
+    margin-top: 0;
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: 0.08rem;
+}
+
+.home-couple-name {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.85rem;
+    font-weight: 400;
+    letter-spacing: 0.04rem;
+}
+
+.home-couple-name-zh {
+    color: #555;
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: 0.05rem;
+}
+
+html[data-bs-theme="dark"] .home-couple-name-zh {
+    color: #aaa;
+}
+
+.wedding-hero {
+    min-height: 100vh;
+}
+
+.hero-photo {
+    position: relative;
+    left: 0.4rem;
+    width: 13.65rem;
+    height: 13.65rem;
+}
+
+.hero-date {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.02rem;
+}
+
+.hero-venue {
+    color: #555;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.92rem;
+    font-weight: 400;
+    letter-spacing: 0.03rem;
+}
+
+.hero-location-icon {
+    color: #8a704f;
+    font-size: 0.72rem;
+    opacity: 0.7;
+}
+
+html[data-bs-theme="dark"] .hero-venue {
+    color: #aaa;
+}
+
+.hero-info-zh {
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: 0.06rem;
+}
+
+html[data-bs-theme="dark"] .hero-info-zh {
+    color: #aaa;
+}
+
+.invitation-cover {
+    color: #292621;
+    background:
+        radial-gradient(circle at 50% 42%, rgb(255 255 255 / 70%), transparent 48%),
+        #f7f1e6;
+}
+
+.cover-content {
+    width: min(100%, 30rem);
+}
+
+.cover-couple-name {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 2.1rem;
+    font-weight: 400;
+    letter-spacing: 0.06rem;
+}
+
+.cover-couple-name-zh {
+    color: #6e665c;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.06rem;
+}
+
+.cover-photo {
+    border: 1px solid rgb(184 151 106 / 70%);
+}
+
+.cover-divider {
+    width: 3.5rem;
+    height: 1px;
+    background-color: #b8976a;
+}
+
+.cover-date {
+    color: #514a41;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1rem;
+    letter-spacing: 0.08rem;
+}
+
+.cover-open-button {
+    padding: 0.7rem 1.6rem;
+    border: 1px solid #b8976a;
+    color: #fff;
+    background-color: #a98556;
+    box-shadow: 0 0.5rem 1.5rem rgb(78 61 40 / 15%);
+    font-size: 0.9rem;
+    letter-spacing: 0.04rem;
+}
+
+.cover-open-button:hover,
+.cover-open-button:focus-visible {
+    border-color: #8d6d45;
+    color: #fff;
+    background-color: #8d6d45;
+}
+
+.story-section {
+    overflow: hidden;
+}
+
+.story-hero {
+    height: 21rem;
+    border-radius: 1.5rem;
+    object-fit: cover;
+}
+
+.story-kicker,
+.story-role {
+    color: #9a7a50;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16rem;
+    text-transform: uppercase;
+}
+
+.story-profile {
+    max-width: 24rem;
+    margin-inline: auto;
+}
+
+.story-portrait {
+    display: block;
+    width: 10.5rem;
+    height: 10.5rem;
+    border: 1px solid rgb(184 151 106 / 60%);
+    object-fit: cover;
+}
+
+.story-person-name,
+.story-timeline-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.65rem;
+    font-weight: 400;
+    letter-spacing: 0.03rem;
+}
+
+.story-person-name-zh {
+    color: #555;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.06rem;
+}
+
+.story-traits {
+    color: #8a704f;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.9rem;
+}
+
+.story-intro {
+    max-width: 20rem;
+    margin-inline: auto;
+    color: var(--bs-secondary-color);
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.story-heart {
+    color: #b8976a;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 2.25rem;
+}
+
+.story-timeline {
+    border: 1px solid rgb(184 151 106 / 25%);
+    border-radius: 1.5rem;
+    box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 7%);
+}
+
+.story-step {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid #b8976a;
+    color: #8a704f;
+    background-color: var(--bs-body-bg);
+}
+
+.story-read-button {
+    border: 1px solid #b8976a;
+    color: #fff;
+    background-color: #a98556;
+}
+
+.story-read-button:hover,
+.story-read-button:focus-visible {
+    border-color: #8d6d45;
+    color: #fff;
+    background-color: #8d6d45;
+}
+
+html[data-bs-theme="dark"] .story-person-name-zh {
+    color: #aaa;
+}
+
+.rsvp-field {
+    margin-bottom: 1.5rem;
+}
+
+.rsvp-group {
+    margin-bottom: 2rem;
+}
+
+.rsvp-group-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.rsvp-helper-zh {
+    color: var(--bs-secondary-color);
+    font-size: 0.75rem;
+    letter-spacing: 0.08rem;
+}
+
+.rsvp-party-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.rsvp-choice {
+    display: flex;
+    align-items: center;
+    min-height: 4.5rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid #b8976a;
+    background-color: rgb(255 255 255 / 30%);
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+    transition: background-color 200ms ease, box-shadow 200ms ease;
+}
+
+.rsvp-choice .form-check-input {
+    flex: 0 0 auto;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-color: #b8976a;
+}
+
+.rsvp-choice .form-check-input:checked {
+    border-color: #b8976a;
+    background-color: #b8976a;
+}
+
+.rsvp-party-choice {
+    justify-content: center;
+    min-height: 3.5rem;
+    padding: 0.65rem;
+    font-weight: 600;
+}
+
+html[data-bs-theme="dark"] .rsvp-choice {
+    background-color: rgb(0 0 0 / 30%);
+}
+
+.rsvp-choice:has(.form-check-input:checked) {
+    background-color: rgb(184 151 106 / 15%);
+    box-shadow: 0 0 0 0.15rem rgb(184 151 106 / 25%);
+}
+
 .img-center-crop {
     width: 13rem;
     height: 13rem;

@@ -35,7 +35,7 @@ export const openAnimation = (until = 15) => {
     const animationEnd = Date.now() + duration;
 
     const heart = heartShape();
-    const colors = ['#FFC0CB', '#FF1493', '#C71585'];
+    const colors = ['#FFC0CB', '#C71585'];
 
     const randomInRange = (min, max) => {
         return Math.random() * (max - min) + min;
@@ -45,20 +45,21 @@ export const openAnimation = (until = 15) => {
         const timeLeft = animationEnd - Date.now();
 
         colors.forEach((color) => {
+            const fromLeft = Math.random() < 0.5;
             window.confetti({
                 particleCount: 1,
                 startVelocity: 0,
                 ticks: Math.max(50, 75 * (timeLeft / duration)),
                 origin: {
-                    x: Math.random(),
+                    x: fromLeft ? randomInRange(0, 0.22) : randomInRange(0.78, 1),
                     y: Math.abs(Math.random() - (timeLeft / duration)),
                 },
                 zIndex: zIndex,
                 colors: [color],
                 shapes: [heart],
                 drift: randomInRange(-0.5, 0.5),
-                gravity: randomInRange(0.5, 1),
-                scalar: randomInRange(0.5, 1),
+                gravity: randomInRange(0.35, 0.7),
+                scalar: randomInRange(0.45, 0.8),
             });
         });
 

@@ -191,6 +191,22 @@ export const guest = (() => {
     };
 
     /**
+     * Make modal images available to mouse and keyboard users.
+     * @returns {void}
+     */
+    const modalImageTriggers = () => {
+        document.querySelectorAll('[data-image-modal]').forEach((img) => {
+            img.addEventListener('click', () => modal(img));
+            img.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    modal(img);
+                }
+            });
+        });
+    };
+
+    /**
      * @returns {void}
      */
     const modalImageClick = () => {
@@ -236,7 +252,7 @@ export const guest = (() => {
      * @returns {void}
      */
     const buildCalendarLinks = () => {
-        const calBtn = document.querySelector('#home button[data-calendar]');
+        const calBtn = document.querySelector('button[data-calendar]');
         if (!calBtn) {
             return;
         }
@@ -343,6 +359,7 @@ export const guest = (() => {
         countDownDate();
         showGuestName();
         modalImageClick();
+        modalImageTriggers();
         buildCalendarLinks();
 
         // Don't restore previous attendance — always start fresh at "Select"
