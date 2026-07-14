@@ -171,11 +171,13 @@ body {
     font-weight: var(--type-hero-heading-zh-weight);
     line-height: var(--type-line-bilingual);
     letter-spacing: var(--type-hero-heading-zh-tracking);
+    transform: translateX(0.5em);
 }
 
 .hero-announcement {
     font-size: var(--type-hero-announcement-size);
     font-weight: var(--type-weight-medium);
+    transform: translateX(-6px);
 }
 
 .home-couple-name {
