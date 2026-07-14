@@ -125,7 +125,7 @@
     --space-countdown-schedule: clamp(20px, 2.6vh, 28px);
     --space-schedule-venue: clamp(20px, 2.6vh, 28px);
     --space-venue-map: 8px;
-    --space-map-calendar: clamp(14px, 2vh, 20px);
+    --space-map-calendar: 24px;
 }
 
 html {
@@ -276,7 +276,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
     align-items: center;
     justify-content: flex-start;
     padding-top: clamp(56px, 8vh, 84px);
-    padding-bottom: clamp(40px, 5vh, 64px);
+    padding-bottom: clamp(80px, 12vh, 120px);
     box-sizing: border-box;
 }
 
