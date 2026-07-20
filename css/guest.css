@@ -1,10 +1,19 @@
 @import url("common.css");
 @import url("animation.css");
 
+@font-face {
+    font-family: 'Zen Maru Gothic';
+    src: url('../assets/fonts/ZenMaruGothic-SoftChinese.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     /* Typography families */
     --font-script: 'Sacramento', cursive;
     --font-sans-zh: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Heiti TC', sans-serif;
+    --font-soft-zh: 'Zen Maru Gothic', 'Noto Sans TC', 'PingFang TC', sans-serif;
     --font-sans: 'Josefin Sans', var(--font-sans-zh);
     --font-serif: Georgia, 'Times New Roman', serif;
     --font-arabic: 'Noto Naskh Arabic', serif;
@@ -38,22 +47,23 @@
     --type-section-title-weight: var(--type-weight-regular);
     --type-section-title-line: var(--type-line-solid);
     --type-section-subtitle-size: 18px;
-    --type-section-subtitle-weight: var(--type-weight-semibold);
+    --type-section-subtitle-weight: var(--type-weight-regular);
     --type-section-subtitle-line: var(--type-line-ui);
-    --type-section-subtitle-tracking: var(--type-tracking-2xl);
+    --type-section-subtitle-tracking: var(--type-tracking-lg);
 
     /* Cover and hero */
     --type-cover-name-size: 2.1rem;
-    --type-cover-name-zh-size: 1rem;
-    --type-cover-date-size: 1rem;
+    --type-cover-name-zh-size: var(--type-hero-name-zh-size);
+    --type-cover-copy-size: 0.94rem;
     --type-cover-action-size: 0.9rem;
     --type-desktop-title-size: 2rem;
     --type-desktop-date-size: 1rem;
-    --type-hero-name-size: 1.85rem;
-    --type-hero-name-zh-size: 1.15rem;
+    --type-hero-name-size: var(--type-story-name-size);
+    --type-hero-name-zh-size: var(--type-story-name-zh-size);
     --type-hero-date-size: 1.05rem;
-    --type-hero-venue-size: 0.92rem;
-    --type-hero-venue-zh-size: 0.9rem;
+    --type-hero-weekday-size: 0.9rem;
+    --type-hero-venue-size: 0.82rem;
+    --type-hero-venue-zh-size: 0.8rem;
 
     /* Wedding information */
     --bottom-nav-height: 4.25rem;
@@ -71,7 +81,8 @@
     --type-action-size: 16px;
 
     /* Story */
-    --type-story-kicker-size: 0.75rem;
+    --type-story-kicker-size: 2rem;
+    --type-story-role-size: 0.75rem;
     --type-story-name-size: 1.65rem;
     --type-story-name-zh-size: 1rem;
     --type-story-supporting-size: 0.9rem;
@@ -81,10 +92,10 @@
     --type-body-size: 1rem;
 
     /* RSVP */
-    --type-field-label-en-size: 18px;
-    --type-field-label-zh-size: 15px;
-    --type-option-en-size: 17px;
-    --type-option-zh-size: 15px;
+    --type-field-label-en-size: 14px;
+    --type-field-label-zh-size: 16px;
+    --type-option-en-size: 14px;
+    --type-option-zh-size: 16px;
     --type-helper-size: 13px;
     --type-input-size: 16px;
     --type-submit-en-size: 17px;
@@ -94,7 +105,11 @@
     --type-guide-question-size: 1.05rem;
     --type-guide-answer-size: 0.95rem;
     --type-guide-answer-zh-size: 0.9rem;
-    --type-footer-message-size: 0.95rem;
+    --type-footer-message-size: 0.9rem;
+    --type-footer-message-zh-size: 0.82rem;
+    --type-footer-name-size: 1.5rem;
+    --type-footer-quote-size: 0.86rem;
+    --type-footer-credit-size: 0.72rem;
     --type-modal-title-size: 2rem;
     --type-modal-signature-size: 1.5rem;
     --type-modal-body-size: 0.95rem;
@@ -147,13 +162,9 @@ body {
     font-family: var(--font-arabic) !important;
 }
 
-.home-heading-zh,
-.home-couple-name-zh,
 .hero-info-zh,
-.section-header-subtitle,
 .wedding-schedule-zh,
 .wedding-venue-zh,
-.story-person-name-zh,
 .zh-subline,
 .story-milestone-body,
 .rsvp-intro-zh,
@@ -163,12 +174,20 @@ body {
 .rsvp-submit-zh,
 .wedding-guide-question-zh,
 .wedding-guide-answer-zh,
-.footer-message-zh,
-.cover-couple-name-zh,
 .rsvp-modal-zh-primary,
 .rsvp-modal-zh-secondary,
 .validation-message-zh {
     font-family: var(--font-sans-zh);
+}
+
+.home-couple-name-zh,
+.story-person-name-zh,
+.cover-couple-name-zh,
+.home-heading-zh,
+.section-header-subtitle,
+.cover-invitation-copy-zh,
+.footer-message-zh {
+    font-family: var(--font-soft-zh);
 }
 
 .zh-subline {
@@ -184,8 +203,8 @@ body {
 }
 
 .home-heading-zh {
-    padding-bottom: 1.25rem;
-    margin-top: 0;
+    padding: 0;
+    margin: 0.7rem 0 0;
     color: var(--bs-secondary-color);
     font-size: var(--type-section-subtitle-size);
     font-weight: var(--type-section-subtitle-weight);
@@ -195,6 +214,7 @@ body {
 }
 
 .hero-announcement {
+    margin: 0;
     font-family: var(--font-script);
     font-size: var(--type-section-title-size);
     font-weight: var(--type-section-title-weight);
@@ -203,6 +223,7 @@ body {
 }
 
 .home-couple-name {
+    margin: 2rem 0 0;
     font-family: var(--font-script);
     font-size: var(--type-hero-name-size);
     font-weight: var(--type-weight-regular);
@@ -210,9 +231,10 @@ body {
 }
 
 .home-couple-name-zh {
+    margin: 0.4rem 0 0;
     color: #555;
     font-size: var(--type-hero-name-zh-size);
-    font-weight: var(--type-weight-medium);
+    font-weight: var(--type-weight-regular);
     line-height: var(--type-line-compact);
     letter-spacing: var(--type-tracking-lg);
 }
@@ -225,20 +247,38 @@ html[data-bs-theme="dark"] .home-couple-name-zh {
     min-height: 100vh;
 }
 
+.hero-content {
+    padding: 5.5rem 0 4.5rem;
+}
+
 .hero-photo {
     position: relative;
     left: 0.4rem;
     width: 13.65rem;
     height: 13.65rem;
+    margin-top: 2.5rem;
 }
 
 .hero-date {
+    margin: 0;
+    font-family: var(--font-sans);
     font-size: var(--type-hero-date-size);
     font-weight: var(--type-weight-semibold);
     letter-spacing: var(--type-tracking-xs);
 }
 
+.hero-weekday {
+    margin: 0.35rem 0 0;
+    color: #555;
+    font-family: var(--font-sans);
+    font-size: var(--type-hero-weekday-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-ui);
+    letter-spacing: var(--type-tracking-sm);
+}
+
 .hero-venue {
+    margin: 0.9rem 0 0;
     color: #555;
     font-family: var(--font-sans);
     font-size: var(--type-hero-venue-size);
@@ -256,7 +296,12 @@ html[data-bs-theme="dark"] .hero-venue {
     color: #aaa;
 }
 
+html[data-bs-theme="dark"] .hero-weekday {
+    color: #aaa;
+}
+
 .hero-info-zh {
+    margin: 0.25rem 0 0;
     color: #555;
     font-size: var(--type-hero-venue-zh-size);
     font-weight: var(--type-weight-medium);
@@ -268,6 +313,14 @@ html[data-bs-theme="dark"] .hero-info-zh {
     color: #aaa;
 }
 
+.hero-event-info {
+    margin-top: 2rem;
+}
+
+.hero-scroll-indicator {
+    margin-top: 2.75rem;
+}
+
 .section-header-title {
     margin: 0;
     font-family: var(--font-script);
@@ -277,9 +330,9 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .section-header-subtitle {
-    margin: 6px 0 0;
+    margin: 0;
     color: var(--bs-secondary-color);
-    font-family: var(--font-sans-zh);
+    font-family: var(--font-soft-zh);
     font-size: var(--type-section-subtitle-size);
     font-weight: var(--type-section-subtitle-weight);
     line-height: var(--type-section-subtitle-line);
@@ -318,6 +371,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .wedding-day-subtitle {
+    margin-top: 0.7rem;
     color: var(--bs-secondary-color);
     font-size: var(--type-wedding-subtitle-size);
 }
@@ -490,6 +544,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .cover-couple-name {
+    margin: 0;
     font-family: var(--font-script);
     font-size: var(--type-cover-name-size);
     font-weight: var(--type-weight-regular);
@@ -497,26 +552,43 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .cover-couple-name-zh {
-    color: #6e665c;
+    margin: 0.25rem 0 1.75rem;
+    color: rgb(41 38 33 / 58%);
     font-size: var(--type-cover-name-zh-size);
     font-weight: var(--type-weight-regular);
     letter-spacing: var(--type-tracking-xl);
 }
 
 .cover-photo {
+    margin-bottom: 1.75rem;
     border: 1px solid rgb(184 151 106 / 70%);
 }
 
 .cover-divider {
-    width: 3.5rem;
-    height: 1px;
-    background-color: #b8976a;
+    width: 2.25rem;
+    height: 0;
+    border-top: 1px solid rgb(184 151 106 / 65%);
+    transform: scaleY(0.5);
 }
 
-.cover-date {
+.cover-invitation-copy {
+    max-width: 18rem;
+    margin: 1.6rem 0 1.75rem;
     color: #514a41;
     font-family: var(--font-sans);
-    font-size: var(--type-cover-date-size);
+    font-size: var(--type-cover-copy-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-relaxed);
+    letter-spacing: var(--type-tracking-xs);
+    text-align: center;
+}
+
+.cover-invitation-copy span {
+    display: block;
+}
+
+.cover-invitation-copy-zh {
+    font-family: var(--font-soft-zh);
     letter-spacing: var(--type-tracking-2xl);
 }
 
@@ -549,10 +621,18 @@ html[data-bs-theme="dark"] .hero-info-zh {
     object-fit: cover;
 }
 
-.story-kicker,
+.story-kicker {
+    color: #9a7a50;
+    font-family: var(--font-script);
+    font-size: var(--type-story-kicker-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-solid);
+    letter-spacing: var(--type-tracking-sm);
+}
+
 .story-role {
     color: #9a7a50;
-    font-size: var(--type-story-kicker-size);
+    font-size: var(--type-story-role-size);
     font-weight: var(--type-weight-semibold);
     letter-spacing: var(--type-tracking-5xl);
     text-transform: uppercase;
@@ -589,7 +669,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
 .story-person-name-zh {
     color: #555;
     font-size: var(--type-story-name-zh-size);
-    font-weight: var(--type-weight-medium);
+    font-weight: var(--type-weight-regular);
     letter-spacing: var(--type-tracking-xl);
 }
 
@@ -665,24 +745,28 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     width: 100%;
     max-width: 100%;
     min-width: 0;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
     box-sizing: border-box;
 }
 
 .rsvp-intro-en {
-    font-size: var(--type-cover-name-zh-size);
+    color: var(--bs-secondary-color);
+    font-size: 14px;
+    font-weight: var(--type-weight-regular);
+    opacity: 0.72;
 }
 
 .rsvp-intro-zh {
-    font-size: var(--type-story-supporting-size);
+    color: inherit;
+    font-size: 16px;
     font-weight: var(--type-weight-medium);
-    letter-spacing: var(--type-tracking-3xl);
+    letter-spacing: var(--type-tracking-lg);
 }
 
 .rsvp-field-label {
     display: block;
     width: 100%;
-    margin: 0 0 12px;
+    margin: 0 0 7px;
     padding: 0;
     color: inherit;
     font-family: var(--font-sans);
@@ -690,43 +774,36 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 
 .bilingual-field-label {
     display: flex;
-    flex-wrap: nowrap;
-    align-items: baseline;
-    gap: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
     font-family: var(--font-sans);
 }
 
 .bilingual-field-label-en {
     min-width: 0;
+    color: var(--bs-secondary-color);
     font-size: var(--type-field-label-en-size);
-    font-weight: var(--type-weight-semibold);
+    font-weight: var(--type-weight-regular);
     line-height: var(--type-line-compact);
+    opacity: 0.72;
 }
 
 .bilingual-field-label-zh {
-    display: inline;
-    flex: 0 0 auto;
+    display: block;
     margin: 0;
-    color: var(--bs-secondary-color);
-    font-family: var(--font-sans);
+    order: -1;
+    color: inherit;
+    font-family: var(--font-sans-zh);
     font-size: var(--type-field-label-zh-size);
     font-weight: var(--type-weight-medium);
     line-height: var(--type-line-compact);
     letter-spacing: var(--type-tracking-lg);
 }
 
-.rsvp-field-icon {
-    flex: 0 0 var(--type-icon-field-size);
-    width: var(--type-icon-field-size) !important;
-    height: var(--type-icon-field-size);
-    font-size: var(--type-icon-field-size);
-    line-height: var(--type-icon-field-size);
-    align-self: center;
-    text-align: center;
-    opacity: 0.72;
-}
-
 .bilingual-option-text {
+    display: flex;
+    flex-direction: column;
     min-width: 0;
     font-family: var(--font-sans);
 }
@@ -737,20 +814,27 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .bilingual-option-text-en {
+    color: var(--bs-secondary-color);
     font-size: var(--type-option-en-size);
-    font-weight: var(--type-weight-medium);
+    font-weight: var(--type-weight-regular);
     line-height: var(--type-line-ui);
+    opacity: 0.72;
 }
 
 .bilingual-option-text-zh {
-    margin-top: 4px;
+    order: -1;
+    margin-bottom: 2px;
+    color: inherit;
+    font-family: var(--font-sans-zh);
     font-size: var(--type-option-zh-size);
-    font-weight: var(--type-weight-regular);
+    font-weight: var(--type-weight-medium);
     line-height: var(--type-line-bilingual);
     letter-spacing: var(--type-tracking-lg);
 }
 
 .bilingual-helper-text {
+    display: flex;
+    flex-direction: column;
     color: #625f5a;
     font-family: var(--font-sans);
     font-size: var(--type-helper-size);
@@ -764,8 +848,14 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .bilingual-helper-text-zh {
-    margin-top: 2px;
+    order: -1;
+    font-family: var(--font-sans-zh);
     letter-spacing: var(--type-tracking-lg);
+}
+
+.bilingual-helper-text-en {
+    margin-top: 2px;
+    opacity: 0.68;
 }
 
 .rsvp-input,
@@ -774,6 +864,67 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     font-size: var(--type-input-size) !important;
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-input);
+}
+
+.rsvp-input {
+    min-height: 40px;
+    padding: 0.5rem 0.85rem;
+    line-height: var(--type-line-ui);
+}
+
+.rsvp-name-field {
+    margin-bottom: 36px;
+}
+
+.rsvp-name-input-wrap {
+    position: relative;
+}
+
+.rsvp-input.rsvp-name-input {
+    min-height: 52px;
+    padding: 1.55rem 0 0.25rem;
+    border: 0 !important;
+    border-bottom: 1px solid rgb(184 151 106 / 75%) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.rsvp-input.rsvp-name-input:focus {
+    border-bottom-color: #9f7b4d !important;
+    box-shadow: none !important;
+}
+
+.rsvp-name-prompt {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+    transition: opacity 160ms ease;
+}
+
+.rsvp-name-prompt-zh {
+    font-family: var(--font-sans-zh);
+    font-size: var(--type-field-label-zh-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-compact);
+}
+
+.rsvp-name-prompt-en {
+    margin-top: 1px;
+    color: var(--bs-secondary-color);
+    font-family: var(--font-sans);
+    font-size: var(--type-field-label-en-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-compact);
+    opacity: 0.72;
+}
+
+.rsvp-name-input:focus + .rsvp-name-prompt,
+.rsvp-name-input:not(:placeholder-shown) + .rsvp-name-prompt {
+    opacity: 0;
 }
 
 .rsvp-message-input {
@@ -790,11 +941,11 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .rsvp-email-field .rsvp-field-label {
-    margin-bottom: 6px;
+    margin-bottom: 7px;
 }
 
 .rsvp-email-input {
-    margin-top: 8px;
+    margin-top: 0;
 }
 
 .rsvp-submit-button {
@@ -838,8 +989,8 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 .rsvp-choice {
     display: flex;
     align-items: center;
-    min-height: 3.75rem;
-    padding: 0.65rem 0.8rem;
+    min-height: 3.4rem;
+    padding: 0.5rem 0.75rem;
     border: 1px solid #b8976a;
     background-color: rgb(255 255 255 / 30%);
     font-size: var(--type-choice-container-size);
@@ -850,8 +1001,9 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 
 .rsvp-choice .form-check-input {
     flex: 0 0 auto;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1.375rem;
+    height: 1.375rem;
+    margin-right: 0.5rem !important;
     border-color: #b8976a;
 }
 
@@ -1035,21 +1187,97 @@ html[data-bs-theme="dark"] .wedding-guide-map-link {
     color: #d7b98f;
 }
 
+.footer-section {
+    padding: 0 1.5rem 2.75rem;
+}
+
+.footer-closing {
+    padding: 4.5rem 0 4rem;
+}
+
+.footer-closing-copy {
+    max-width: 19rem;
+}
+
 .footer-message {
+    margin: 0;
+    font-family: var(--font-sans);
     font-size: var(--type-footer-message-size);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-relaxed);
+}
+
+.footer-message-zh {
+    margin-top: 0.2rem;
+    color: var(--bs-secondary-color);
+    font-family: var(--font-soft-zh);
+    font-size: var(--type-footer-message-zh-size);
+    font-weight: var(--type-weight-regular);
+    letter-spacing: var(--type-tracking-sm);
+}
+
+.footer-credits {
+    padding: 0 0 1rem;
+}
+
+.footer-divider {
+    width: 4rem;
+    margin: 0 auto 1.5rem;
+    border-color: currentColor;
+    opacity: 0.15;
 }
 
 .footer-kicker {
-    font-size: var(--type-nav-size);
-    letter-spacing: var(--type-tracking-4xl);
+    margin: 0;
+    font-family: var(--font-script);
+    font-size: 1.75rem;
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-solid);
+    opacity: 0.65;
 }
 
-.footer-credit {
-    font-size: var(--type-credit-size);
+.footer-credit-list {
+    margin-top: 1.75rem;
+}
+
+.footer-person-name {
+    margin: 0;
+    font-family: var(--font-script);
+    font-size: var(--type-footer-name-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-solid);
+}
+
+.footer-quote {
+    max-width: 15rem;
+    margin: 0.25rem 0 0;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: var(--font-sans);
+    font-size: var(--type-footer-quote-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-body);
+}
+
+.footer-credit-separator {
+    margin: 1.6rem 0;
+    color: var(--bs-secondary-color);
+    font-family: var(--font-serif);
+    font-size: 0.7rem;
+    line-height: var(--type-line-solid);
+    opacity: 0.55;
 }
 
 .footer-build-credit {
-    font-size: var(--type-credit-small-size);
+    max-width: 8rem;
+    margin-top: 2.75rem;
+    margin-bottom: 0;
+    color: var(--bs-secondary-color);
+    font-family: var(--font-sans);
+    font-size: var(--type-footer-credit-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-body);
+    opacity: 0.72;
 }
 
 .bottom-nav-label {
@@ -1103,10 +1331,6 @@ html[data-bs-theme="dark"] .wedding-guide-map-link {
     font-family: var(--font-script);
     font-size: var(--type-modal-signature-size);
     font-weight: var(--type-weight-regular);
-}
-
-.footer-person-name {
-    font-family: var(--font-script);
 }
 
 .rsvp-section {
@@ -1277,9 +1501,9 @@ html[data-bs-theme="dark"] .bg-white-black {
     }
 
     .wedding-guide-header .section-header-title {
-        max-width: 19rem;
+        max-width: none;
         margin-inline: auto;
-        line-height: 1.08;
+        line-height: var(--type-section-title-line);
         text-wrap: balance;
     }
 

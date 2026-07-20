@@ -29,7 +29,7 @@ Typography is determined by semantic role, not by HTML heading level. Emotional 
 
 The names `Minchi`, `David`, and `Minchi & David`, wherever they appear visibly in the interface, and the Hero announcement `We're getting married` are intentionally handwritten. Together they create a romantic invitation feeling.
 
-This is a deliberate design decision. Do not replace visible English couple or personal names, or the Hero announcement, with Display Serif or Sans-serif during future typography reviews. Chinese names remain Chinese Sans-serif.
+This is a deliberate design decision. Do not replace visible English couple or personal names, or the Hero announcement, with Display Serif or Sans-serif during future typography reviews. Chinese personal names and short emotional display lines use Zen Maru Gothic for a softer rounded tone.
 
 The Hero announcement and its Chinese line use the shared bilingual section-title tokens so they remain visually consistent with the other emotional titles.
 
@@ -44,19 +44,19 @@ Do not use the Display Serif for section titles, dates, times, venues, body text
 Use the Section Script for:
 
 - Couple name on the invitation Cover
-- Couple name in the desktop sidebar and Hero
+- Couple name in the desktop sidebar
 - Personal names in Meet the Couple
 - Couple signatures in RSVP modals
-- Personal names within footer credits; surrounding role descriptions remain Sans-serif
+- Personal names within footer credits
 - Hero announcement: `We're getting married`
 - `Wedding Day`
 - `RSVP`
 - `Our Story`
 - `Meet the Couple`
-- `A Few Things to Know`
+- `Good to Know`
 - `Behind the Scenes`
 
-Within `A Few Things to Know`, only the English section title uses the Section Script. FAQ questions, answers, links, and map text remain Sans-serif.
+Within `Good to Know`, only the English section title uses the Section Script. FAQ questions, answers, links, and map text remain Sans-serif.
 
 Do not use the Section Script for information blocks, descriptions, modal copy other than couple signatures, buttons, or navigation.
 
@@ -74,15 +74,23 @@ Use the primary Sans-serif for:
 
 Sans-serif should account for more than 90% of the website typography.
 
-### 4. Chinese Sans-serif
+### 4. Chinese Typography
 
-All Chinese text must use this dedicated Chinese sans-serif stack:
+Chinese informational and interface text must use this dedicated Chinese sans-serif stack:
 
 ```css
 --font-sans-zh: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Heiti TC', sans-serif;
 ```
 
-Load `Noto Sans TC` explicitly and use `var(--font-sans-zh)` for Chinese text. Never place Chinese inside a Section Script or Brand Font element.
+Chinese personal names (`蔡旻淇`, `郭大為`, `旻淇`, and `大為`) and short emotional display lines are the exceptions. Emotional display lines include the Hero Chinese announcement, Chinese section subtitles, Cover invitation copy, and footer closing message. Load `Zen Maru Gothic` explicitly and use this dedicated rounded stack:
+
+```css
+--font-soft-zh: 'Zen Maru Gothic', 'Noto Sans TC', 'PingFang TC', sans-serif;
+```
+
+Load `Noto Sans TC` explicitly. Load the local subset `assets/fonts/ZenMaruGothic-SoftChinese.woff2` as `Zen Maru Gothic` for Chinese names and emotional display glyphs. Use `var(--font-soft-zh)` only for those roles and `var(--font-sans-zh)` for informational Chinese, body copy, forms, FAQ content, dates, times, and venues. Never place Chinese inside a Section Script or Brand Font element.
+
+Chinese is the primary language in bilingual informational and UI pairs. Place or style Chinese as the dominant line; English is secondary, smaller, lighter, and must not compete. Approved English Section Script titles and visible personal names remain romantic display exceptions rather than informational hierarchy.
 
 Do not apply a global `60%` size ratio or universal `0.1rem` letter-spacing to Chinese. Text with the same semantic role must consume the same shared Chinese typography token, such as:
 
@@ -100,11 +108,11 @@ All bilingual section headings share the same English title and Chinese subtitle
 
 ### Required Hierarchy
 
-- Cover: Section Script couple name → Chinese Sans-serif names → date in Sans-serif → button in Sans-serif
-- Hero: Section Script announcement → Chinese Sans-serif announcement → Section Script couple name → Chinese Sans-serif names → Sans-serif date and venue
+- Cover: Section Script couple name → smaller muted rounded Chinese names → portrait → subtle divider → invitation copy in Sans-serif → button in Sans-serif
+- Hero: Section Script announcement → Chinese Sans-serif announcement → Section Script couple name → rounded Chinese names → Sans-serif date and venue
 - Wedding Day: Section Script → Chinese subtitle → date → weekday → schedule → venue → actions; only the section title uses script
 - RSVP: Section Script → invitation sentence → form → buttons → helper text; only the section title uses script
-- A Few Things to Know: Section Script → Chinese subtitle → compact FAQ questions and answers; only the section title uses script
+- Good to Know: Section Script → Chinese subtitle → compact FAQ questions and answers; only the section title uses script
 
 ### Consistency Rule
 
@@ -113,4 +121,5 @@ Before styling any text, classify it:
 - Visible English couple name, personal name, or couple signature → Section Script
 - Emotional statement or approved emotional title → Section Script
 - Informational heading, body copy, date, venue, FAQ, button, or navigation → Sans-serif
-- Chinese → `var(--font-sans-zh)` plus the shared Chinese semantic token for its role
+- Chinese personal name or short emotional display line → `var(--font-soft-zh)` plus its shared semantic size token
+- Other Chinese → `var(--font-sans-zh)` plus the shared Chinese semantic token for its role
