@@ -23,44 +23,54 @@ The Apps Script (`docs/google-apps-script.js`) must only interact with the RSVP 
 
 ## Canonical Typography System
 
-Typography is determined by semantic role, never by visual preference. Do not introduce another font role without updating this specification.
+Typography is determined by semantic role, not by HTML heading level. Emotional statements may use a different role from informational headings. Do not introduce another font role without updating this specification.
 
-### 1. Brand Font — Display Serif
+### Design Principle
 
-The Brand Font is the Display Serif and represents the couple's identity. Use it for all bride and groom names, including:
+The names `Minchi`, `David`, and `Minchi & David`, wherever they appear visibly in the interface, and the Hero announcement `We're getting married` are intentionally handwritten. Together they create a romantic invitation feeling.
 
-- `Minchi & David` in the Hero and invitation cover
-- `Minchi Tsai` and `David Kuo` on Couple or profile sections
-- An optional couple-name footer signature
+This is a deliberate design decision. Do not replace visible English couple or personal names, or the Hero announcement, with Display Serif or Sans-serif during future typography reviews. Chinese names remain Chinese Sans-serif.
 
-Never use the Display Serif for section titles, dates, times, venues, Story body content, RSVP content, buttons, forms, or navigation.
+The Hero announcement uses the shared Section Script title size, weight, and line-height tokens so it remains visually consistent with the other emotional titles.
 
-### 2. Section Script — Emotional Headings
+### 1. Display Serif
 
-Use the decorative Section Script only for these section or profile headings:
+Display Serif is not currently assigned to visible couple or personal names. Do not use it for `Minchi`, `David`, or `Minchi & David` without first changing this specification.
 
+Do not use the Display Serif for section titles, dates, times, venues, body text, buttons, forms, or navigation.
+
+### 2. Section Script — Emotional Statements and Titles
+
+Use the Section Script for:
+
+- Couple name on the invitation Cover
+- Couple name in the desktop sidebar and Hero
+- Personal names in Meet the Couple
+- Couple signatures in RSVP modals
+- Personal names within footer credits; surrounding role descriptions remain Sans-serif
+- Hero announcement: `We're getting married`
 - `Wedding Day`
 - `RSVP`
-- `Bride`
-- `Groom`
 - `Our Story`
+- `Meet the Couple`
 - `A Few Things to Know`
+- `Behind the Scenes`
 
 Within `A Few Things to Know`, only the English section title uses the Section Script. FAQ questions, answers, links, and map text remain Sans-serif.
 
-Do not use the Section Script for Hero announcements, names, information blocks, descriptions, modal copy, buttons, or navigation.
+Do not use the Section Script for information blocks, descriptions, modal copy other than couple signatures, buttons, or navigation.
 
 ### 3. Sans-serif — Information and UI
 
-Use the primary sans-serif for everything that is not a couple name or one of the approved Section Script headings, including:
+Use the primary Sans-serif for:
 
-- Hero announcements
+- Informational headings
+- Body text
 - Dates, times, countdowns, schedules, and venues
+- FAQ content
 - Maps links, buttons, and navigation
 - RSVP fields, options, descriptions, and helper text
-- Story body content
-- Wedding Guide content, except the `A Few Things to Know` English section title
-- Footer content
+- Modal titles and copy
 
 Sans-serif should account for more than 90% of the website typography.
 
@@ -88,8 +98,8 @@ Section-heading Chinese must remain on its own line below the English heading. C
 
 ### Required Hierarchy
 
-- Cover: Display Serif couple name → date in sans-serif → button in sans-serif
-- Hero: Sans-serif announcement → Chinese subtitle → Display Serif couple name → Chinese names → date → venue
+- Cover: Section Script couple name → Chinese Sans-serif names → date in Sans-serif → button in Sans-serif
+- Hero: Section Script announcement → Chinese Sans-serif announcement → Section Script couple name → Chinese Sans-serif names → Sans-serif date and venue
 - Wedding Day: Section Script → Chinese subtitle → date → weekday → schedule → venue → actions; only the section title uses script
 - RSVP: Section Script → invitation sentence → form → buttons → helper text; only the section title uses script
 - A Few Things to Know: Section Script → Chinese subtitle → compact FAQ questions and answers; only the section title uses script
@@ -98,7 +108,7 @@ Section-heading Chinese must remain on its own line below the English heading. C
 
 Before styling any text, classify it:
 
-- Bride or groom name → Display Serif
-- `Wedding Day`, `RSVP`, `Bride`, `Groom`, `Our Story`, or `A Few Things to Know` heading → Section Script
-- Everything else → Sans-serif
+- Visible English couple name, personal name, or couple signature → Section Script
+- Emotional statement or approved emotional title → Section Script
+- Informational heading, body copy, date, venue, FAQ, button, or navigation → Sans-serif
 - Chinese → `var(--font-sans-zh)` plus the shared Chinese semantic token for its role

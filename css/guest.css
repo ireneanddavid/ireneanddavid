@@ -49,7 +49,6 @@
     --type-cover-action-size: 0.9rem;
     --type-desktop-title-size: 2rem;
     --type-desktop-date-size: 1rem;
-    --type-hero-announcement-size: 2.25rem;
     --type-hero-heading-zh-size: 1.25rem;
     --type-hero-heading-zh-weight: var(--type-weight-semibold);
     --type-hero-heading-zh-tracking: var(--type-tracking-md);
@@ -198,14 +197,15 @@ body {
 }
 
 .hero-announcement {
-    font-family: var(--font-sans);
-    font-size: var(--type-hero-announcement-size);
-    font-weight: var(--type-weight-medium);
+    font-family: var(--font-script);
+    font-size: var(--type-section-title-size);
+    font-weight: var(--type-section-title-weight);
+    line-height: var(--type-section-title-line);
     transform: translateX(-6px);
 }
 
 .home-couple-name {
-    font-family: var(--font-serif);
+    font-family: var(--font-script);
     font-size: var(--type-hero-name-size);
     font-weight: var(--type-weight-regular);
     letter-spacing: var(--type-tracking-md);
@@ -288,7 +288,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .desktop-couple-title {
-    font-family: var(--font-serif);
+    font-family: var(--font-script);
     font-size: var(--type-desktop-title-size);
     font-weight: var(--type-weight-regular);
     letter-spacing: var(--type-tracking-md);
@@ -491,7 +491,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .cover-couple-name {
-    font-family: var(--font-serif);
+    font-family: var(--font-script);
     font-size: var(--type-cover-name-size);
     font-weight: var(--type-weight-regular);
     letter-spacing: var(--type-tracking-xl);
@@ -580,7 +580,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .story-person-name {
-    font-family: var(--font-serif);
+    font-family: var(--font-script);
 }
 
 .story-timeline-title {
@@ -880,6 +880,15 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     padding-bottom: 4.5rem !important;
 }
 
+.wedding-guide-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 65%;
+    opacity: 0.12;
+    mask-image: linear-gradient(to bottom, transparent, black 14%, black 86%, transparent);
+}
+
 .wedding-guide-header {
     margin-bottom: 1.5rem;
 }
@@ -1092,9 +1101,13 @@ html[data-bs-theme="dark"] .wedding-guide-map-link {
 }
 
 .rsvp-modal-signature {
-    font-family: var(--font-serif);
+    font-family: var(--font-script);
     font-size: var(--type-modal-signature-size);
     font-weight: var(--type-weight-regular);
+}
+
+.footer-person-name {
+    font-family: var(--font-script);
 }
 
 .rsvp-section {
@@ -1200,6 +1213,18 @@ html[data-bs-theme="dark"] .bg-white-black {
     }
 
     .wedding-day-section {
+        --type-wedding-title-size: clamp(38px, 10vw, 40px);
+        --type-wedding-subtitle-size: 16px;
+        --type-wedding-date-size: 26px;
+        --type-wedding-day-size: 15px;
+        --type-countdown-number-size: 17px;
+        --type-countdown-label-size: 12px;
+        --type-schedule-time-size: 22px;
+        --type-schedule-label-en-size: 15px;
+        --type-schedule-label-zh-size: 14px;
+        --type-venue-en-size: 18px;
+        --type-venue-zh-size: 14px;
+        --type-action-size: 15px;
         --space-title-date: 30px;
         --space-date-countdown: 26px;
         --space-countdown-schedule: 34px;
