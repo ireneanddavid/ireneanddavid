@@ -31,7 +31,7 @@ The names `Minchi`, `David`, and `Minchi & David`, wherever they appear visibly 
 
 This is a deliberate design decision. Do not replace visible English couple or personal names, or the Hero announcement, with Display Serif or Sans-serif during future typography reviews. Chinese names remain Chinese Sans-serif.
 
-The Hero announcement uses the shared Section Script title size, weight, and line-height tokens so it remains visually consistent with the other emotional titles.
+The Hero announcement and its Chinese line use the shared bilingual section-title tokens so they remain visually consistent with the other emotional titles.
 
 ### 1. Display Serif
 
@@ -95,6 +95,8 @@ Do not apply a global `60%` size ratio or universal `0.1rem` letter-spacing to C
 - Button text
 
 Section-heading Chinese must remain on its own line below the English heading. Compact UI components are the exception: field labels, options, helper text, and placeholders may keep English and Chinese together when the component specification calls for a compact bilingual label. Do not use slash separators between languages.
+
+All bilingual section headings share the same English title and Chinese subtitle size tokens. On mobile, the Section Script title uses `clamp(38px, 10vw, 40px)` and the Chinese subtitle uses `16px`. `Wedding Day / 婚禮資訊` is the visual reference; do not create section-specific title sizes unless the specification explicitly requires one.
 
 ### Required Hierarchy
 

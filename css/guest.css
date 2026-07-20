@@ -49,9 +49,6 @@
     --type-cover-action-size: 0.9rem;
     --type-desktop-title-size: 2rem;
     --type-desktop-date-size: 1rem;
-    --type-hero-heading-zh-size: 1.25rem;
-    --type-hero-heading-zh-weight: var(--type-weight-semibold);
-    --type-hero-heading-zh-tracking: var(--type-tracking-md);
     --type-hero-name-size: 1.85rem;
     --type-hero-name-zh-size: 1.15rem;
     --type-hero-date-size: 1.05rem;
@@ -60,8 +57,8 @@
 
     /* Wedding information */
     --bottom-nav-height: 4.25rem;
-    --type-wedding-title-size: clamp(42px, 11vw, 46px);
-    --type-wedding-subtitle-size: 18px;
+    --type-wedding-title-size: var(--type-section-title-size);
+    --type-wedding-subtitle-size: var(--type-section-subtitle-size);
     --type-wedding-date-size: 30px;
     --type-wedding-day-size: 17px;
     --type-countdown-number-size: 18px;
@@ -189,10 +186,11 @@ body {
 .home-heading-zh {
     padding-bottom: 1.25rem;
     margin-top: 0;
-    font-size: var(--type-hero-heading-zh-size);
-    font-weight: var(--type-hero-heading-zh-weight);
-    line-height: var(--type-line-bilingual);
-    letter-spacing: var(--type-hero-heading-zh-tracking);
+    color: var(--bs-secondary-color);
+    font-size: var(--type-section-subtitle-size);
+    font-weight: var(--type-section-subtitle-weight);
+    line-height: var(--type-section-subtitle-line);
+    letter-spacing: var(--type-section-subtitle-tracking);
     transform: translateX(0.5em);
 }
 
@@ -280,7 +278,8 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .section-header-subtitle {
     margin: 6px 0 0;
-    font-family: var(--font-sans);
+    color: var(--bs-secondary-color);
+    font-family: var(--font-sans-zh);
     font-size: var(--type-section-subtitle-size);
     font-weight: var(--type-section-subtitle-weight);
     line-height: var(--type-section-subtitle-line);
@@ -1207,24 +1206,27 @@ html[data-bs-theme="dark"] .bg-white-black {
     }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 768px) {
+    :root {
+        --type-section-title-size: clamp(38px, 10vw, 40px);
+        --type-section-subtitle-size: 16px;
+    }
+
     .width-loading {
         width: 75%;
     }
 
     .wedding-day-section {
-        --type-wedding-title-size: clamp(38px, 10vw, 40px);
-        --type-wedding-subtitle-size: 16px;
-        --type-wedding-date-size: 26px;
-        --type-wedding-day-size: 15px;
-        --type-countdown-number-size: 17px;
-        --type-countdown-label-size: 12px;
-        --type-schedule-time-size: 22px;
-        --type-schedule-label-en-size: 15px;
-        --type-schedule-label-zh-size: 14px;
-        --type-venue-en-size: 18px;
-        --type-venue-zh-size: 14px;
-        --type-action-size: 15px;
+        --type-wedding-date-size: 22px;
+        --type-wedding-day-size: 14px;
+        --type-countdown-number-size: 15px;
+        --type-countdown-label-size: 11px;
+        --type-schedule-time-size: 19px;
+        --type-schedule-label-en-size: 14px;
+        --type-schedule-label-zh-size: 13px;
+        --type-venue-en-size: 16px;
+        --type-venue-zh-size: 13px;
+        --type-action-size: 14px;
         --space-title-date: 30px;
         --space-date-countdown: 26px;
         --space-countdown-schedule: 34px;
@@ -1277,7 +1279,6 @@ html[data-bs-theme="dark"] .bg-white-black {
     .wedding-guide-header .section-header-title {
         max-width: 19rem;
         margin-inline: auto;
-        font-size: clamp(2.25rem, 11vw, 2.625rem);
         line-height: 1.08;
         text-wrap: balance;
     }
