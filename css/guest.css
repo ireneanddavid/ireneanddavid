@@ -13,6 +13,7 @@
     /* Readable editorial neutrals */
     --color-info-secondary: #69645d;
     --color-info-muted: #77716a;
+    --color-info-soft: #817b74;
     --color-placeholder: #77716a;
 
     /* Typography families */
@@ -143,6 +144,7 @@
 html[data-bs-theme="dark"] {
     --color-info-secondary: #b8b2aa;
     --color-info-muted: #a8a199;
+    --color-info-soft: #928c85;
     --color-placeholder: #9d978f;
 }
 
@@ -1517,19 +1519,20 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 .wedding-guide-question-en {
     display: block;
     margin: 0;
-    font-size: var(--type-guide-question-size);
-    font-weight: var(--type-weight-semibold);
-    line-height: var(--type-line-ui);
+    color: var(--color-info-soft);
+    font-size: 12px;
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-body);
 }
 
 .wedding-guide-question-zh {
     display: block;
-    margin: 0.25rem 0 0;
-    font-size: var(--type-guide-answer-zh-size);
-    font-weight: var(--type-weight-regular);
+    margin: 3px 0 0;
+    color: var(--bs-body-color);
+    font-size: 15px;
+    font-weight: var(--type-weight-medium);
     line-height: var(--type-line-bilingual);
-    letter-spacing: var(--type-tracking-xl);
-    color: var(--color-info-secondary);
+    letter-spacing: var(--type-tracking-lg);
     opacity: 1;
 }
 
@@ -1572,17 +1575,32 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 
 .wedding-guide-answer-en {
     margin: 0;
-    font-size: var(--type-guide-answer-size);
+    color: var(--color-info-soft);
+    font-size: 12px;
     font-weight: var(--type-weight-regular);
-    line-height: var(--type-line-relaxed);
+    line-height: var(--type-line-control);
 }
 
 .wedding-guide-answer-zh {
-    margin: 0.2rem 0 0;
+    margin: 3px 0 0;
     font-size: var(--type-guide-answer-zh-size);
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-relaxed);
     letter-spacing: var(--type-tracking-md);
+}
+
+.guide-map-inline-link {
+    color: #b8976a;
+    font: inherit;
+    text-decoration: none;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+}
+
+.guide-map-inline-link:hover,
+.guide-map-inline-link:focus-visible {
+    color: #8f6d42;
+    text-decoration: underline;
 }
 
 .wedding-guide-map {
@@ -2011,7 +2029,7 @@ html[data-bs-theme="dark"] .bg-white-black {
     }
 
     .wedding-guide-question-zh {
-        margin-top: 0.4rem;
+        margin-top: 3px;
     }
 
     .wedding-guide-answer {
@@ -2019,7 +2037,7 @@ html[data-bs-theme="dark"] .bg-white-black {
     }
 
     .wedding-guide-answer-zh {
-        margin-top: 0.35rem;
+        margin-top: 3px;
     }
 
     .wedding-guide-map {
