@@ -2455,6 +2455,36 @@ html[data-bs-theme="light"] .btn-transparent {
     z-index: 1056;
 }
 
+.loading-content {
+    align-items: center;
+}
+
+.loading-signature {
+    margin: 0 0 1.15rem;
+    color: #4a453f;
+    font-family: var(--font-script);
+    font-size: 34px;
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-solid);
+}
+
+.loading-progress {
+    width: min(12rem, 72vw);
+    height: 1px;
+    border-radius: 0;
+    background-color: rgb(184 151 106 / 18%);
+    overflow: hidden;
+}
+
+.loading-progress .progress-bar {
+    background-color: rgb(184 151 106 / 78%);
+    transition: width 220ms ease;
+}
+
+html[data-bs-theme="dark"] .loading-signature {
+    color: #ddd5ca;
+}
+
 html[data-bs-theme="light"] .color-theme-svg {
     color: rgb(255, 255, 255);
     background-color: var(--bs-light);
