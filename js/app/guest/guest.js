@@ -163,7 +163,6 @@ export const guest = (() => {
         const welcome = document.getElementById('welcome');
         const root = document.getElementById('root');
 
-        await confetti.basicAnimation();
         await util.changeOpacity(welcome, false);
         welcome.remove();
         root.classList.remove('opacity-0');
@@ -177,6 +176,9 @@ export const guest = (() => {
         theme.spyTop();
 
         document.dispatchEvent(new Event('undangan.open'));
+        window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(() => confetti.basicAnimation());
+        });
     };
 
     /**

@@ -30,19 +30,40 @@ export const image = (() => {
     });
 
     /**
+     * Decode an image before the loading screen is removed so scrolling never
+     * has to perform the first decode on demand.
+     * @param {HTMLImageElement} img
+     * @returns {Promise<void>}
+     */
+    const decodeImage = async (img) => {
+        if (typeof img.decode !== 'function') {
+            return;
+        }
+
+        try {
+            await img.decode();
+        } catch {
+            // Some Safari versions reject decode() for an otherwise valid image.
+        }
+    };
+
+    /**
      * @param {HTMLImageElement} el 
      * @param {string} src 
      * @returns {Promise<void>}
      */
-    const appendImage = (el, src) => loadedImage(src).then((img) => {
+    const appendImage = async (el, src) => {
+        const img = await loadedImage(src);
+        await decodeImage(img);
         el.width = img.naturalWidth;
         el.height = img.naturalHeight;
         el.classList.remove('opacity-0');
         el.src = img.src;
+        await decodeImage(el);
         img.remove();
 
         progress.complete('image');
-    });
+    };
 
     /**
      * @param {HTMLImageElement} el 
@@ -51,7 +72,10 @@ export const image = (() => {
     const getByFetch = (el) => {
         urlCache.push({
             url: el.getAttribute('data-src'),
-            res: (url) => appendImage(el, url),
+            res: (url) => appendImage(el, url).catch((err) => {
+                console.error(err);
+                progress.invalid('image');
+            }),
             rej: (err) => {
                 console.error(err);
                 progress.invalid('image');
@@ -65,14 +89,17 @@ export const image = (() => {
      */
     const getByDefault = (el) => {
         el.onerror = () => progress.invalid('image');
-        el.onload = () => {
+        const completeImage = async () => {
             el.width = el.naturalWidth;
             el.height = el.naturalHeight;
+            await decodeImage(el);
             progress.complete('image');
         };
+        el.onload = completeImage;
 
         if (el.complete && el.naturalWidth !== 0 && el.naturalHeight !== 0) {
-            progress.complete('image');
+            el.onload = null;
+            completeImage();
         } else if (el.complete) {
             progress.invalid('image');
         }

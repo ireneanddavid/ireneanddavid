@@ -1,4 +1,4 @@
-@import url("common.css?v=3");
+@import url("common.css?v=4");
 @import url("animation.css?v=2");
 
 @font-face {
@@ -2152,6 +2152,10 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .loading-copy {
+        transition: none;
+    }
+
     .wedding-day-section.is-shortcut-arrival .wedding-day-title,
     .wedding-day-section.is-shortcut-arrival .wedding-countdown {
         animation: none;
@@ -2528,6 +2532,42 @@ html[data-bs-theme="light"] .btn-transparent {
 .loading-progress .progress-bar {
     background-color: rgb(184 151 106 / 78%);
     transition: width 220ms ease;
+}
+
+.loading-copy {
+    min-height: 3.2rem;
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateY(3px);
+    transition: opacity 280ms ease-out, transform 280ms ease-out;
+}
+
+.loading-copy.is-ready {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.loading-copy-zh,
+.loading-copy-en {
+    margin: 0;
+    font-weight: var(--type-weight-regular);
+}
+
+.loading-copy-zh {
+    color: var(--color-info-secondary);
+    font-family: var(--font-sans-zh);
+    font-size: 14px;
+    line-height: var(--type-line-body);
+    letter-spacing: var(--type-tracking-sm);
+}
+
+.loading-copy-en {
+    margin-top: 0.3rem;
+    color: var(--color-info-muted);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    line-height: var(--type-line-ui);
+    letter-spacing: var(--type-tracking-xs);
 }
 
 html[data-bs-theme="dark"] .loading-signature {

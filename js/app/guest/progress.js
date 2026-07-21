@@ -9,6 +9,16 @@ export const progress = (() => {
      * @type {HTMLElement|null}
      */
     let bar = null;
+    let loadingCopy = null;
+    let loadingCopyZh = null;
+    let loadingCopyEn = null;
+
+    const loadingMessages = [
+        { zh: '正在展開邀請函…', en: 'Preparing your invitation...' },
+        { zh: '正在準備婚禮資訊…', en: 'Folding the invitation...' },
+        { zh: '正在翻開我們的故事…', en: 'Adding a little sparkle...' },
+        { zh: '請稍候片刻…', en: 'One moment, please. ✨' },
+    ];
 
     let total = 0;
     let loaded = 0;
@@ -31,6 +41,21 @@ export const progress = (() => {
      */
     const showInformation = () => {
         return `(${loaded}/${total}) [${parseInt((loaded / total) * 100).toFixed(0)}%]`;
+    };
+
+    /**
+     * @returns {void}
+     */
+    const selectLoadingCopy = () => {
+        if (!loadingCopy || !loadingCopyZh || !loadingCopyEn) {
+            return;
+        }
+
+        const message = loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
+
+        loadingCopyZh.textContent = message.zh;
+        loadingCopyEn.textContent = message.en;
+        loadingCopy.classList.add('is-ready');
     };
 
     /**
@@ -79,7 +104,11 @@ export const progress = (() => {
     const init = () => {
         info = document.getElementById('progress-info');
         bar = document.getElementById('progress-bar');
+        loadingCopy = document.getElementById('loading-copy');
+        loadingCopyZh = document.getElementById('loading-copy-zh');
+        loadingCopyEn = document.getElementById('loading-copy-en');
         info.classList.remove('d-none');
+        selectLoadingCopy();
         cancelProgress = new Promise((res) => document.addEventListener('undangan.progress.invalid', res));
     };
 
