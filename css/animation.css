@@ -26,20 +26,6 @@
     box-sizing: content-box;
 }
 
-@keyframes spin-icon {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.spin-button {
-    animation: spin-icon 5s linear infinite;
-}
-
 @keyframes love {
     50% {
         transform: translateY(1rem);

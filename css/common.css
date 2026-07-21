@@ -17,17 +17,7 @@ i {
     width: auto !important;
 }
 
-body,
-div,
-nav,
-svg,
-section {
-    will-change: background-color;
-    transition: background-color 350ms ease;
-}
-
 svg>path {
-    will-change: color;
     transition: color 350ms ease;
 }
 

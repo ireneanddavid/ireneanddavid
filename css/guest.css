@@ -1,5 +1,5 @@
-@import url("common.css");
-@import url("animation.css");
+@import url("common.css?v=2");
+@import url("animation.css?v=2");
 
 @font-face {
     font-family: 'Zen Maru Gothic Local';

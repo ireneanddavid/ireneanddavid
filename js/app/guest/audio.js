@@ -4,7 +4,7 @@ import { cache } from '../../connection/cache.js';
 
 export const audio = (() => {
 
-    const statePlay = '<i class="fa-solid fa-circle-pause spin-button"></i>';
+    const statePlay = '<i class="fa-solid fa-circle-pause"></i>';
     const statePause = '<i class="fa-solid fa-circle-play"></i>';
 
     /**
