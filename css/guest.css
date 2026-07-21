@@ -1470,6 +1470,10 @@ html[data-bs-theme="dark"] .rsvp-name-prompt-en {
     margin-bottom: 18px;
 }
 
+.rsvp-paper-field label[for="paper-yes"] {
+    border-bottom: 0;
+}
+
 #response-message-field.show {
     padding-top: 0 !important;
     border-top: 0;
@@ -1627,6 +1631,7 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 }
 
 .wedding-guide-faq {
+    width: calc(100% - 1rem);
     max-width: 36rem;
 }
 
@@ -1655,7 +1660,7 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     justify-content: space-between;
     width: 100%;
     min-height: 44px;
-    padding: 1.75rem 0;
+    padding: 1.75rem 0.25rem;
     border: 0;
     color: inherit;
     background: transparent;
@@ -1713,7 +1718,7 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 }
 
 .wedding-guide-answer {
-    padding: 0 2.5rem 1.75rem 0;
+    padding: 0 2.5rem 1.75rem 0.25rem;
     opacity: 0;
     transform: translateY(-4px);
     transition: opacity 220ms ease, transform 220ms ease;
@@ -1780,7 +1785,7 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 .calendar-shortcut {
     color: var(--bs-body-color);
     opacity: 0.45;
-    transition: color 260ms ease, border-color 260ms ease, background-color 260ms ease, opacity 260ms ease, transform 180ms ease;
+    transition: none;
 }
 
 .calendar-shortcut:focus-visible {
@@ -1795,27 +1800,11 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     }
 }
 
-.calendar-shortcut.is-footer-highlight {
+.calendar-shortcut.is-guide-highlight {
     border-color: rgb(184 151 106 / 68%) !important;
     color: #b8976a;
     background-color: rgb(184 151 106 / 10%) !important;
     opacity: 1;
-}
-
-.calendar-shortcut.is-shimmering {
-    animation: calendar-shortcut-shimmer 800ms ease-out 1;
-}
-
-@keyframes calendar-shortcut-shimmer {
-    0%, 100% {
-        box-shadow: 0 0 0 rgb(184 151 106 / 0%);
-        transform: scale(1);
-    }
-
-    42% {
-        box-shadow: 0 0 0.9rem rgb(184 151 106 / 46%);
-        transform: scale(1.08);
-    }
 }
 
 .wedding-day-section.is-shortcut-arrival .wedding-day-title {
@@ -1931,6 +1920,9 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     line-height: inherit;
     vertical-align: baseline;
     transform-origin: center;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .guide-closing-heart:hover,
@@ -2043,6 +2035,9 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     letter-spacing: 0.01em;
     opacity: 0.68;
     white-space: nowrap;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .footer-build-credit:hover,
@@ -2077,7 +2072,6 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .calendar-shortcut.is-shimmering,
     .wedding-day-section.is-shortcut-arrival .wedding-day-title,
     .wedding-day-section.is-shortcut-arrival .wedding-countdown {
         animation: none;
@@ -2461,7 +2455,7 @@ html[data-bs-theme="dark"] .bg-white-black {
     }
 
     .wedding-guide-toggle {
-        padding: 1.65rem 0;
+        padding: 1.65rem 0.25rem;
     }
 
     .wedding-guide-question-en {
@@ -2473,7 +2467,7 @@ html[data-bs-theme="dark"] .bg-white-black {
     }
 
     .wedding-guide-answer {
-        padding: 0 2.25rem 1.85rem 0;
+        padding: 0 2.25rem 1.85rem 0.25rem;
     }
 
     .wedding-guide-answer-zh {

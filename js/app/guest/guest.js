@@ -389,6 +389,7 @@ export const guest = (() => {
         let resetTimer = null;
         let hideTimer = null;
 
+        trigger.addEventListener('dblclick', (event) => event.preventDefault());
         trigger.addEventListener('click', () => {
             taps += 1;
             window.clearTimeout(resetTimer);
@@ -419,6 +420,7 @@ export const guest = (() => {
         let resetTimer = null;
         let hideTimer = null;
 
+        heart.addEventListener('dblclick', (event) => event.preventDefault());
         heart.addEventListener('click', () => {
             heart.classList.remove('is-beating');
             void heart.offsetWidth;
@@ -449,8 +451,9 @@ export const guest = (() => {
     const weddingDayShortcut = () => {
         const button = document.getElementById('button-wedding-day');
         const target = document.getElementById('wedding-date');
+        const guide = document.getElementById('wedding-guide');
         const footer = document.querySelector('.footer-section');
-        if (!button || !target || !footer) {
+        if (!button || !target || !guide || !footer) {
             return;
         }
 
@@ -510,24 +513,20 @@ export const guest = (() => {
             scrollFrame = window.requestAnimationFrame(step);
         });
 
-        const footerObserver = new IntersectionObserver((entries) => {
+        const visibleLateSections = new Set();
+        const guideObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
-                button.classList.toggle('is-footer-highlight', entry.isIntersecting);
-                if (!entry.isIntersecting || button.dataset.footerShimmered === 'true') {
-                    return;
+                if (entry.isIntersecting) {
+                    visibleLateSections.add(entry.target);
+                } else {
+                    visibleLateSections.delete(entry.target);
                 }
-
-                button.dataset.footerShimmered = 'true';
-                button.classList.add('is-shimmering');
             });
-        }, { threshold: 0.08 });
+            button.classList.toggle('is-guide-highlight', visibleLateSections.size > 0);
+        }, { threshold: 0.01 });
 
-        button.addEventListener('animationend', (event) => {
-            if (event.animationName === 'calendar-shortcut-shimmer') {
-                button.classList.remove('is-shimmering');
-            }
-        });
-        footerObserver.observe(footer);
+        guideObserver.observe(guide);
+        guideObserver.observe(footer);
     };
 
     /**

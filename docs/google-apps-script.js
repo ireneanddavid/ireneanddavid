@@ -12,19 +12,40 @@
 
 const RSVP_TAB = 'RSVP';
 
+function getRsvpSheet() {
+  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+
+  if (!spreadsheet) {
+    return {
+      error: 'RSVP endpoint is not attached to a spreadsheet. Open the RSVP spreadsheet, choose Extensions > Apps Script, and redeploy the web app from there.',
+      sheet: null,
+    };
+  }
+
+  const sheet = spreadsheet.getSheetByName(RSVP_TAB);
+  if (!sheet) {
+    return {
+      error: 'RSVP sheet not found. Create a sheet tab named "RSVP" and redeploy the web app.',
+      sheet: null,
+    };
+  }
+
+  return { error: '', sheet: sheet };
+}
+
 function doPost(e) {
   try {
     const params = e.parameter;
-    const sheet = SpreadsheetApp
-      .getActiveSpreadsheet()
-      .getSheetByName(RSVP_TAB);
+    const destination = getRsvpSheet();
 
-    if (!sheet) {
+    if (!destination.sheet) {
       return jsonResponse({
         result: 'error',
-        message: 'RSVP sheet not found.',
+        message: destination.error,
       });
     }
+
+    const sheet = destination.sheet;
 
     if (!params.name || !params.name.trim()) {
       return jsonResponse({
@@ -57,10 +78,16 @@ function doPost(e) {
 }
 
 function doGet() {
-  return jsonResponse({
-    result: 'ok',
-    message: 'RSVP endpoint is active.',
-  });
+  const destination = getRsvpSheet();
+
+  if (!destination.sheet) {
+    return jsonResponse({
+      result: 'error',
+      message: destination.error,
+    });
+  }
+
+  return jsonResponse({ result: 'ok', message: 'RSVP endpoint is active.' });
 }
 
 function jsonResponse(data) {
