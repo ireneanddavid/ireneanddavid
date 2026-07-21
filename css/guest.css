@@ -10,6 +10,11 @@
 }
 
 :root {
+    /* Readable editorial neutrals */
+    --color-info-secondary: #69645d;
+    --color-info-muted: #77716a;
+    --color-placeholder: #77716a;
+
     /* Typography families */
     --font-script: 'Sacramento', cursive;
     --font-sans-zh: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Heiti TC', sans-serif;
@@ -133,6 +138,12 @@
     --space-date-countdown: clamp(16px, 2.2vh, 22px);
     --space-countdown-schedule: clamp(20px, 2.6vh, 28px);
     --space-schedule-venue: clamp(20px, 2.6vh, 28px);
+}
+
+html[data-bs-theme="dark"] {
+    --color-info-secondary: #b8b2aa;
+    --color-info-muted: #a8a199;
+    --color-placeholder: #9d978f;
 }
 
 html {
@@ -284,6 +295,14 @@ html[data-bs-theme="dark"] .home-couple-name-zh {
     color: #8a704f;
     font-size: var(--type-icon-hero-size);
     opacity: 0.7;
+}
+
+.hero-venue-link-indicator {
+    display: inline-block;
+    margin-left: 0.1rem;
+    font-size: 0.82em;
+    line-height: var(--type-line-solid);
+    transform: translateY(-0.08em);
 }
 
 .venue-inline-link {
@@ -470,11 +489,11 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .wedding-countdown-item small {
-    color: var(--bs-secondary-color);
+    color: var(--color-info-secondary);
     font-size: var(--type-countdown-label-size);
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-ui);
-    opacity: 0.7;
+    opacity: 1;
 }
 
 .wedding-schedule {
@@ -667,12 +686,12 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .story-transition-en {
     margin: 3px 0 0;
-    color: var(--bs-secondary-color);
+    color: var(--color-info-muted);
     font-family: var(--font-sans);
     font-size: 12px;
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-body);
-    opacity: 0.62;
+    opacity: 1;
 }
 
 .story-transition-divider {
@@ -772,9 +791,16 @@ html[data-bs-theme="dark"] .hero-info-zh {
     isolation: isolate;
     width: 100%;
     height: min(650px, calc(100dvh - var(--bottom-nav-height)));
+    overflow: hidden;
     padding: 2.75rem 1.5rem 3rem;
     margin-inline: -0.75rem;
     box-sizing: border-box;
+    transition: height 340ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.story-timeline:has(#journey-story-two.show),
+.story-timeline:has(#journey-story-two.collapsing) {
+    height: 790px;
 }
 
 .journey-background {
@@ -782,7 +808,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
     z-index: 0;
     inset: 0;
     width: 100%;
-    height: 100%;
+    height: min(650px, calc(100dvh - var(--bottom-nav-height)));
     object-fit: cover;
     object-position: 60% center;
     opacity: 0.065;
@@ -880,12 +906,12 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .journey-preview {
     margin-top: 0.65rem;
-    color: var(--bs-secondary-color);
+    color: var(--color-info-muted);
     font-family: var(--font-sans);
     font-size: 12px;
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-body);
-    opacity: 0.72;
+    opacity: 1;
 }
 
 .journey-indicator {
@@ -935,6 +961,39 @@ html[data-bs-theme="dark"] .hero-info-zh {
     margin-top: 0.75rem;
 }
 
+.journey-photo-card {
+    width: min(200px, 82%);
+    padding: 4px;
+    margin: 1rem auto 0;
+    border: 1px solid rgb(184 151 106 / 28%);
+    border-radius: 14px;
+    background: rgb(250 247 241 / 88%);
+    box-shadow: 0 10px 24px rgb(65 52 38 / 10%);
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(10px) scale(0.985);
+    transition: opacity 260ms ease, transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.journey-card:has(.journey-toggle[aria-expanded="true"]) .journey-photo-card {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: 160ms;
+}
+
+.journey-photo-card-image {
+    display: block;
+    width: 100%;
+    height: 124px;
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: center 43%;
+}
+
+.journey-photo-card-image-first {
+    object-position: center 72%;
+}
+
 .journey-card .collapsing {
     transition: height 280ms ease;
 }
@@ -947,6 +1006,11 @@ html[data-bs-theme="dark"] .journey-background {
 
 html[data-bs-theme="dark"] .journey-story-body {
     color: #d8d2c9;
+}
+
+html[data-bs-theme="dark"] .journey-photo-card {
+    border-color: rgb(216 189 147 / 28%);
+    background: rgb(29 28 26 / 88%);
 }
 
 html[data-bs-theme="dark"] .story-person-name-zh {
@@ -962,10 +1026,10 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .rsvp-intro-en {
-    color: var(--bs-secondary-color);
+    color: var(--color-info-muted);
     font-size: 13px;
     font-weight: var(--type-weight-regular);
-    opacity: 0.62;
+    opacity: 1;
 }
 
 .rsvp-intro-zh {
@@ -1010,11 +1074,11 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 
 .bilingual-field-label-en {
     min-width: 0;
-    color: var(--bs-secondary-color);
+    color: var(--color-info-secondary);
     font-size: var(--type-field-label-en-size);
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-compact);
-    opacity: 0.72;
+    opacity: 1;
 }
 
 .bilingual-field-label-zh {
@@ -1042,11 +1106,11 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .bilingual-option-text-en {
-    color: var(--bs-secondary-color);
+    color: var(--color-info-secondary);
     font-size: var(--type-option-en-size);
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-ui);
-    opacity: 0.72;
+    opacity: 1;
 }
 
 .bilingual-option-text-zh {
@@ -1083,7 +1147,8 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 
 .bilingual-helper-text-en {
     margin-top: 2px;
-    opacity: 0.68;
+    color: var(--color-info-muted);
+    opacity: 1;
 }
 
 .rsvp-input,
@@ -1116,12 +1181,12 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .rsvp-input::placeholder {
-    color: rgb(33 37 41 / 32%);
+    color: var(--color-placeholder);
     font-size: 13px !important;
 }
 
 html[data-bs-theme="dark"] .rsvp-input::placeholder {
-    color: rgb(255 255 255 / 38%);
+    color: var(--color-placeholder);
 }
 
 .rsvp-name-field {
@@ -1166,12 +1231,12 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 
 .rsvp-name-prompt-en {
     margin-top: 1px;
-    color: var(--bs-secondary-color);
+    color: var(--color-info-secondary);
     font-family: var(--font-sans);
     font-size: var(--type-field-label-en-size);
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-compact);
-    opacity: 0.72;
+    opacity: 1;
 }
 
 .rsvp-name-input:focus + .rsvp-name-prompt,
@@ -1199,8 +1264,8 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 }
 
 .rsvp-message-input::placeholder {
-    color: var(--bs-secondary-color);
-    opacity: 0.42;
+    color: var(--color-placeholder);
+    opacity: 1;
 }
 
 .rsvp-optional-note {
@@ -1215,7 +1280,8 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
     font-family: var(--font-sans-zh);
     font-size: 12px;
     font-weight: var(--type-weight-regular);
-    opacity: 0.72;
+    color: var(--color-info-secondary);
+    opacity: 1;
 }
 
 .rsvp-optional-note-en {
@@ -1223,7 +1289,8 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
     font-family: var(--font-sans);
     font-size: 12px;
     font-weight: var(--type-weight-regular);
-    opacity: 0.52;
+    color: var(--color-info-muted);
+    opacity: 1;
 }
 
 #party-size-field.show,
@@ -1292,11 +1359,11 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 }
 
 .rsvp-submit-en {
-    color: var(--bs-secondary-color);
+    color: var(--color-info-secondary);
     font-size: 12px;
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-ui);
-    opacity: 0.68;
+    opacity: 1;
 }
 
 .rsvp-submit-zh {
@@ -1462,7 +1529,8 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-bilingual);
     letter-spacing: var(--type-tracking-xl);
-    opacity: 0.78;
+    color: var(--color-info-secondary);
+    opacity: 1;
 }
 
 .wedding-guide-toggle-icon {
@@ -1568,9 +1636,9 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 
 .footer-message-en {
     margin-top: 0.25rem;
-    color: var(--bs-secondary-color);
+    color: var(--color-info-muted);
     letter-spacing: var(--type-tracking-xs);
-    opacity: 0.55;
+    opacity: 1;
 }
 
 .footer-message-heart {
@@ -1607,13 +1675,13 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 
 .footer-role {
     margin: 0.25rem 0 0;
-    color: var(--bs-secondary-color);
+    color: var(--color-info-secondary);
     font-family: var(--font-sans);
     font-size: var(--type-footer-credit-size);
     font-weight: var(--type-weight-medium);
     line-height: var(--type-line-ui);
     letter-spacing: var(--type-tracking-sm);
-    opacity: 0.8;
+    opacity: 1;
 }
 
 .footer-quote {
@@ -1640,12 +1708,12 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     max-width: 8rem;
     margin-top: 2.75rem;
     margin-bottom: 0;
-    color: var(--bs-secondary-color);
+    color: var(--color-info-muted);
     font-family: var(--font-sans);
     font-size: var(--type-footer-credit-size);
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-body);
-    opacity: 0.72;
+    opacity: 1;
 }
 
 .bottom-nav-label {
