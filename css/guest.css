@@ -72,7 +72,7 @@
     --type-hero-venue-zh-size: 0.8rem;
 
     /* Wedding information */
-    --bottom-nav-height: 4.25rem;
+    --bottom-nav-height: 0px;
     --type-wedding-title-size: var(--type-section-title-size);
     --type-wedding-subtitle-size: var(--type-section-subtitle-size);
     --type-wedding-date-size: 30px;
@@ -788,6 +788,53 @@ html[data-bs-theme="dark"] .hero-info-zh {
     font-size: var(--type-story-heart-size);
 }
 
+.story-heart-button {
+    display: inline-flex;
+    width: 2.75rem;
+    height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    line-height: var(--type-line-solid);
+    vertical-align: middle;
+}
+
+.story-heart-button:hover,
+.story-heart-button:focus-visible {
+    color: #8f6d42;
+}
+
+.story-heart-button:focus-visible {
+    outline: 1px solid rgb(184 151 106 / 58%);
+    outline-offset: 6px;
+}
+
+.story-heart-button.is-beating {
+    animation: couple-heart-beat 560ms ease-in-out;
+}
+
+@keyframes couple-heart-beat {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    28% {
+        transform: scale(1.22);
+    }
+
+    52% {
+        transform: scale(0.94);
+    }
+
+    74% {
+        transform: scale(1.12);
+    }
+}
+
 .story-timeline {
     position: relative;
     isolation: isolate;
@@ -881,6 +928,25 @@ html[data-bs-theme="dark"] .hero-info-zh {
     letter-spacing: var(--type-tracking-lg);
 }
 
+.journey-toggle[aria-expanded="true"] .journey-step {
+    animation: journey-step-gold-flash 620ms ease-out;
+}
+
+@keyframes journey-step-gold-flash {
+    0%,
+    100% {
+        color: #9a7a50;
+        text-shadow: none;
+        transform: scale(1);
+    }
+
+    38% {
+        color: #d0aa62;
+        text-shadow: 0 0 9px rgb(208 170 98 / 42%);
+        transform: scale(1.08);
+    }
+}
+
 .journey-card-copy {
     display: flex;
     flex-direction: column;
@@ -953,6 +1019,25 @@ html[data-bs-theme="dark"] .hero-info-zh {
     margin: 0 0 1.1rem;
     border-top: 1px solid rgb(184 151 106 / 32%);
     content: "";
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+.journey-card:has(.journey-toggle[aria-expanded="true"]) .journey-story-body::before {
+    animation: journey-divider-reveal 420ms ease-out 90ms forwards;
+}
+
+@keyframes journey-divider-reveal {
+    from {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
 }
 
 .journey-story-body p {
@@ -964,13 +1049,9 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .journey-photo-card {
-    width: min(200px, 82%);
-    padding: 4px;
-    margin: 1rem auto 0;
-    border: 1px solid rgb(184 151 106 / 28%);
-    border-radius: 14px;
-    background: rgb(250 247 241 / 88%);
-    box-shadow: 0 10px 24px rgb(65 52 38 / 10%);
+    width: calc(100% + 24px);
+    margin: 0.75rem -12px 0;
+    border-radius: 8px;
     opacity: 0;
     overflow: hidden;
     transform: translateY(10px) scale(0.985);
@@ -986,8 +1067,8 @@ html[data-bs-theme="dark"] .hero-info-zh {
 .journey-photo-card-image {
     display: block;
     width: 100%;
-    height: 124px;
-    border-radius: 10px;
+    height: 140px;
+    border-radius: 8px;
     object-fit: cover;
     object-position: center 43%;
 }
@@ -1008,11 +1089,6 @@ html[data-bs-theme="dark"] .journey-background {
 
 html[data-bs-theme="dark"] .journey-story-body {
     color: #d8d2c9;
-}
-
-html[data-bs-theme="dark"] .journey-photo-card {
-    border-color: rgb(216 189 147 / 28%);
-    background: rgb(29 28 26 / 88%);
 }
 
 html[data-bs-theme="dark"] .story-person-name-zh {
@@ -1175,6 +1251,7 @@ html[data-bs-theme="dark"] .story-person-name-zh {
     border-radius: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
+    transition: border-color 240ms ease;
 }
 
 .rsvp-input:not(.rsvp-message-input):focus {
@@ -1183,12 +1260,13 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .rsvp-input::placeholder {
-    color: var(--color-placeholder);
+    color: rgb(86 80 74 / 42%);
     font-size: 13px !important;
+    opacity: 1;
 }
 
 html[data-bs-theme="dark"] .rsvp-input::placeholder {
-    color: var(--color-placeholder);
+    color: rgb(245 239 230 / 42%);
 }
 
 .rsvp-name-field {
@@ -1197,6 +1275,47 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 
 .rsvp-name-input-wrap {
     position: relative;
+}
+
+.rsvp-name-field.is-validation-error .rsvp-name-input-wrap {
+    animation: rsvp-field-shake 360ms ease-out 1;
+}
+
+.rsvp-field.is-validation-error .rsvp-input:not(.rsvp-message-input) {
+    border-bottom-color: #a66f5b !important;
+}
+
+.rsvp-inline-error {
+    margin: 0.5rem 0 0;
+    color: #a05f4d;
+    font-family: var(--font-sans-zh);
+    font-size: 12px;
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-body);
+    letter-spacing: var(--type-tracking-sm);
+    opacity: 0;
+    transform: translateY(-3px);
+    animation: rsvp-inline-error-in 220ms ease-out forwards;
+    transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.rsvp-inline-error.is-hiding {
+    opacity: 0;
+    transform: translateY(-2px);
+}
+
+@keyframes rsvp-field-shake {
+    0%, 100% { transform: translateX(0); }
+    28% { transform: translateX(-2px); }
+    55% { transform: translateX(2px); }
+    78% { transform: translateX(-1px); }
+}
+
+@keyframes rsvp-inline-error-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .rsvp-input.rsvp-name-input {
@@ -1216,7 +1335,8 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 
 .rsvp-name-prompt {
     position: absolute;
-    top: 0;
+    right: 0;
+    bottom: 5px;
     left: 0;
     display: flex;
     flex-direction: column;
@@ -1225,6 +1345,7 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 }
 
 .rsvp-name-prompt-zh {
+    color: rgb(64 59 54 / 62%);
     font-family: var(--font-sans-zh);
     font-size: var(--type-field-label-zh-size);
     font-weight: var(--type-weight-medium);
@@ -1233,12 +1354,20 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 
 .rsvp-name-prompt-en {
     margin-top: 1px;
-    color: var(--color-info-secondary);
+    color: rgb(105 98 91 / 48%);
     font-family: var(--font-sans);
     font-size: var(--type-field-label-en-size);
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-compact);
     opacity: 1;
+}
+
+html[data-bs-theme="dark"] .rsvp-name-prompt-zh {
+    color: rgb(245 239 230 / 66%);
+}
+
+html[data-bs-theme="dark"] .rsvp-name-prompt-en {
+    color: rgb(245 239 230 / 44%);
 }
 
 .rsvp-name-input:focus + .rsvp-name-prompt,
@@ -1271,11 +1400,28 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 }
 
 .rsvp-optional-note {
-    display: flex;
-    flex-direction: column;
-    margin: 0 0 1.75rem;
+    display: grid;
+    grid-template-columns: minmax(2rem, 1fr) auto minmax(2rem, 1fr);
+    align-items: center;
+    gap: 0.85rem;
+    margin: 0.35rem 0 2rem;
     color: var(--bs-secondary-color);
     line-height: var(--type-line-ui);
+    text-align: center;
+}
+
+.rsvp-optional-note::before,
+.rsvp-optional-note::after {
+    height: 1px;
+    background: rgb(184 151 106 / 24%);
+    content: '';
+    transform: scaleY(0.5);
+}
+
+.rsvp-optional-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .rsvp-optional-note-zh {
@@ -1293,6 +1439,11 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
     font-weight: var(--type-weight-regular);
     color: var(--color-info-muted);
     opacity: 1;
+}
+
+#field-address > .bilingual-helper-text,
+.rsvp-email-field > .bilingual-helper-text {
+    margin-top: 10px;
 }
 
 #party-size-field.show,
@@ -1463,7 +1614,12 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     object-fit: cover;
     object-position: center 65%;
     opacity: 0.12;
-    mask-image: linear-gradient(to bottom, transparent, black 14%, black 86%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 74%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 74%, transparent 100%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
 }
 
 .wedding-guide-header {
@@ -1617,7 +1773,97 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 }
 
 .footer-section {
+    position: relative;
     padding: 0 0 2.75rem;
+}
+
+.calendar-shortcut {
+    color: var(--bs-body-color);
+    opacity: 0.45;
+    transition: color 260ms ease, border-color 260ms ease, background-color 260ms ease, opacity 260ms ease, transform 180ms ease;
+}
+
+.calendar-shortcut:focus-visible {
+    color: #9f7b4d;
+    opacity: 0.82;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .calendar-shortcut:hover {
+        color: #9f7b4d;
+        opacity: 0.82;
+    }
+}
+
+.calendar-shortcut.is-footer-highlight {
+    border-color: rgb(184 151 106 / 68%) !important;
+    color: #b8976a;
+    background-color: rgb(184 151 106 / 10%) !important;
+    opacity: 1;
+}
+
+.calendar-shortcut.is-shimmering {
+    animation: calendar-shortcut-shimmer 800ms ease-out 1;
+}
+
+@keyframes calendar-shortcut-shimmer {
+    0%, 100% {
+        box-shadow: 0 0 0 rgb(184 151 106 / 0%);
+        transform: scale(1);
+    }
+
+    42% {
+        box-shadow: 0 0 0.9rem rgb(184 151 106 / 46%);
+        transform: scale(1.08);
+    }
+}
+
+.wedding-day-section.is-shortcut-arrival .wedding-day-title {
+    animation: wedding-title-arrival 720ms ease-out 1;
+}
+
+.wedding-day-section.is-shortcut-arrival .wedding-countdown {
+    animation: wedding-countdown-arrival 760ms ease-out 1;
+}
+
+@keyframes wedding-title-arrival {
+    0% {
+        opacity: 0.35;
+        transform: translateY(5px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes wedding-countdown-arrival {
+    0%, 100% {
+        border-color: var(--bs-border-color);
+        box-shadow: none;
+        transform: scale(1);
+    }
+
+    48% {
+        border-color: rgb(184 151 106 / 62%);
+        box-shadow: 0 0 1rem rgb(184 151 106 / 18%);
+        transform: scale(1.018);
+    }
+}
+
+.footer-credit-image {
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 35%) 18%, black 38%, black 84%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 35%) 18%, black 38%, black 84%, transparent 100%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
 }
 
 .guide-closing {
@@ -1633,7 +1879,7 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 }
 
 .guide-closing-copy {
-    max-width: 17.5rem;
+    max-width: 18rem;
 }
 
 .footer-message {
@@ -1646,24 +1892,81 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 
 .footer-message-zh {
     color: inherit;
-    font-family: var(--font-soft-zh);
-    font-size: var(--type-footer-message-zh-size);
+    font-family: var(--font-sans-zh);
+    font-size: 15px;
     font-weight: var(--type-weight-regular);
-    letter-spacing: var(--type-tracking-sm);
+    line-height: 1.7;
+    letter-spacing: 0.045em;
 }
 
 .footer-message-en {
-    margin-top: 0.25rem;
+    max-width: 16.75rem;
+    margin: 0.3rem auto 0;
     color: var(--color-info-muted);
-    letter-spacing: var(--type-tracking-xs);
+    font-size: 12px;
+    line-height: 1.65;
+    letter-spacing: 0.015em;
     opacity: 1;
 }
 
-.footer-message-heart {
-    margin-left: 0.1rem;
-    color: rgb(184 151 106 / 78%);
+.footer-message-date {
+    margin-top: 1.35rem;
+    color: var(--color-info-secondary);
+    font-family: var(--font-sans-zh);
+    font-size: 13px;
+    font-weight: var(--type-weight-medium);
+    letter-spacing: 0.07em;
+}
+
+.guide-closing-heart {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.08rem;
+    border: 0;
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+    font: inherit;
+    line-height: inherit;
+    vertical-align: baseline;
+    transform-origin: center;
+}
+
+.guide-closing-heart:hover,
+.guide-closing-heart:focus-visible {
+    filter: drop-shadow(0 0 4px rgb(184 151 106 / 42%));
+}
+
+.guide-closing-heart:focus-visible {
+    outline: 1px solid rgb(184 151 106 / 48%);
+    outline-offset: 3px;
+}
+
+.guide-closing-heart.is-beating {
+    animation: couple-heart-beat 560ms ease-in-out;
+}
+
+.guide-closing-easter-egg-message {
+    max-width: 16.5rem;
+    max-height: 0;
+    margin: 0 auto;
+    color: #9a7a50;
     font-family: var(--font-sans);
-    font-size: 0.75em;
+    font-size: 12px;
+    font-weight: var(--type-weight-regular);
+    line-height: 1.6;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(5px);
+    transition: max-height 240ms ease, margin-top 240ms ease, opacity 240ms ease, transform 240ms ease;
+}
+
+.guide-closing-easter-egg-message.is-visible {
+    max-height: 4rem;
+    margin-top: 1rem;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .footer-credits {
@@ -1723,19 +2026,95 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 }
 
 .footer-build-credit {
-    max-width: 8rem;
+    display: block;
+    width: fit-content;
+    max-width: calc(100% - 1rem);
+    padding: 0;
+    border: 0;
     margin-top: 2.75rem;
     margin-bottom: 0;
     color: var(--color-info-muted);
+    background: transparent;
+    cursor: pointer;
     font-family: var(--font-sans);
-    font-size: var(--type-footer-credit-size);
+    font-size: clamp(8.5px, 2.5vw, 10px);
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-body);
-    opacity: 1;
+    letter-spacing: 0.01em;
+    opacity: 0.68;
+    white-space: nowrap;
 }
 
-.bottom-nav-label {
-    font-size: var(--type-nav-size);
+.footer-build-credit:hover,
+.footer-build-credit:focus-visible {
+    color: var(--color-info-secondary);
+}
+
+.footer-build-credit:focus-visible {
+    outline: 1px solid rgb(184 151 106 / 55%);
+    outline-offset: 5px;
+}
+
+.footer-easter-egg-message {
+    max-height: 0;
+    margin: 0;
+    color: #b8976a;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-body);
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(5px);
+    transition: max-height 220ms ease, margin-top 220ms ease, opacity 220ms ease, transform 220ms ease;
+}
+
+.footer-easter-egg-message.is-visible {
+    max-height: 2rem;
+    margin-top: 1rem;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .calendar-shortcut.is-shimmering,
+    .wedding-day-section.is-shortcut-arrival .wedding-day-title,
+    .wedding-day-section.is-shortcut-arrival .wedding-countdown {
+        animation: none;
+    }
+
+    .rsvp-name-field.is-validation-error .rsvp-name-input-wrap,
+    .rsvp-inline-error {
+        animation: none;
+    }
+
+    .rsvp-inline-error {
+        opacity: 1;
+        transform: none;
+    }
+
+    .journey-toggle[aria-expanded="true"] .journey-step {
+        animation: none;
+    }
+
+    .journey-card:has(.journey-toggle[aria-expanded="true"]) .journey-story-body::before {
+        animation: none;
+        opacity: 1;
+        transform: scaleX(1);
+    }
+
+    .story-heart-button.is-beating {
+        animation: none;
+    }
+
+    .guide-closing-heart.is-beating {
+        animation: none;
+    }
+
+    .footer-easter-egg-message,
+    .guide-closing-easter-egg-message {
+        transition: none;
+    }
 }
 
 .loading-status {
@@ -1752,8 +2131,69 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 }
 
 .validation-message-zh {
+    display: block;
+    margin-top: 3px;
+    color: var(--bs-body-color);
+    font-family: var(--font-sans-zh);
     font-size: var(--type-validation-zh-size);
-    letter-spacing: var(--type-tracking-3xl);
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-body);
+    letter-spacing: var(--type-tracking-lg);
+}
+
+.rsvp-feedback {
+    position: relative;
+    padding: 0.8rem 2rem 0.25rem 0;
+    border: 0;
+    border-top: 1px solid rgb(184 151 106 / 46%);
+    border-radius: 0;
+    color: var(--color-info-soft);
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-control);
+}
+
+.rsvp-feedback strong {
+    color: var(--bs-body-color);
+    font-weight: var(--type-weight-medium);
+}
+
+.rsvp-feedback-danger {
+    border-top-color: rgb(168 117 107 / 58%);
+}
+
+.rsvp-feedback-success {
+    border-top-color: rgb(129 151 113 / 58%);
+}
+
+.rsvp-feedback-close {
+    position: absolute;
+    top: 0.45rem;
+    right: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    border: 0;
+    color: var(--color-info-muted);
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-solid);
+    opacity: 0.72;
+}
+
+.rsvp-feedback-close:hover,
+.rsvp-feedback-close:focus-visible {
+    color: #8f6d42;
+    opacity: 1;
+}
+
+.rsvp-feedback-close:focus-visible {
+    outline: 1px solid rgb(184 151 106 / 52%);
+    outline-offset: 2px;
 }
 
 .offline-status-text {
@@ -1788,7 +2228,7 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 }
 
 .rsvp-section {
-    --bottom-nav-height: 4.25rem;
+    --bottom-nav-height: 0px;
 
     min-height: calc(100dvh - var(--bottom-nav-height));
     padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + 0.75rem) !important;
@@ -2003,10 +2443,6 @@ html[data-bs-theme="dark"] .bg-white-black {
     .guide-closing {
         padding-top: 0;
         margin-top: 4rem;
-    }
-
-    .wedding-guide-background {
-        height: calc(100dvh - var(--bottom-nav-height));
     }
 
     .wedding-guide-header {

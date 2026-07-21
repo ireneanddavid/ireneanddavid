@@ -7,6 +7,17 @@
 3. Never push commits or changes to a remote repository without the user's explicit confirmation immediately before the push.
 4. Treat the user's standalone command `cp` as explicit confirmation to commit all currently reviewed changes and push the resulting commit to the configured remote branch.
 
+## Visual Regression Review
+
+1. After every meaningful visual, typography, layout, interaction, or content change, review the affected area in the local browser at the 390 × 844 mobile viewport before reporting completion.
+2. Review both the changed component and its transitions to the sections immediately before and after it. Interactive components must be checked in every state affected by the change, including collapsed, expanded, validation, hover/focus, and post-animation states where applicable.
+3. Preserve the `Good to Know → Thank-you note → Behind the Scenes` background transition as a design invariant:
+   - The Good to Know background image must follow the full rendered section height, including expanded FAQ content.
+   - The image must fade out gradually behind the Thank-you note.
+   - The Behind the Scenes image must fade in gradually, with no hard horizontal seam or plain-background gap between the two sections.
+   - Never constrain `.wedding-guide-background` to a viewport-only height while the section content can expand.
+4. Any change near Good to Know, the Thank-you note, Footer, accordion spacing, section height, background images, or mobile navigation requires an explicit re-check of this three-part transition before completion.
+
 ## Git and PR Rules
 
 Do not include Codex branding or attribution in commits or pull requests.

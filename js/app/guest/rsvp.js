@@ -20,13 +20,71 @@ export const rsvp = (() => {
      */
     let RECAPTCHA_SITE_KEY = '';
 
+    const validationTimers = new WeakMap();
+
+    /**
+     * @param {HTMLElement} field
+     * @returns {void}
+     */
+    const clearFieldError = (field) => {
+        if (!field) {
+            return;
+        }
+
+        window.clearTimeout(validationTimers.get(field));
+        validationTimers.delete(field);
+        field.classList.remove('is-validation-error');
+        field.removeAttribute('aria-invalid');
+        field.querySelectorAll('[aria-invalid="true"]').forEach((control) => control.removeAttribute('aria-invalid'));
+        field.querySelector('.rsvp-inline-error')?.remove();
+    };
+
+    /**
+     * @param {HTMLElement} field
+     * @param {HTMLElement|null} control
+     * @param {string} message
+     * @param {HTMLElement|null} anchor
+     * @returns {void}
+     */
+    const showFieldError = (field, control, message, anchor = null) => {
+        clearFieldError(field);
+
+        const error = document.createElement('p');
+        error.className = 'rsvp-inline-error';
+        error.setAttribute('role', 'status');
+        error.textContent = `⚠ ${message}`;
+
+        if (anchor) {
+            anchor.insertAdjacentElement('afterend', error);
+        } else {
+            field.append(error);
+        }
+
+        field.classList.remove('is-validation-error');
+        void field.offsetWidth;
+        field.classList.add('is-validation-error');
+        field.setAttribute('aria-invalid', 'true');
+        control?.setAttribute('aria-invalid', 'true');
+
+        if (control && typeof control.focus === 'function') {
+            control.focus({ preventScroll: true });
+        }
+        field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        const timer = window.setTimeout(() => {
+            error.classList.add('is-hiding');
+            window.setTimeout(() => clearFieldError(field), 240);
+        }, 2600);
+        validationTimers.set(field, timer);
+    };
+
     /**
      * @param {string} type
      * @param {string} msg
      * @returns {string}
      */
     const alertMarkup = (type, msg) => {
-        return `<div class="alert alert-${util.escapeHtml(type)} alert-dismissible fade show rounded-4 mb-0 mt-2" role="alert">${msg}<button type="button" class="btn-close rounded-4 p-3" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+        return `<div class="alert fade show rsvp-feedback rsvp-feedback-${util.escapeHtml(type)} mb-0 mt-2" role="alert"><div class="rsvp-feedback-copy">${msg}</div><button type="button" class="rsvp-feedback-close" aria-label="Close notification">×</button></div>`;
     };
 
     /**
@@ -66,17 +124,19 @@ export const rsvp = (() => {
         }
 
         if (!name.value || name.value.trim().length === 0) {
-            alertWrapper.innerHTML = alertMarkup('warning', 'Please enter your name.<br><span class="validation-message-zh">請填寫姓名</span>');
+            showFieldError(document.querySelector('.rsvp-name-field'), name, '請填寫姓名');
             return;
         }
 
         if (!presence || !presence.value) {
-            alertWrapper.innerHTML = alertMarkup('warning', 'Please select your attendance status.<br><span class="validation-message-zh">請選擇是否出席</span>');
+            const attendanceField = document.getElementById('attendance-field');
+            showFieldError(attendanceField, attendanceField.querySelector('input[type="radio"]'), '請選擇是否出席');
             return;
         }
 
         if (isAttending && (!guestCount || !guestCount.value)) {
-            alertWrapper.innerHTML = alertMarkup('warning', 'Please select your party size.<br><span class="validation-message-zh">請選擇同行人數</span>');
+            const partyField = document.getElementById('party-size-field');
+            showFieldError(partyField, partyField.querySelector('input[type="radio"]'), '請選擇同行人數');
             return;
         }
 
@@ -84,7 +144,7 @@ export const rsvp = (() => {
         if (isAttending && invitationType) {
             const v = invitationType.value;
             if (v === 'yes-paper' && address && !address.value.trim()) {
-                alertWrapper.innerHTML = alertMarkup('warning', 'Please enter your mailing address.<br><span class="validation-message-zh">請填寫收件地址</span>');
+                showFieldError(document.getElementById('field-address'), address, '請填寫收件地址', address);
                 return;
             }
         }
@@ -160,6 +220,24 @@ export const rsvp = (() => {
         information = storage('information');
         APPS_SCRIPT_URL = document.body.getAttribute('data-rsvp-url') || '';
         RECAPTCHA_SITE_KEY = document.body.getAttribute('data-recaptcha-key') || '';
+
+        document.getElementById('rsvp-alert')?.addEventListener('click', (event) => {
+            const closeButton = event.target.closest('.rsvp-feedback-close');
+            if (!closeButton) {
+                return;
+            }
+
+            closeButton.closest('.rsvp-feedback')?.remove();
+        });
+
+        document.getElementById('form-name')?.addEventListener('input', () => clearFieldError(document.querySelector('.rsvp-name-field')));
+        document.querySelectorAll('input[name="attendance-choice"]').forEach((option) => {
+            option.addEventListener('change', () => clearFieldError(document.getElementById('attendance-field')));
+        });
+        document.querySelectorAll('input[name="party-size-choice"]').forEach((option) => {
+            option.addEventListener('change', () => clearFieldError(document.getElementById('party-size-field')));
+        });
+        document.getElementById('form-address')?.addEventListener('input', () => clearFieldError(document.getElementById('field-address')));
     };
 
     return {

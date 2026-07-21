@@ -166,6 +166,7 @@ export const guest = (() => {
         await util.changeOpacity(welcome, false);
         welcome.remove();
         root.classList.remove('opacity-0');
+        document.getElementById('button-wedding-day')?.classList.remove('d-none');
 
         if (theme.isAutoMode()) {
             document.getElementById('button-theme').classList.remove('d-none');
@@ -175,7 +176,6 @@ export const guest = (() => {
         theme.spyTop();
 
         confetti.basicAnimation();
-        util.timeOut(confetti.openAnimation, 1500);
 
         document.dispatchEvent(new Event('undangan.open'));
     };
@@ -335,6 +335,201 @@ export const guest = (() => {
         }
     };
 
+    /** @returns {void} */
+    const journeyConfetti = () => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return;
+        }
+
+        const celebrated = new Set();
+        document.querySelectorAll('#journey-stories .collapse').forEach((panel) => {
+            panel.addEventListener('show.bs.collapse', () => {
+                if (celebrated.has(panel.id)) {
+                    return;
+                }
+
+                celebrated.add(panel.id);
+                const toggle = document.querySelector(`[aria-controls="${panel.id}"]`);
+                if (toggle) {
+                    const sourceSide = panel.id === 'journey-story-one' ? 'right' : 'left';
+                    confetti.journeyGoldAnimation(toggle, sourceSide);
+                }
+            });
+        });
+    };
+
+    /** @returns {void} */
+    const coupleHeartInteraction = () => {
+        const heart = document.getElementById('couple-heart');
+        if (!heart) {
+            return;
+        }
+
+        heart.addEventListener('click', () => {
+            heart.classList.remove('is-beating');
+            void heart.offsetWidth;
+            heart.classList.add('is-beating');
+
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                confetti.loveSparkleAnimation(heart);
+            }
+        });
+        heart.addEventListener('animationend', () => heart.classList.remove('is-beating'));
+    };
+
+    /** @returns {void} */
+    const footerEasterEgg = () => {
+        const trigger = document.getElementById('footer-easter-egg-trigger');
+        const message = document.getElementById('footer-easter-egg-message');
+        if (!trigger || !message) {
+            return;
+        }
+
+        let taps = 0;
+        let resetTimer = null;
+        let hideTimer = null;
+
+        trigger.addEventListener('click', () => {
+            taps += 1;
+            window.clearTimeout(resetTimer);
+
+            if (taps < 5) {
+                resetTimer = window.setTimeout(() => {
+                    taps = 0;
+                }, 2200);
+                return;
+            }
+
+            taps = 0;
+            window.clearTimeout(hideTimer);
+            message.classList.add('is-visible');
+            hideTimer = window.setTimeout(() => message.classList.remove('is-visible'), 3500);
+        });
+    };
+
+    /** @returns {void} */
+    const guideClosingHeartEasterEgg = () => {
+        const heart = document.getElementById('guide-closing-heart');
+        const message = document.getElementById('guide-closing-easter-egg-message');
+        if (!heart || !message) {
+            return;
+        }
+
+        let taps = 0;
+        let resetTimer = null;
+        let hideTimer = null;
+
+        heart.addEventListener('click', () => {
+            heart.classList.remove('is-beating');
+            void heart.offsetWidth;
+            heart.classList.add('is-beating');
+
+            taps += 1;
+            window.clearTimeout(resetTimer);
+            if (taps < 5) {
+                resetTimer = window.setTimeout(() => {
+                    taps = 0;
+                }, 2200);
+                return;
+            }
+
+            taps = 0;
+            window.clearTimeout(hideTimer);
+            message.classList.add('is-visible');
+            hideTimer = window.setTimeout(() => message.classList.remove('is-visible'), 5500);
+
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                confetti.loveSparkleAnimation(heart);
+            }
+        });
+        heart.addEventListener('animationend', () => heart.classList.remove('is-beating'));
+    };
+
+    /** @returns {void} */
+    const weddingDayShortcut = () => {
+        const button = document.getElementById('button-wedding-day');
+        const target = document.getElementById('wedding-date');
+        const footer = document.querySelector('.footer-section');
+        if (!button || !target || !footer) {
+            return;
+        }
+
+        let scrollFrame = null;
+        let arrivalTimer = null;
+        let restoreScrollBehavior = null;
+
+        const showArrival = () => {
+            target.classList.remove('is-shortcut-arrival');
+            void target.offsetWidth;
+            target.classList.add('is-shortcut-arrival');
+            window.clearTimeout(arrivalTimer);
+            arrivalTimer = window.setTimeout(() => target.classList.remove('is-shortcut-arrival'), 1250);
+        };
+
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            window.cancelAnimationFrame(scrollFrame);
+            restoreScrollBehavior?.();
+
+            const rootStyle = document.documentElement.style;
+            const previousScrollBehavior = rootStyle.getPropertyValue('scroll-behavior');
+            const previousScrollPriority = rootStyle.getPropertyPriority('scroll-behavior');
+            rootStyle.setProperty('scroll-behavior', 'auto', 'important');
+            restoreScrollBehavior = () => {
+                if (previousScrollBehavior) {
+                    rootStyle.setProperty('scroll-behavior', previousScrollBehavior, previousScrollPriority);
+                } else {
+                    rootStyle.removeProperty('scroll-behavior');
+                }
+                restoreScrollBehavior = null;
+            };
+
+            const startY = window.scrollY;
+            const targetY = target.getBoundingClientRect().top + startY;
+            const distance = targetY - startY;
+            const duration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1050;
+            const startedAt = performance.now();
+
+            const step = (now) => {
+                const progress = duration === 0 ? 1 : Math.min(1, (now - startedAt) / duration);
+                const eased = progress < 0.5
+                    ? 4 * progress * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                window.scrollTo(0, startY + (distance * eased));
+
+                if (progress < 1) {
+                    scrollFrame = window.requestAnimationFrame(step);
+                    return;
+                }
+
+                restoreScrollBehavior?.();
+                window.history.replaceState(null, '', '#wedding-date');
+                showArrival();
+            };
+
+            scrollFrame = window.requestAnimationFrame(step);
+        });
+
+        const footerObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                button.classList.toggle('is-footer-highlight', entry.isIntersecting);
+                if (!entry.isIntersecting || button.dataset.footerShimmered === 'true') {
+                    return;
+                }
+
+                button.dataset.footerShimmered = 'true';
+                button.classList.add('is-shimmering');
+            });
+        }, { threshold: 0.08 });
+
+        button.addEventListener('animationend', (event) => {
+            if (event.animationName === 'calendar-shortcut-shimmer') {
+                button.classList.remove('is-shimmering');
+            }
+        });
+        footerObserver.observe(footer);
+    };
+
     /**
      * @returns {object}
      */
@@ -366,6 +561,11 @@ export const guest = (() => {
         modalImageClick();
         modalImageTriggers();
         buildCalendarLinks();
+        journeyConfetti();
+        coupleHeartInteraction();
+        footerEasterEgg();
+        guideClosingHeartEasterEgg();
+        weddingDayShortcut();
 
         // Don't restore previous attendance — always start fresh at "Select"
 

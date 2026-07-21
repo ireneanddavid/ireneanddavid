@@ -117,3 +117,59 @@ export const tapTapAnimation = (div, duration = 50) => {
 
     requestAnimationFrame(frame);
 };
+
+/**
+ * @param {HTMLElement} element
+ * @param {'left'|'right'} sourceSide
+ * @returns {void}
+ */
+export const journeyGoldAnimation = (element, sourceSide = 'right') => {
+    if (!window.confetti) {
+        return;
+    }
+
+    const rect = element.getBoundingClientRect();
+    const fromRight = sourceSide === 'right';
+    window.confetti({
+        particleCount: 20,
+        angle: fromRight ? 135 : 45,
+        spread: 54,
+        startVelocity: 21,
+        ticks: 58,
+        gravity: 0.76,
+        scalar: 0.62,
+        origin: {
+            x: Math.max(0.08, Math.min(0.92, (fromRight ? rect.right - 12 : rect.left + 12) / window.innerWidth)),
+            y: Math.max(0.12, Math.min(0.9, (rect.bottom - 10) / window.innerHeight)),
+        },
+        zIndex: zIndex,
+        colors: ['#b8976a', '#d6bd91', '#eadfc9', '#9f7b4d'],
+    });
+};
+
+/**
+ * @param {HTMLElement} element
+ * @returns {void}
+ */
+export const loveSparkleAnimation = (element) => {
+    if (!window.confetti) {
+        return;
+    }
+
+    const rect = element.getBoundingClientRect();
+    window.confetti({
+        particleCount: 14,
+        spread: 68,
+        startVelocity: 18,
+        ticks: 55,
+        gravity: 0.65,
+        scalar: 0.62,
+        shapes: ['star'],
+        origin: {
+            x: (rect.left + (rect.width / 2)) / window.innerWidth,
+            y: (rect.top + (rect.height / 2)) / window.innerHeight,
+        },
+        zIndex: zIndex,
+        colors: ['#b8976a', '#d6bd91', '#f1e8d5', '#9f7b4d'],
+    });
+};

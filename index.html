@@ -47,7 +47,7 @@
     <!-- Dependencies CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha256-2FMn2Zx6PuH5tdBQDRNwrOo60ts5wWPC9R8jK67b3t4=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css" integrity="sha256-4rTIfo5GQTi/7UJqoyUJQKzxW8VN/YBH31+Cy+vTZj4=" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/guest.css?v=52">
+    <link rel="stylesheet" href="./css/guest.css?v=69">
 
     <!-- Dependencies JS -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha256-5P1JGBOIxI7FBAvT/mb1fCnI5n/NhQKzNUuW7Hq0fMc=" crossorigin="anonymous"></script>
@@ -59,7 +59,7 @@
             if (window.caches) { caches.keys().then(function(n) { n.forEach(function(k) { caches.delete(k); }); }); }
         }
     </script>
-    <script src="./dist/guest.js?v=5"></script>
+    <script src="./dist/guest.js?v=19"></script>
 
     <!-- reCAPTCHA v3 — replace YOUR_SITE_KEY with your actual key -->
     <!-- <script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script> -->
@@ -109,7 +109,7 @@
         <!-- Smartphone mode -->
         <div class="col-sm-7 col-md-6 col-lg-5 col-xl-4 col-xxl-3 m-0 p-0">
             <!-- Main Content -->
-            <main data-bs-spy="scroll" data-bs-target="#navbar-menu" data-bs-root-margin="25% 0% 0% 0%" data-bs-smooth-scroll="true" tabindex="0">
+            <main tabindex="0">
 
                 <!-- Home -->
                 <section id="home" class="wedding-hero bg-light-dark position-relative overflow-hidden p-0 m-0 d-flex align-items-center">
@@ -215,7 +215,7 @@
                                 <p class="story-punchline mb-0">There’s no such thing as too many ski trips.</p>
                             </article>
 
-                            <div class="story-heart my-4" aria-hidden="true">♡</div>
+                            <button type="button" class="story-heart story-heart-button my-4" id="couple-heart" aria-label="Send love to Minchi and David">♡</button>
 
                             <article class="story-profile" data-aos="fade-up" data-aos-duration="1200">
                                 <p class="story-role mb-2">Groom</p>
@@ -436,7 +436,7 @@
                                 </script>
                             </fieldset>
 
-                            <p class="rsvp-optional-note"><span class="rsvp-optional-note-zh">以下皆為選填</span><span class="rsvp-optional-note-en">Everything below is optional</span></p>
+                            <p class="rsvp-optional-note"><span class="rsvp-optional-copy"><span class="rsvp-optional-note-zh">以下皆為選填</span><span class="rsvp-optional-note-en">Optional</span></span></p>
 
                             <div id="invitation-details" class="rsvp-conditional">
                                 <div id="field-address" class="rsvp-field rsvp-conditional">
@@ -444,7 +444,7 @@
                                         <span class="bilingual-field-label"><span class="bilingual-field-label-en">Mailing Address</span><span class="bilingual-field-label-zh">收件地址</span></span>
                                     </label>
                                     <input type="text" class="form-control rsvp-input" id="form-address" placeholder="例：台北市中山區民生東路 123 號 5 樓" autocomplete="street-address" data-offline-disabled="false">
-                                    <p class="bilingual-helper-text mb-0"><span class="bilingual-helper-text-en">Used only to mail your invitation.</span><span class="bilingual-helper-text-zh">地址僅用於寄送喜帖。</span></p>
+                                    <p class="bilingual-helper-text mb-0"><span class="bilingual-helper-text-zh">地址僅用於寄送喜帖。</span></p>
                                 </div>
                             </div>
 
@@ -453,7 +453,7 @@
                                     <span class="bilingual-field-label"><span class="bilingual-field-label-en">Email</span><span class="bilingual-field-label-zh">電子郵件</span></span>
                                 </label>
                                 <input type="email" class="form-control rsvp-input rsvp-email-input" id="form-email" placeholder="name@example.com" autocomplete="email" data-offline-disabled="false">
-                                <p class="bilingual-helper-text mb-0"><span class="bilingual-helper-text-en">For wedding updates and reminders only.</span><span class="bilingual-helper-text-zh">僅用於寄送婚禮最新消息與行前提醒。</span></p>
+                                <p class="bilingual-helper-text mb-0"><span class="bilingual-helper-text-zh">僅用於寄送婚禮最新消息與行前提醒。</span></p>
                             </div>
                         </section>
 
@@ -540,7 +540,6 @@
                                 </h3>
                                 <div class="collapse" id="wedding-guide-directions" data-bs-parent="#wedding-guide-accordion">
                                     <div class="wedding-guide-answer">
-                                        <p class="wedding-guide-answer-en">Open in <a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" rel="noopener noreferrer" class="guide-map-inline-link">Google Maps <span aria-hidden="true">↗</span></a></p>
                                         <p class="wedding-guide-answer-zh">在 <a href="https://maps.google.com/?q=Taipei+Marriott+Hotel" target="_blank" rel="noopener noreferrer" class="guide-map-inline-link">Google Maps <span aria-hidden="true">↗</span></a> 查看路線與交通資訊</p>
 
                                         <div class="wedding-guide-map">
@@ -555,8 +554,10 @@
                         <div class="guide-closing text-center">
                             <div class="guide-closing-divider" aria-hidden="true"></div>
                             <div class="guide-closing-copy mx-auto">
-                                <p class="footer-message footer-message-zh">謝謝你成為我們故事的一部分 <span class="footer-message-heart" aria-hidden="true">♥</span></p>
-                                <p class="footer-message footer-message-en"><em>Thank you for being part of our story.</em></p>
+                                <p class="footer-message footer-message-zh">謝謝你讀完我們的故事<button type="button" class="guide-closing-heart" id="guide-closing-heart" aria-label="Tap the heart five times">🤍</button></p>
+                                <p class="footer-message footer-message-en"><em>Thank you for reading our story all the way to the end.</em></p>
+                                <p class="footer-message footer-message-date">11 月 29 日· 我們見</p>
+                                <p class="guide-closing-easter-egg-message" id="guide-closing-easter-egg-message" aria-live="polite">You’re officially part of our story now.</p>
                             </div>
                         </div>
                     </div>
@@ -565,14 +566,14 @@
                 <!-- Footer -->
                 <footer class="footer-section bg-white-black no-gap-bottom">
                     <div class="footer-credit-stage position-relative overflow-hidden">
-                        <img src="./assets/images/placeholder.webp" data-src="./assets/images/footer.jpeg?v=2" alt="Minchi and David" class="position-absolute top-0 start-0" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3; z-index: 0; mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 35%) 18%, black 38%, black 84%, transparent 100%);">
-                        <div class="footer-credits position-relative text-center" style="z-index: 1;">
+                        <img src="./assets/images/placeholder.webp" data-src="./assets/images/footer.jpeg?v=2" alt="Minchi and David" class="footer-credit-image position-absolute top-0 start-0">
+                        <div class="footer-credits position-relative text-center" style="z-index: 1;" data-aos="fade-up" data-aos-duration="1100" data-aos-offset="60">
                             <p class="footer-kicker">Behind the Scenes</p>
 
                             <div class="footer-credit-list">
                                 <div class="footer-credit-block">
                                     <p class="footer-person-name">Minchi</p>
-                                    <p class="footer-role">PM &amp; AI Spell Caster</p>
+                                    <p class="footer-role">Full Stack Developer &amp; AI Spell Caster</p>
                                     <p class="footer-quote">“I’ll just change one more thing…”</p>
                                 </div>
                                 <div class="footer-credit-separator" aria-hidden="true">•</div>
@@ -583,7 +584,8 @@
                                 </div>
                             </div>
 
-                            <p class="footer-build-credit mx-auto">Built with ♥, coffee, and a lot of “Can you check this?”</p>
+                            <button type="button" class="footer-build-credit mx-auto" id="footer-easter-egg-trigger">Built with ♥, coffee, and a lot of “Can you check this?”</button>
+                            <p class="footer-easter-egg-message" id="footer-easter-egg-message" aria-live="polite">See you on November 29.</p>
                         </div>
                     </div>
                 </footer>
@@ -600,35 +602,6 @@
                 })();
             </script>
 
-            <!-- Navbar Bottom -->
-            <nav class="navbar navbar-expand sticky-bottom rounded-top-4 border-top p-0" id="navbar-menu">
-                <ul class="navbar-nav nav-justified w-100 align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">
-                            <i class="fa-solid fa-house"></i>
-                            <span class="bottom-nav-label d-block">Home</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#wedding-date">
-                            <i class="fa-solid fa-calendar-check"></i>
-                            <span class="bottom-nav-label d-block">Wedding</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#rsvp">
-                            <i class="fa-solid fa-envelope-open-text"></i>
-                            <span class="bottom-nav-label d-block">RSVP</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#our-story">
-                            <i class="fa-solid fa-heart"></i>
-                            <span class="bottom-nav-label d-block">Story</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </div>
 
@@ -651,6 +624,11 @@
 
     <!-- Button Group -->
     <div class="d-flex position-fixed flex-column" style="bottom: 10vh; right: 2vh; z-index: 1030;">
+        <!-- Wedding Day Shortcut -->
+        <a href="#wedding-date" id="button-wedding-day" class="calendar-shortcut btn bg-light-dark border btn-sm rounded-circle d-none btn-transparent shadow-sm mt-3" aria-label="Go to Wedding Day 婚禮資訊">
+            <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+        </a>
+
         <!-- Theme Button -->
         <button type="button" id="button-theme" class="btn bg-light-dark border btn-sm rounded-circle d-none btn-transparent shadow-sm mt-3" aria-label="Change theme" onclick="undangan.theme.change()">
             <i class="fa-solid fa-circle-half-stroke"></i>
