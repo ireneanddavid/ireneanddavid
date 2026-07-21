@@ -629,6 +629,11 @@ html[data-bs-theme="dark"] .hero-info-zh {
     z-index: 1;
 }
 
+.cover-viewport {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
 .cover-content {
     width: min(100%, 30rem);
 }
