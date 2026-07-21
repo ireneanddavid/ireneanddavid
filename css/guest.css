@@ -108,7 +108,7 @@
     --type-footer-message-zh-size: 1rem;
     --type-footer-name-size: 1.5rem;
     --type-footer-quote-size: 0.86rem;
-    --type-footer-credit-size: 0.72rem;
+    --type-footer-credit-size: 0.75rem;
     --type-modal-title-size: 2rem;
     --type-modal-signature-size: 1.5rem;
     --type-modal-body-size: 0.95rem;
@@ -124,7 +124,7 @@
     --type-choice-container-size: 1.1rem;
 
     /* Supporting interface text */
-    --type-nav-size: 0.7rem;
+    --type-nav-size: 0.75rem;
     --type-credit-size: 0.65rem;
     --type-credit-small-size: 0.6rem;
 
@@ -847,7 +847,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
     padding-top: 2px;
     color: #9a7a50;
     font-family: var(--font-sans);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: var(--type-weight-medium);
     line-height: var(--type-line-compact);
     letter-spacing: var(--type-tracking-lg);
@@ -1221,7 +1221,7 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 .rsvp-optional-note-en {
     margin-top: 1px;
     font-family: var(--font-sans);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: var(--type-weight-regular);
     opacity: 0.52;
 }
@@ -1609,7 +1609,7 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     margin: 0.25rem 0 0;
     color: var(--bs-secondary-color);
     font-family: var(--font-sans);
-    font-size: 0.72rem;
+    font-size: var(--type-footer-credit-size);
     font-weight: var(--type-weight-medium);
     line-height: var(--type-line-ui);
     letter-spacing: var(--type-tracking-sm);
@@ -1849,7 +1849,7 @@ html[data-bs-theme="dark"] .bg-white-black {
         --type-wedding-date-size: 22px;
         --type-wedding-day-size: 14px;
         --type-countdown-number-size: 15px;
-        --type-countdown-label-size: 11px;
+        --type-countdown-label-size: 12px;
         --type-schedule-time-size: 18px;
         --type-schedule-label-en-size: 13px;
         --type-schedule-label-zh-size: 14px;
