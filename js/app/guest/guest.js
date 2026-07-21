@@ -319,16 +319,12 @@ export const guest = (() => {
             ].join(''));
 
             const calHtml = `
-                <p class="calendar-helper-text mb-1 mt-3"><strong>Add to your calendar:</strong></p>
-                <div class="calendar-provider-links d-flex justify-content-center gap-3 mb-1">
-                    <a href="${googleUrl.toString()}" target="_blank" style="color: #b8976a; text-decoration: none;"><i class="fa-brands fa-google me-1"></i>Google</a>
-                    <span style="opacity: 0.3;">·</span>
-                    <a href="${icsHref}" target="_blank" style="color: #b8976a; text-decoration: none;"><i class="fa-brands fa-apple me-1"></i>Apple</a>
-                </div>
-                <div class="calendar-provider-links d-flex justify-content-center gap-3">
-                    <a href="${icsHref}" target="_blank" style="color: #b8976a; text-decoration: none;"><i class="fa-brands fa-microsoft me-1"></i>Outlook</a>
-                    <span style="opacity: 0.3;">·</span>
-                    <a href="${yahooUrl}" target="_blank" style="color: #b8976a; text-decoration: none;"><i class="fa-brands fa-yahoo me-1"></i>Yahoo</a>
+                <p class="calendar-helper-text mb-2 mt-0">Save the Date</p>
+                <div class="calendar-provider-links d-flex flex-wrap justify-content-center gap-3">
+                    <a href="${googleUrl.toString()}" target="_blank">Google</a>
+                    <a href="${icsHref}" target="_blank">Apple</a>
+                    <a href="${icsHref}" target="_blank">Outlook</a>
+                    <a href="${yahooUrl}" target="_blank">Yahoo</a>
                 </div>
             `;
             util.safeInnerHTML(calContainer, calHtml);
@@ -451,9 +447,7 @@ export const guest = (() => {
     const weddingDayShortcut = () => {
         const button = document.getElementById('button-wedding-day');
         const target = document.getElementById('wedding-date');
-        const guide = document.getElementById('wedding-guide');
-        const footer = document.querySelector('.footer-section');
-        if (!button || !target || !guide || !footer) {
+        if (!button || !target) {
             return;
         }
 
@@ -512,21 +506,6 @@ export const guest = (() => {
 
             scrollFrame = window.requestAnimationFrame(step);
         });
-
-        const visibleLateSections = new Set();
-        const guideObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    visibleLateSections.add(entry.target);
-                } else {
-                    visibleLateSections.delete(entry.target);
-                }
-            });
-            button.classList.toggle('is-guide-highlight', visibleLateSections.size > 0);
-        }, { threshold: 0.01 });
-
-        guideObserver.observe(guide);
-        guideObserver.observe(footer);
     };
 
     /**

@@ -148,6 +148,37 @@ export const journeyGoldAnimation = (element, sourceSide = 'right') => {
 };
 
 /**
+ * A restrained shower for the RSVP confirmation card.
+ * @returns {void}
+ */
+export const rsvpPetalAnimation = () => {
+    if (!window.confetti) {
+        return;
+    }
+
+    const petal = window.confetti.shapeFromPath({
+        path: 'M10 0 C16 4 18 12 10 20 C2 12 4 4 10 0 Z',
+        matrix: [0.5, 0, 0, 0.5, -5, -5],
+    });
+
+    window.confetti({
+        particleCount: 7,
+        angle: 270,
+        spread: 42,
+        startVelocity: 5,
+        ticks: 48,
+        gravity: 0.38,
+        drift: 0.08,
+        scalar: 0.52,
+        origin: { x: 0.5, y: 0.04 },
+        zIndex: zIndex,
+        shapes: [petal],
+        colors: ['#b8976a', '#d6bd91', '#eadfc9'],
+        disableForReducedMotion: true,
+    });
+};
+
+/**
  * @param {HTMLElement} element
  * @returns {void}
  */

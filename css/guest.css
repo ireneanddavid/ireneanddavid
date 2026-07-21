@@ -98,13 +98,13 @@
 
     /* RSVP */
     --type-field-label-en-size: 13px;
-    --type-field-label-zh-size: 14px;
+    --type-field-label-zh-size: 15px;
     --type-option-en-size: 13px;
-    --type-option-zh-size: 14px;
+    --type-option-zh-size: 15px;
     --type-helper-size: 13px;
     --type-input-size: 16px;
     --type-submit-en-size: 13px;
-    --type-submit-zh-size: 14px;
+    --type-submit-zh-size: 15px;
 
     /* Guide, footer, navigation, and transient UI */
     --type-guide-question-size: 1.05rem;
@@ -115,10 +115,10 @@
     --type-footer-name-size: 1.5rem;
     --type-footer-quote-size: 0.86rem;
     --type-footer-credit-size: 0.75rem;
-    --type-modal-title-size: 2rem;
-    --type-modal-signature-size: 1.5rem;
-    --type-modal-body-size: 0.95rem;
-    --type-modal-zh-primary-size: 1rem;
+    --type-modal-title-size: 0.9rem;
+    --type-modal-signature-size: 1.75rem;
+    --type-modal-body-size: 0.88rem;
+    --type-modal-zh-primary-size: 1.05rem;
     --type-modal-zh-secondary-size: 0.9rem;
     --type-loading-size: 0.8rem;
     --type-calendar-helper-size: 0.85rem;
@@ -409,6 +409,32 @@ html[data-bs-theme="dark"] .hero-info-zh {
 .wedding-day-content {
     padding-top: 0;
     padding-bottom: 0;
+}
+
+.wedding-day-credit {
+    z-index: 1;
+    width: 100%;
+    margin-top: auto;
+    padding: clamp(34px, 5vh, 48px) 1.5rem 0;
+}
+
+.wedding-day-credit-zh {
+    margin: 0;
+    color: #4a453f;
+    font-family: var(--font-sans-zh);
+    font-size: 14px;
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-relaxed);
+    letter-spacing: var(--type-tracking-sm);
+}
+
+.wedding-day-credit-en {
+    margin: 0.2rem 0 0;
+    color: var(--color-info-muted);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-body);
 }
 
 .wedding-day-title {
@@ -849,7 +875,12 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .story-timeline:has(#journey-story-two.show),
 .story-timeline:has(#journey-story-two.collapsing) {
-    height: 790px;
+    height: 750px;
+}
+
+.story-timeline:has(#journey-story-one.show),
+.story-timeline:has(#journey-story-one.collapsing) {
+    height: 700px;
 }
 
 .journey-background {
@@ -1050,8 +1081,11 @@ html[data-bs-theme="dark"] .hero-info-zh {
 
 .journey-photo-card {
     width: calc(100% + 24px);
-    margin: 0.75rem -12px 0;
-    border-radius: 8px;
+    margin: 1rem -12px 1.1rem;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    box-shadow: none;
     opacity: 0;
     overflow: hidden;
     transform: translateY(10px) scale(0.985);
@@ -1067,8 +1101,11 @@ html[data-bs-theme="dark"] .hero-info-zh {
 .journey-photo-card-image {
     display: block;
     width: 100%;
-    height: 140px;
-    border-radius: 8px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 4px;
+    box-shadow: none;
     object-fit: cover;
     object-position: center 43%;
 }
@@ -1111,11 +1148,11 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .rsvp-intro-zh {
-    color: var(--bs-secondary-color);
-    font-size: 14px;
-    font-weight: var(--type-weight-regular);
+    color: #38342f;
+    font-size: 15px;
+    font-weight: var(--type-weight-medium);
     letter-spacing: var(--type-tracking-lg);
-    opacity: 0.88;
+    opacity: 0.94;
 }
 
 .rsvp-transition {
@@ -1152,18 +1189,18 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 
 .bilingual-field-label-en {
     min-width: 0;
-    color: var(--color-info-secondary);
+    color: var(--color-info-muted);
     font-size: var(--type-field-label-en-size);
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-compact);
-    opacity: 1;
+    opacity: 0.92;
 }
 
 .bilingual-field-label-zh {
     display: block;
     margin: 0;
     order: -1;
-    color: inherit;
+    color: #38342f;
     font-family: var(--font-sans-zh);
     font-size: var(--type-field-label-zh-size);
     font-weight: var(--type-weight-medium);
@@ -1184,20 +1221,20 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 }
 
 .bilingual-option-text-en {
-    color: var(--color-info-secondary);
+    color: var(--color-info-muted);
     font-size: var(--type-option-en-size);
     font-weight: var(--type-weight-regular);
     line-height: var(--type-line-ui);
-    opacity: 1;
+    opacity: 0.92;
 }
 
 .bilingual-option-text-zh {
     order: -1;
     margin-bottom: 2px;
-    color: inherit;
+    color: #403b36;
     font-family: var(--font-sans-zh);
     font-size: var(--type-option-zh-size);
-    font-weight: var(--type-weight-regular);
+    font-weight: var(--type-weight-medium);
     line-height: var(--type-line-bilingual);
     letter-spacing: var(--type-tracking-lg);
 }
@@ -1205,7 +1242,7 @@ html[data-bs-theme="dark"] .story-person-name-zh {
 .bilingual-helper-text {
     display: flex;
     flex-direction: column;
-    color: #625f5a;
+    color: var(--color-info-secondary);
     font-family: var(--font-sans);
     font-size: var(--type-helper-size);
     font-weight: var(--type-weight-regular);
@@ -1345,7 +1382,7 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 }
 
 .rsvp-name-prompt-zh {
-    color: rgb(64 59 54 / 62%);
+    color: rgb(64 59 54 / 72%);
     font-family: var(--font-sans-zh);
     font-size: var(--type-field-label-zh-size);
     font-weight: var(--type-weight-medium);
@@ -1530,6 +1567,7 @@ html[data-bs-theme="dark"] .rsvp-name-prompt-en {
     font-weight: var(--type-weight-medium);
     line-height: var(--type-line-ui);
     letter-spacing: var(--type-tracking-lg);
+    color: #38342f;
 }
 
 html[data-bs-theme="dark"] .rsvp-submit-button {
@@ -1798,13 +1836,6 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
         color: #9f7b4d;
         opacity: 0.82;
     }
-}
-
-.calendar-shortcut.is-guide-highlight {
-    border-color: rgb(184 151 106 / 68%) !important;
-    color: #b8976a;
-    background-color: rgb(184 151 106 / 10%) !important;
-    opacity: 1;
 }
 
 .wedding-day-section.is-shortcut-arrival .wedding-day-title {
@@ -2198,20 +2229,76 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     font-family: var(--font-sans);
     font-size: var(--type-modal-title-size);
     font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-ui);
+    letter-spacing: var(--type-tracking-3xl);
+    text-transform: uppercase;
+    color: var(--color-info-secondary);
 }
 
 .rsvp-modal-body {
+    font-family: var(--font-sans);
     font-size: var(--type-modal-body-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-relaxed);
+    color: var(--color-info-muted);
+}
+
+.rsvp-modal-page-header {
+    margin: 0 0 1.65rem;
+}
+
+.rsvp-modal-page-title {
+    margin: 0;
+    color: #38342f;
+    font-family: var(--font-script);
+    font-size: var(--type-section-title-size);
+    font-weight: var(--type-section-title-weight);
+    line-height: var(--type-section-title-line);
+}
+
+.rsvp-modal-page-subtitle {
+    margin: 0.35rem 0 0;
+    color: var(--color-info-secondary);
+    font-family: var(--font-sans-zh);
+    font-size: var(--type-section-subtitle-size);
+    font-weight: var(--type-section-subtitle-weight);
+    line-height: var(--type-section-subtitle-line);
+    letter-spacing: var(--type-section-subtitle-tracking);
 }
 
 .rsvp-modal-zh-primary {
+    font-family: var(--font-sans-zh);
     font-size: var(--type-modal-zh-primary-size);
     font-weight: var(--type-weight-medium);
-    letter-spacing: var(--type-tracking-3xl);
+    line-height: var(--type-line-relaxed);
+    letter-spacing: var(--type-tracking-sm);
+    color: #38342f;
 }
 
 .rsvp-modal-zh-secondary {
+    font-family: var(--font-sans-zh);
     font-size: var(--type-modal-zh-secondary-size);
+    font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-relaxed);
+    letter-spacing: var(--type-tracking-xs);
+    color: var(--color-info-secondary);
+}
+
+.rsvp-modal-closing-zh {
+    color: #38342f;
+    font-family: var(--font-sans-zh);
+    font-size: 15px;
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-relaxed);
+    letter-spacing: var(--type-tracking-sm);
+}
+
+.rsvp-modal-date {
+    color: #4a453f;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: var(--type-weight-medium);
+    line-height: var(--type-line-body);
     letter-spacing: var(--type-tracking-3xl);
 }
 
@@ -2219,6 +2306,84 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     font-family: var(--font-script);
     font-size: var(--type-modal-signature-size);
     font-weight: var(--type-weight-regular);
+    line-height: var(--type-line-tight);
+    color: #38342f;
+}
+
+.rsvp-success-content {
+    border: 1px solid rgb(184 151 106 / 22%);
+    border-radius: 1.35rem;
+    background: rgb(255 252 246 / 98%);
+    box-shadow: 0 1rem 2.8rem rgb(72 59 43 / 14%);
+}
+
+#rsvp-success-modal.show .rsvp-success-content {
+    animation: rsvp-card-reveal 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rsvp-success-body {
+    padding: 2.5rem 2rem 2.25rem;
+}
+
+.rsvp-modal-divider {
+    width: min(13rem, 72%);
+    margin: 1.35rem auto 0;
+    border-color: rgb(184 151 106 / 34%);
+    opacity: 1;
+}
+
+.rsvp-modal-divider-calendar {
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+#rsvp-success-modal .btn-close {
+    width: 0.7rem;
+    height: 0.7rem;
+    opacity: 0.42;
+}
+
+#rsvp-success-modal .calendar-helper-text {
+    font-family: var(--font-sans);
+    font-size: var(--type-calendar-helper-size);
+    font-weight: var(--type-weight-regular);
+    letter-spacing: var(--type-tracking-lg);
+    color: var(--color-info-muted);
+}
+
+#rsvp-success-modal .calendar-provider-links {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: var(--type-weight-regular);
+}
+
+#rsvp-success-modal .calendar-provider-links a {
+    color: #9f7b4d;
+    text-decoration: none;
+}
+
+#rsvp-success-modal .calendar-provider-links a:hover,
+#rsvp-success-modal .calendar-provider-links a:focus-visible {
+    text-decoration: underline !important;
+    text-underline-offset: 0.18rem;
+}
+
+@keyframes rsvp-card-reveal {
+    0% {
+        opacity: 0;
+        transform: translateY(8px) scale(0.985);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #rsvp-success-modal.show .rsvp-success-content {
+        animation: none;
+    }
 }
 
 .rsvp-section {

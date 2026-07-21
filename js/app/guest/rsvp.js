@@ -2,6 +2,7 @@ import { util } from '../../common/util.js';
 import { lang } from '../../common/language.js';
 import { storage } from '../../common/storage.js';
 import { bs } from '../../libs/bootstrap.js';
+import * as confetti from '../../libs/confetti.js';
 
 export const rsvp = (() => {
 
@@ -196,6 +197,9 @@ export const rsvp = (() => {
                 document.getElementById('modal-declined').classList.toggle('d-none', isAttending);
 
                 bs.modal('rsvp-success-modal').show();
+                if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    window.setTimeout(() => confetti.rsvpPetalAnimation(), 100);
+                }
             }
         } catch {
             alertWrapper.innerHTML = alertMarkup('danger', lang
