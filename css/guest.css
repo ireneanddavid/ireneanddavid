@@ -3773,6 +3773,15 @@ html[data-bs-theme="dark"] .bg-white-black {
         width: 75%;
     }
 
+    .hero-content {
+        padding: 2.75rem 0 3rem;
+        padding-top: clamp(2rem, 4dvh, 2.75rem);
+    }
+
+    .hero-scroll-indicator {
+        margin-top: 2rem;
+    }
+
     .wedding-hero > .bg-cover-home,
     .wedding-day-section > img,
     .rsvp-section > img,
