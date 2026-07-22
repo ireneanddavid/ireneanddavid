@@ -1,7 +1,7 @@
 import { video } from './video.js';
 import { image } from './image.js';
 import { audio } from './audio.js';
-import { successChime } from './success-chime.js';
+import { openingChime } from './opening-chime.js';
 import { rsvp } from './rsvp.js';
 import { progress } from './progress.js';
 import { util } from '../../common/util.js';
@@ -158,8 +158,8 @@ export const guest = (() => {
      * @returns {void}
      */
     const open = async (button) => {
-        successChime.prepare();
         button.disabled = true;
+        await openingChime.play();
         document.body.scrollIntoView({ behavior: 'instant' });
 
         const welcome = document.getElementById('welcome');
@@ -443,16 +443,11 @@ export const guest = (() => {
             return;
         }
 
-        let guideWasActive = false;
         let guideFrame = null;
         let lastGuideScrollY = window.scrollY;
 
         const setGuideActive = (active) => {
             button.classList.toggle('is-guide-active', active);
-            if (active && !guideWasActive) {
-                successChime.play();
-            }
-            guideWasActive = active;
         };
 
         const updateGuideState = () => {
@@ -640,6 +635,7 @@ export const guest = (() => {
         heroScrollIndicator();
         journeyAccordionReveal();
         confetti.prepareBasicAnimation();
+        openingChime.prepare();
 
         // Don't restore previous attendance — always start fresh at "Select"
 
