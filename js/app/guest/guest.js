@@ -372,6 +372,33 @@ export const guest = (() => {
     };
 
     /** @returns {void} */
+    const hiddenSideInteraction = () => {
+        const coin = document.getElementById('david-hidden-side');
+        if (!coin) {
+            return;
+        }
+
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let locked = false;
+
+        coin.addEventListener('click', () => {
+            if (locked) {
+                return;
+            }
+
+            locked = true;
+            const isFlipped = coin.classList.toggle('is-flipped');
+            coin.setAttribute('aria-pressed', String(isFlipped));
+            coin.setAttribute('aria-busy', 'true');
+
+            window.setTimeout(() => {
+                locked = false;
+                coin.removeAttribute('aria-busy');
+            }, reducedMotion ? 0 : 580);
+        });
+    };
+
+    /** @returns {void} */
     const footerEasterEgg = () => {
         const trigger = document.getElementById('footer-easter-egg-trigger');
         const message = document.getElementById('footer-easter-egg-message');
@@ -636,6 +663,7 @@ export const guest = (() => {
         buildCalendarLinks();
         journeyConfetti();
         coupleHeartInteraction();
+        hiddenSideInteraction();
         footerEasterEgg();
         guideClosingHeartEasterEgg();
         weddingDayShortcut();
