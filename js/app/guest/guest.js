@@ -1,6 +1,7 @@
 import { video } from './video.js';
 import { image } from './image.js';
 import { audio } from './audio.js';
+import { successChime } from './success-chime.js';
 import { rsvp } from './rsvp.js';
 import { progress } from './progress.js';
 import { util } from '../../common/util.js';
@@ -157,6 +158,7 @@ export const guest = (() => {
      * @returns {void}
      */
     const open = async (button) => {
+        successChime.prepare();
         button.disabled = true;
         document.body.scrollIntoView({ behavior: 'instant' });
 
@@ -347,14 +349,8 @@ export const guest = (() => {
             return;
         }
 
-        const celebrated = new Set();
         document.querySelectorAll('#journey-stories .collapse').forEach((panel) => {
             panel.addEventListener('show.bs.collapse', () => {
-                if (celebrated.has(panel.id)) {
-                    return;
-                }
-
-                celebrated.add(panel.id);
                 const toggle = document.querySelector(`[aria-controls="${panel.id}"]`);
                 if (toggle) {
                     const sourceSide = panel.id === 'journey-story-one' ? 'right' : 'left';
@@ -457,16 +453,42 @@ export const guest = (() => {
     const weddingDayShortcut = () => {
         const button = document.getElementById('button-wedding-day');
         const target = document.getElementById('wedding-date');
-        const guide = document.getElementById('wedding-guide');
-        if (!button || !target || !guide) {
+        const guideClosing = document.querySelector('.guide-closing-copy');
+        if (!button || !target || !guideClosing) {
             return;
         }
 
-        const guideObserver = new IntersectionObserver(([entry]) => {
-            const hasReachedGuide = entry.isIntersecting || entry.boundingClientRect.top < 0;
-            button.classList.toggle('is-guide-active', hasReachedGuide);
-        });
-        guideObserver.observe(guide);
+        let guideWasActive = false;
+        let guideFrame = null;
+        let lastGuideScrollY = window.scrollY;
+
+        const setGuideActive = (active) => {
+            button.classList.toggle('is-guide-active', active);
+            if (active && !guideWasActive) {
+                successChime.play();
+            }
+            guideWasActive = active;
+        };
+
+        const updateGuideState = () => {
+            guideFrame = null;
+            const currentScrollY = window.scrollY;
+            const isMovingDown = currentScrollY > lastGuideScrollY + 1;
+            const isBeforeGuideClosing = guideClosing.getBoundingClientRect().top > window.innerHeight * 0.72;
+
+            if (isBeforeGuideClosing) {
+                setGuideActive(false);
+            } else if (isMovingDown) {
+                setGuideActive(true);
+            }
+            lastGuideScrollY = currentScrollY;
+        };
+
+        window.addEventListener('scroll', () => {
+            if (guideFrame === null) {
+                guideFrame = window.requestAnimationFrame(updateGuideState);
+            }
+        }, { passive: true });
 
         let scrollFrame = null;
         let arrivalTimer = null;
@@ -569,6 +591,32 @@ export const guest = (() => {
     };
 
     /**
+     * Keep the next chapter title visible after the first Journey story opens.
+     * @returns {void}
+     */
+    const journeyAccordionReveal = () => {
+        const firstStory = document.getElementById('journey-story-one');
+        const secondChapter = document.querySelector('[data-bs-target="#journey-story-two"]');
+        if (!firstStory || !secondChapter) {
+            return;
+        }
+
+        firstStory.addEventListener('shown.bs.collapse', () => {
+            const bottomSafeArea = 24;
+            const secondChapterBottom = secondChapter.getBoundingClientRect().bottom;
+            const visibleBottom = window.innerHeight - bottomSafeArea;
+            if (secondChapterBottom <= visibleBottom) {
+                return;
+            }
+
+            window.scrollBy({
+                top: secondChapterBottom - visibleBottom,
+                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+            });
+        });
+    };
+
+    /**
      * @returns {object}
      */
     const loaderLibs = () => {
@@ -605,6 +653,7 @@ export const guest = (() => {
         guideClosingHeartEasterEgg();
         weddingDayShortcut();
         heroScrollIndicator();
+        journeyAccordionReveal();
         confetti.prepareBasicAnimation();
 
         // Don't restore previous attendance — always start fresh at "Select"

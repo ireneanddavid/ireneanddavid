@@ -59,12 +59,12 @@ export const basicAnimation = () => {
     openingCanvas = null;
 
     return fire({
-        particleCount: 36,
-        startVelocity: 30,
-        spread: 58,
-        ticks: 80,
-        gravity: 1.05,
-        scalar: 0.82,
+        particleCount: 544,
+        startVelocity: 54,
+        spread: 172,
+        ticks: 384,
+        gravity: 0.78,
+        scalar: 0.56,
         origin: { y: 1 },
         disableForReducedMotion: true,
     }).finally(() => canvas.remove());
