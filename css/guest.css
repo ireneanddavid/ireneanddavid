@@ -300,6 +300,76 @@ html[data-bs-theme="dark"] .home-couple-name-zh {
     transform: translateX(6%) scale(1.12);
 }
 
+.hero-hidden-side-spin .hidden-side-spin-inner::before,
+.hero-hidden-side-spin .hidden-side-spin-inner::after,
+.hero-hidden-side-spin .hidden-side-spin-edge::before,
+.hero-hidden-side-spin .hidden-side-spin-edge::after {
+    display: none;
+}
+
+.hero-hidden-side-spin .hidden-side-spin-edge {
+    inset: 0;
+    background: transparent;
+}
+
+.hero-hidden-side-spin .hidden-side-spin-front {
+    transform: rotateY(0deg) translateZ(8px);
+}
+
+.hero-hidden-side-spin .hidden-side-spin-back {
+    transform: rotateY(180deg) translateZ(8px);
+}
+
+.hero-photo-bevel-layer {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+    -webkit-mask-image: radial-gradient(circle, transparent 0 87%, #000 88% 100%);
+    mask-image: radial-gradient(circle, transparent 0 87%, #000 88% 100%);
+}
+
+.hero-photo-bevel-front-outer,
+.hero-photo-bevel-front-inner {
+    background-image:
+        linear-gradient(90deg, rgb(255 255 255 / 14%), transparent 38%, rgb(35 28 22 / 18%)),
+        url("../assets/images/hero-photo.jpeg?v=1");
+}
+
+.hero-photo-bevel-back-outer,
+.hero-photo-bevel-back-inner,
+.hero-photo-bevel-center {
+    background-image:
+        linear-gradient(90deg, rgb(255 255 255 / 12%), transparent 40%, rgb(35 28 22 / 20%)),
+        url("../assets/images/hero-hidden-side.jpeg?v=1");
+    background-position: 56% 58%;
+}
+
+.hero-photo-bevel-front-outer {
+    transform: translateZ(6.5px) scale(0.997);
+}
+
+.hero-photo-bevel-front-inner {
+    transform: translateZ(3.25px) scale(0.985);
+}
+
+.hero-photo-bevel-center {
+    transform: translateZ(0) scale(0.978);
+}
+
+.hero-photo-bevel-back-inner {
+    transform: translateZ(-3.25px) scale(0.985);
+}
+
+.hero-photo-bevel-back-outer {
+    transform: translateZ(-6.5px) scale(0.997);
+}
+
 .hero-date {
     margin: 0;
     font-family: var(--font-sans);
@@ -798,7 +868,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
     opacity: 1;
     animation:
         cover-button-exit 720ms cubic-bezier(0.22, 1, 0.36, 1) both,
-        cover-button-gold-wash 840ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        cover-button-gold-wash 960ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .cover-open-button.is-opening::before,
@@ -1458,6 +1528,8 @@ html[data-bs-theme="dark"] .hero-info-zh {
     mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%);
     mix-blend-mode: multiply;
     pointer-events: none;
+    transform: translateY(4.5%) scale(1.06);
+    transform-origin: center bottom;
 }
 
 .journey-header {
@@ -1974,7 +2046,7 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 }
 
 .rsvp-name-prompt-zh {
-    color: rgb(64 59 54 / 72%);
+    color: #38342f;
     font-family: var(--font-sans-zh);
     font-size: var(--type-field-label-zh-size);
     font-weight: var(--type-weight-medium);
@@ -1992,7 +2064,7 @@ html[data-bs-theme="dark"] .rsvp-input::placeholder {
 }
 
 html[data-bs-theme="dark"] .rsvp-name-prompt-zh {
-    color: rgb(245 239 230 / 66%);
+    color: rgb(248 246 242 / 84%);
 }
 
 html[data-bs-theme="dark"] .rsvp-name-prompt-en {
