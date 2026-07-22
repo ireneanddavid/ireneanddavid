@@ -471,6 +471,7 @@ html[data-bs-theme="dark"] .hero-info-zh {
 }
 
 .wedding-date-link {
+    display: inline-block;
     min-width: 10.5rem;
     padding: 0.15rem 0.65rem 0.35rem;
     border: 0;
@@ -478,22 +479,13 @@ html[data-bs-theme="dark"] .hero-info-zh {
     border-radius: 0;
     background: transparent;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .wedding-date-value {
     display: block;
     padding-left: 0.12em;
     letter-spacing: 0.12em;
-}
-
-.calendar-platform-cta {
-    display: block;
-    margin-top: 0.4rem;
-    color: var(--color-info-muted);
-    font-size: 10px;
-    font-weight: var(--type-weight-regular);
-    line-height: var(--type-line-ui);
-    letter-spacing: var(--type-tracking-md);
 }
 
 .wedding-date-link:hover,
@@ -841,6 +833,13 @@ html[data-bs-theme="dark"] .hero-info-zh {
     line-height: var(--type-line-relaxed);
 }
 
+.story-punchline-zh {
+    color: #5f5953;
+    font-family: var(--font-soft-zh);
+    font-style: normal;
+    letter-spacing: var(--type-tracking-sm);
+}
+
 .story-heart {
     color: #b8976a;
     font-family: var(--font-serif);
@@ -1157,6 +1156,10 @@ html[data-bs-theme="dark"] .journey-story-body {
 
 html[data-bs-theme="dark"] .story-person-name-zh {
     color: #aaa;
+}
+
+html[data-bs-theme="dark"] .story-punchline-zh {
+    color: #d8d2c9;
 }
 
 .rsvp-field {
@@ -2509,6 +2512,118 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
     color: #38342f;
 }
 
+.calendar-choice-content {
+    border: 1px solid rgb(184 151 106 / 22%);
+    border-radius: 1.25rem;
+    background: rgb(255 252 246 / 98%);
+    box-shadow: 0 1rem 2.8rem rgb(72 59 43 / 14%);
+}
+
+#calendar-choice-modal.show .calendar-choice-content {
+    animation: rsvp-card-reveal 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.calendar-choice-body {
+    padding: 2.25rem 1.75rem 1.4rem;
+}
+
+.calendar-choice-title,
+.calendar-choice-subtitle {
+    margin: 0;
+}
+
+.calendar-choice-title {
+    color: #38342f;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: var(--type-weight-medium);
+    letter-spacing: var(--type-tracking-lg);
+}
+
+.calendar-choice-subtitle {
+    margin-top: 0.3rem;
+    color: #706860;
+    font-family: var(--font-soft-zh);
+    font-size: 13px;
+    font-weight: var(--type-weight-regular);
+    letter-spacing: var(--type-tracking-md);
+}
+
+.calendar-choice-divider {
+    width: 2.5rem;
+    margin: 1.15rem auto 0.55rem;
+    border-top: 1px solid rgb(184 151 106 / 46%);
+}
+
+.calendar-choice-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-choice-links a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 0.2rem;
+    color: #4a453f;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: var(--type-weight-regular);
+    letter-spacing: var(--type-tracking-xs);
+    text-decoration: none;
+}
+
+.calendar-choice-links a + a {
+    border-top: 1px solid rgb(184 151 106 / 20%);
+}
+
+.calendar-choice-links a:hover,
+.calendar-choice-links a:focus-visible,
+.calendar-choice-link-mark {
+    color: #9f7b4d;
+}
+
+.calendar-choice-links a:focus-visible {
+    outline: 1px solid rgb(184 151 106 / 38%);
+    outline-offset: 2px;
+}
+
+.calendar-choice-link-mark {
+    margin-left: 1rem;
+    font-size: 12px;
+}
+
+#calendar-choice-modal .btn-close {
+    width: 0.7rem;
+    height: 0.7rem;
+    opacity: 0.42;
+}
+
+html[data-bs-theme="dark"] .calendar-choice-content {
+    border-color: rgb(216 189 147 / 24%);
+    background: rgb(27 24 21 / 98%);
+    box-shadow: 0 1rem 2.8rem rgb(0 0 0 / 28%);
+}
+
+html[data-bs-theme="dark"] .calendar-choice-title,
+html[data-bs-theme="dark"] .calendar-choice-links a {
+    color: rgb(248 246 242 / 84%);
+}
+
+html[data-bs-theme="dark"] .calendar-choice-subtitle {
+    color: rgb(248 246 242 / 58%);
+}
+
+html[data-bs-theme="dark"] .calendar-choice-links a:hover,
+html[data-bs-theme="dark"] .calendar-choice-links a:focus-visible,
+html[data-bs-theme="dark"] .calendar-choice-link-mark {
+    color: #d2b27d;
+}
+
+html[data-bs-theme="dark"] #calendar-choice-modal .btn-close {
+    filter: invert(1) grayscale(1);
+}
+
 .rsvp-success-content {
     border: 1px solid rgb(184 151 106 / 22%);
     border-radius: 1.35rem;
@@ -2580,6 +2695,7 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    #calendar-choice-modal.show .calendar-choice-content,
     #rsvp-success-modal.show .rsvp-success-content {
         animation: none;
     }

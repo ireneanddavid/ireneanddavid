@@ -260,7 +260,7 @@ export const guest = (() => {
      * @returns {void}
      */
     const buildCalendarLinks = () => {
-        const calBtn = document.querySelector('button[data-calendar]');
+        const calBtn = document.querySelector('[data-calendar]');
         if (!calBtn) {
             return;
         }
@@ -270,7 +270,7 @@ export const guest = (() => {
         const end = calBtn.getAttribute('data-cal-end') || '';
         const location = calBtn.getAttribute('data-cal-location') || '';
         const details = calBtn.getAttribute('data-cal-details') || '';
-        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const eventTimeZone = 'Asia/Taipei';
         const icsHref = './assets/calendar/minchi-david-wedding.ics';
 
         // Google Calendar link
@@ -282,34 +282,19 @@ export const guest = (() => {
             dates: `${formatDate(start)}/${end ? formatDate(end) : formatDate(start)}`,
             details: details,
             location: location,
-            ctz: tz,
+            ctz: eventTimeZone,
         }).toString();
 
-        const userAgent = navigator.userAgent || '';
-        const isIOS = /iPad|iPhone|iPod/.test(userAgent)
-            || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-        const isAndroid = /Android/.test(userAgent);
-        const platformCta = document.getElementById('calendar-platform-cta');
-        let platformLabel = 'Add to Calendar';
-        if (isIOS) {
-            platformLabel = 'Add to Apple Calendar';
-        } else if (isAndroid) {
-            platformLabel = 'Add to Google Calendar';
+        const googleChoice = document.getElementById('calendar-choice-google');
+        const icsChoice = document.getElementById('calendar-choice-ics');
+        if (googleChoice) {
+            googleChoice.setAttribute('href', googleUrl.toString());
         }
-
-        if (platformCta) {
-            platformCta.textContent = platformLabel;
+        if (icsChoice) {
+            icsChoice.setAttribute('href', icsHref);
         }
-        calBtn.setAttribute('aria-label', `${platformLabel}: November 29, 2026`);
-
-        calBtn.addEventListener('click', () => {
-            if (isAndroid) {
-                window.open(googleUrl, '_blank', 'noopener');
-                return;
-            }
-
-            window.location.assign(icsHref);
-        });
+        calBtn.setAttribute('aria-label', 'Choose a calendar for November 29, 2026');
+        calBtn.addEventListener('click', () => bs.modal('calendar-choice-modal').show());
 
         // Build calendar links for the RSVP success modal
         const calContainer = document.getElementById('add-to-cal');

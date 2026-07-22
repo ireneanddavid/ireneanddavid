@@ -28,7 +28,7 @@ The Apps Script (`docs/google-apps-script.js`) must only interact with the RSVP 
 
 1. Only use `SpreadsheetApp.getActiveSpreadsheet()`; never open another spreadsheet by ID or URL.
 2. Only use `appendRow()`; never delete, clear, or overwrite existing rows.
-3. Never access other Google services such as Drive, Gmail, or Calendar.
+3. Never access other Google services such as Drive, Gmail, or Calendar. The only exception is `MailApp.sendEmail()`, which may send one confirmation email exclusively to the validated email address included in the current RSVP submission. Never use `GmailApp`, read mailbox data, add CC/BCC recipients, or send to an address that did not come from the current submission.
 4. Never install automatic triggers.
 5. Make no external HTTP calls except to Google's reCAPTCHA verification endpoint.
 

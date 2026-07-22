@@ -56,7 +56,7 @@
     <!-- Dependencies CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha256-2FMn2Zx6PuH5tdBQDRNwrOo60ts5wWPC9R8jK67b3t4=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css" integrity="sha256-4rTIfo5GQTi/7UJqoyUJQKzxW8VN/YBH31+Cy+vTZj4=" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/guest.css?v=114">
+    <link rel="stylesheet" href="./css/guest.css?v=117">
 
     <!-- Dependencies JS -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha256-5P1JGBOIxI7FBAvT/mb1fCnI5n/NhQKzNUuW7Hq0fMc=" crossorigin="anonymous"></script>
@@ -68,7 +68,7 @@
             if (window.caches) { caches.keys().then(function(n) { n.forEach(function(k) { caches.delete(k); }); }); }
         }
     </script>
-    <script src="./dist/guest.js?v=59"></script>
+    <script src="./dist/guest.js?v=61"></script>
 
     <!-- reCAPTCHA v3 — replace YOUR_SITE_KEY with your actual key -->
     <!-- <script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script> -->
@@ -165,9 +165,8 @@
                                     data-cal-end="2026-11-29 15:00"
                                     data-cal-location="Taipei Marriott Hotel 36F 寰宇廳, No.199 Lequn 2nd Road, ZhongShan District, Taipei, Taiwan"
                                     data-cal-details="We look forward to celebrating with you!"
-                                    aria-label="Add November 29, 2026 to calendar">
+                                    aria-label="Choose a calendar for November 29, 2026">
                                     <span class="wedding-date-value">2026.11.29</span>
-                                    <span class="calendar-platform-cta" id="calendar-platform-cta">Add to Calendar</span>
                                 </button>
                             </p>
                             <p class="wedding-day mb-0">Sunday · 星期日</p>
@@ -226,10 +225,11 @@
                             <article class="story-profile" data-aos="fade-up" data-aos-duration="1200">
                                 <p class="story-role mb-2">Bride</p>
                                 <img src="./assets/images/placeholder.webp" data-src="./assets/images/bride.jpg?v=2" alt="Portrait of Minchi Tsai" data-image-modal role="button" tabindex="0" aria-label="Open portrait of Minchi Tsai" class="story-portrait rounded-circle shadow mx-auto mb-3 cursor-pointer">
-                                <h3 class="story-person-name mb-0">Minchi Tsai</h3>
+                                <h3 class="story-person-name mb-0">Minchi</h3>
                                 <p class="story-person-name-zh mb-3">蔡旻淇</p>
                                 <p class="story-traits mb-2">Snowboard Instructor • Outdoor Addict • Free Spirit</p>
-                                <p class="story-punchline mb-0">There’s no such thing as too many ski trips.</p>
+                                <p class="story-punchline story-punchline-en mb-1">There’s no such thing as too many ski trips.</p>
+                                <p class="story-punchline story-punchline-zh mb-0">滑雪與戶外，永遠不嫌多。</p>
                             </article>
 
                             <button type="button" class="story-heart story-heart-button my-4" id="couple-heart" aria-label="Send love to Minchi and David">♡</button>
@@ -237,10 +237,11 @@
                             <article class="story-profile" data-aos="fade-up" data-aos-duration="1200">
                                 <p class="story-role mb-2">Groom</p>
                                 <img src="./assets/images/placeholder.webp" data-src="./assets/images/groom.jpeg" alt="Portrait of David Kuo" data-image-modal role="button" tabindex="0" aria-label="Open portrait of David Kuo" class="story-portrait rounded-circle shadow mx-auto mb-3 cursor-pointer">
-                                <h3 class="story-person-name mb-0">David Kuo</h3>
+                                <h3 class="story-person-name mb-0">David</h3>
                                 <p class="story-person-name-zh mb-3">郭大為</p>
                                 <p class="story-traits mb-2">Burger Hunter • Steak Expert • Calm Soul</p>
-                                <p class="story-punchline mb-0">Will drive anywhere for great food.</p>
+                                <p class="story-punchline story-punchline-en mb-1">Will drive anywhere for great food.</p>
+                                <p class="story-punchline story-punchline-zh mb-0">總能為一頓好吃的，多開一段路。</p>
                             </article>
                         </div>
 
@@ -673,6 +674,30 @@
                 <noscript>
                     <small class="mt-1 text-danger">Sorry, this invitation requires JavaScript to work.</small>
                 </noscript>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calendar Choice Modal -->
+    <div class="modal fade" id="calendar-choice-modal" tabindex="-1" aria-hidden="true" aria-labelledby="calendar-choice-title">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content calendar-choice-content">
+                <div class="modal-body calendar-choice-body text-center">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <header class="calendar-choice-header">
+                        <p class="calendar-choice-title" id="calendar-choice-title">Save the Date</p>
+                        <p class="calendar-choice-subtitle">加入行事曆</p>
+                    </header>
+                    <div class="calendar-choice-divider" aria-hidden="true"></div>
+                    <nav class="calendar-choice-links" aria-label="Calendar providers">
+                        <a href="#" id="calendar-choice-google" target="_blank" rel="noopener noreferrer" data-bs-dismiss="modal">
+                            <span>Google Calendar</span><span class="calendar-choice-link-mark" aria-hidden="true">↗</span>
+                        </a>
+                        <a href="./assets/calendar/minchi-david-wedding.ics" id="calendar-choice-ics" data-bs-dismiss="modal">
+                            <span>Apple / Outlook Calendar</span><span class="calendar-choice-link-mark" aria-hidden="true">.ics ↓</span>
+                        </a>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
