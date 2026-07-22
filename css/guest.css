@@ -933,35 +933,131 @@ html[data-bs-theme="dark"] .hero-info-zh {
     object-fit: cover;
 }
 
-.hidden-side-coin {
+.hidden-side-spin {
     position: relative;
     padding: 0;
     border: 0;
     background: transparent;
     cursor: pointer;
-    perspective: 800px;
+    isolation: isolate;
+    overflow: visible;
+    perspective: 700px;
     -webkit-tap-highlight-color: transparent;
 }
 
-.hidden-side-coin:focus-visible {
+.hidden-side-spin::before,
+.hidden-side-spin::after {
+    position: absolute;
+    z-index: 0;
+    inset: -0.8rem;
+    border-radius: 50%;
+    content: '';
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hidden-side-spin::before {
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg 34deg,
+        rgb(255 251 239 / 78%) 52deg,
+        rgb(229 194 126 / 92%) 68deg,
+        transparent 88deg 166deg,
+        rgb(196 153 88 / 78%) 190deg,
+        transparent 214deg 292deg,
+        rgb(245 220 169 / 84%) 318deg,
+        transparent 340deg 360deg
+    );
+    transform: rotate(0deg) scale(0.86);
+}
+
+.hidden-side-spin::after {
+    background:
+        radial-gradient(ellipse 0.8px 4px at 18% 28%, rgb(255 255 250 / 96%) 0 72%, transparent 100%),
+        radial-gradient(ellipse 4px 0.8px at 18% 28%, rgb(255 255 250 / 96%) 0 72%, transparent 100%),
+        radial-gradient(ellipse 0.7px 3.5px at 78% 22%, rgb(244 215 155 / 92%) 0 72%, transparent 100%),
+        radial-gradient(ellipse 3.5px 0.7px at 78% 22%, rgb(244 215 155 / 92%) 0 72%, transparent 100%),
+        radial-gradient(ellipse 0.7px 3px at 86% 72%, rgb(255 251 239 / 90%) 0 72%, transparent 100%),
+        radial-gradient(ellipse 3px 0.7px at 86% 72%, rgb(255 251 239 / 90%) 0 72%, transparent 100%),
+        radial-gradient(ellipse 0.6px 2.8px at 24% 82%, rgb(226 188 112 / 88%) 0 72%, transparent 100%),
+        radial-gradient(ellipse 2.8px 0.6px at 24% 82%, rgb(226 188 112 / 88%) 0 72%, transparent 100%);
+    transform: scale(0.5);
+}
+
+.hidden-side-spin:focus-visible {
     outline: 2px solid rgb(184 151 106 / 72%);
     outline-offset: 4px;
 }
 
-.hidden-side-coin-inner {
+.hidden-side-spin-inner {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    display: block;
+    transform: rotateY(var(--hidden-side-spin-rotation, 0deg));
+    transform-style: preserve-3d;
+}
+
+.hidden-side-spin.is-animating .hidden-side-spin-inner {
+    animation: hidden-side-continuous-turn 940ms both;
+    will-change: transform;
+}
+
+.hidden-side-spin.is-animating::before {
+    animation: hidden-side-gold-orbit 940ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hidden-side-spin.is-animating::after {
+    animation: hidden-side-spin-burst 470ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hidden-side-spin-inner::before,
+.hidden-side-spin-inner::after,
+.hidden-side-spin-edge {
+    position: absolute;
+    inset: 2px;
+    display: block;
+    border-radius: 50%;
+    content: '';
+    backface-visibility: visible;
+}
+
+.hidden-side-spin-inner::before {
+    background: #a98556;
+    transform: translateZ(-3px);
+}
+
+.hidden-side-spin-edge {
+    background: #c5a16d;
+    transform: translateZ(0);
+    transform-style: preserve-3d;
+}
+
+.hidden-side-spin-edge::before,
+.hidden-side-spin-edge::after {
     position: absolute;
     inset: 0;
     display: block;
-    transform: rotateY(0deg);
-    transform-style: preserve-3d;
-    transition: transform 560ms cubic-bezier(0.22, 0.75, 0.25, 1);
+    border-radius: 50%;
+    content: '';
 }
 
-.hidden-side-coin.is-flipped .hidden-side-coin-inner {
-    transform: rotateY(180deg);
+.hidden-side-spin-edge::before {
+    background: #b58c58;
+    transform: translateZ(-1.5px);
 }
 
-.hidden-side-coin-face {
+.hidden-side-spin-edge::after {
+    background: #d4b784;
+    transform: translateZ(1.5px);
+}
+
+.hidden-side-spin-inner::after {
+    background: #dfc89f;
+    transform: translateZ(3px);
+}
+
+.hidden-side-spin-face {
     position: absolute;
     inset: 0;
     display: block;
@@ -973,19 +1069,74 @@ html[data-bs-theme="dark"] .hero-info-zh {
     -webkit-backface-visibility: hidden;
 }
 
-.hidden-side-coin-front {
-    transform: rotateY(0deg) translateZ(1px);
+.hidden-side-spin-front {
+    transform: rotateY(0deg) translateZ(5px);
 }
 
-.hidden-side-coin-back {
-    transform: rotateY(180deg) translateZ(1px);
+.hidden-side-spin-back {
+    transform: rotateY(180deg) translateZ(5px);
 }
 
-.hidden-side-coin-image {
+.hidden-side-spin-image {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+@keyframes hidden-side-continuous-turn {
+    0% {
+        transform: rotateY(var(--hidden-side-spin-start, 0deg));
+        animation-timing-function: cubic-bezier(0.45, 0, 0.2, 1);
+    }
+
+    80% {
+        transform: rotateY(calc(var(--hidden-side-spin-rotation, 0deg) + 6deg));
+        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    100% {
+        transform: rotateY(var(--hidden-side-spin-rotation, 0deg));
+    }
+}
+
+@keyframes hidden-side-gold-orbit {
+    0% {
+        opacity: 0;
+        transform: rotate(0deg) scale(0.86);
+    }
+
+    18% {
+        opacity: 0.9;
+        transform: rotate(72deg) scale(1);
+    }
+
+    72% {
+        opacity: 0.52;
+        transform: rotate(286deg) scale(1.08);
+    }
+
+    100% {
+        opacity: 0;
+        transform: rotate(360deg) scale(1.14);
+    }
+}
+
+@keyframes hidden-side-spin-burst {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    22% {
+        opacity: 1;
+        transform: scale(1.06);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.62);
+    }
 }
 
 .story-person-name {
@@ -2493,8 +2644,13 @@ html[data-bs-theme="dark"] .rsvp-submit-button {
         animation: none;
     }
 
-    .hidden-side-coin-inner {
-        transition: none;
+    .hidden-side-spin.is-animating .hidden-side-spin-inner {
+        animation: none;
+    }
+
+    .hidden-side-spin.is-animating::before,
+    .hidden-side-spin.is-animating::after {
+        animation: none;
     }
 
     .cover-open-button.is-opening,

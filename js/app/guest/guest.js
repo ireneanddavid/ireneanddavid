@@ -372,29 +372,38 @@ export const guest = (() => {
     };
 
     /** @returns {void} */
-    const hiddenSideInteraction = () => {
-        const coin = document.getElementById('david-hidden-side');
-        if (!coin) {
+    const hiddenSideSpinInteraction = () => {
+        const spin = document.getElementById('david-hidden-side-spin');
+        if (!spin) {
             return;
         }
 
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         let locked = false;
+        let halfTurns = 0;
 
-        coin.addEventListener('click', () => {
+        spin.addEventListener('click', () => {
             if (locked) {
                 return;
             }
 
             locked = true;
-            const isFlipped = coin.classList.toggle('is-flipped');
-            coin.setAttribute('aria-pressed', String(isFlipped));
-            coin.setAttribute('aria-busy', 'true');
+            const startAngle = halfTurns * 180;
+            halfTurns += 1;
+            const isFlipped = halfTurns % 2 === 1;
+            spin.style.setProperty('--hidden-side-spin-start', `${startAngle}deg`);
+            spin.style.setProperty('--hidden-side-spin-rotation', `${halfTurns * 180}deg`);
+            spin.classList.add('is-animating');
+            spin.setAttribute('aria-pressed', String(isFlipped));
+            spin.setAttribute('aria-busy', 'true');
 
-            window.setTimeout(() => {
+            const unlock = () => {
                 locked = false;
-                coin.removeAttribute('aria-busy');
-            }, reducedMotion ? 0 : 580);
+                spin.classList.remove('is-animating');
+                spin.removeAttribute('aria-busy');
+            };
+
+            window.setTimeout(unlock, reducedMotion ? 0 : 960);
         });
     };
 
@@ -663,7 +672,7 @@ export const guest = (() => {
         buildCalendarLinks();
         journeyConfetti();
         coupleHeartInteraction();
-        hiddenSideInteraction();
+        hiddenSideSpinInteraction();
         footerEasterEgg();
         guideClosingHeartEasterEgg();
         weddingDayShortcut();
