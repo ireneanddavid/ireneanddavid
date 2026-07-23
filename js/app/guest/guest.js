@@ -185,6 +185,7 @@ export const guest = (() => {
 
         button.classList.add('is-opening');
         button.disabled = true;
+        document.dispatchEvent(new Event('undangan.open.prepare'));
         const chime = openingChime.play();
         await new Promise((resolve) => util.timeOut(resolve, 140));
         document.body.scrollIntoView({ behavior: 'instant' });
@@ -915,6 +916,7 @@ export const guest = (() => {
         lib.load({
             aos: !window.matchMedia('(max-width: 767px)').matches,
             confetti: document.body.getAttribute('data-confetti') === 'true',
+            additionalFont: false,
         });
     };
 
@@ -924,11 +926,10 @@ export const guest = (() => {
     const init = () => {
         theme.init();
 
-        window.addEventListener('load', () => {
+        document.addEventListener('DOMContentLoaded', () => {
             pool.init(pageLoaded, [
                 'image',
                 'video',
-                'audio',
                 'libs',
             ]);
         });

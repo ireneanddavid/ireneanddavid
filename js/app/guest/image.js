@@ -52,7 +52,7 @@ export const image = (() => {
      * @param {string} src 
      * @returns {Promise<void>}
      */
-    const appendImage = async (el, src) => {
+    const appendImage = async (el, src, trackProgress) => {
         const img = await loadedImage(src);
         await decodeImage(img);
         el.width = img.naturalWidth;
@@ -62,23 +62,29 @@ export const image = (() => {
         await decodeImage(el);
         img.remove();
 
-        progress.complete('image');
+        if (trackProgress) {
+            progress.complete('image');
+        }
     };
 
     /**
      * @param {HTMLImageElement} el 
      * @returns {void}
      */
-    const getByFetch = (el) => {
+    const getByFetch = (el, trackProgress) => {
         urlCache.push({
             url: el.getAttribute('data-src'),
-            res: (url) => appendImage(el, url).catch((err) => {
+            res: (url) => appendImage(el, url, trackProgress).catch((err) => {
                 console.error(err);
-                progress.invalid('image');
+                if (trackProgress) {
+                    progress.invalid('image');
+                }
             }),
             rej: (err) => {
                 console.error(err);
-                progress.invalid('image');
+                if (trackProgress) {
+                    progress.invalid('image');
+                }
             },
         });
     };
@@ -87,13 +93,15 @@ export const image = (() => {
      * @param {HTMLImageElement} el 
      * @returns {void}
      */
-    const getByDefault = (el) => {
-        el.onerror = () => progress.invalid('image');
+    const getByDefault = (el, trackProgress) => {
+        el.onerror = () => trackProgress && progress.invalid('image');
         const completeImage = async () => {
             el.width = el.naturalWidth;
             el.height = el.naturalHeight;
             await decodeImage(el);
-            progress.complete('image');
+            if (trackProgress) {
+                progress.complete('image');
+            }
         };
         el.onload = completeImage;
 
@@ -101,7 +109,9 @@ export const image = (() => {
             el.onload = null;
             completeImage();
         } else if (el.complete) {
-            progress.invalid('image');
+            if (trackProgress) {
+                progress.invalid('image');
+            }
         }
     };
 
@@ -120,14 +130,26 @@ export const image = (() => {
          * @param {function} filter 
          * @returns {Promise<void>}
          */
-        const runGroup = async (filter) => {
+        const runGroup = async (filter, trackProgress) => {
             urlCache.length = 0;
-            imgs.filter(filter).forEach((el) => el.hasAttribute('data-src') ? getByFetch(el) : getByDefault(el));
+            imgs.filter(filter).forEach((el) => el.hasAttribute('data-src')
+                ? getByFetch(el, trackProgress)
+                : getByDefault(el, trackProgress));
             await c.run(urlCache, progress.getAbort());
         };
 
-        await runGroup((el) => el.hasAttribute('fetchpriority'));
-        await runGroup((el) => !el.hasAttribute('fetchpriority'));
+        await runGroup((el) => el.getAttribute('fetchpriority') === 'high', true);
+
+        const loadDeferred = () => runGroup(
+            (el) => el.getAttribute('fetchpriority') !== 'high',
+            false,
+        ).catch((err) => console.error('Deferred image loading failed:', err));
+
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadDeferred, { timeout: 1200 });
+        } else {
+            window.setTimeout(loadDeferred, 0);
+        }
     };
 
     /**
@@ -144,7 +166,11 @@ export const image = (() => {
     const init = () => {
         c = cache('image').withForceCache();
         images = document.querySelectorAll('img');
-        images.forEach(progress.add);
+        images.forEach((img) => {
+            if (img.getAttribute('fetchpriority') === 'high') {
+                progress.add();
+            }
+        });
 
         return {
             load,

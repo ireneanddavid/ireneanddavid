@@ -1,7 +1,3 @@
-import { progress } from './progress.js';
-import { util } from '../../common/util.js';
-import { cache } from '../../connection/cache.js';
-
 export const audio = (() => {
 
     const statePlay = '<i class="fa-solid fa-circle-pause"></i>';
@@ -11,63 +7,23 @@ export const audio = (() => {
      * @param {boolean} [playOnOpen=true]
      * @returns {Promise<void>}
      */
-    const load = async (playOnOpen = true) => {
+    const load = (playOnOpen = true) => {
 
         const url = document.body.getAttribute('data-audio');
         if (!url) {
-            progress.complete('audio', true);
             return;
         }
 
-        /**
-         * @type {HTMLAudioElement|null}
-         */
-        let audioEl = null;
-
-        try {
-            const audioUrl = await cache('audio').withForceCache().get(url, progress.getAbort());
-            audioEl = new Audio();
-            audioEl.loop = true;
-            audioEl.muted = false;
-            audioEl.autoplay = false;
-            audioEl.controls = false;
-            audioEl.preload = 'auto';
-
-            await new Promise((resolve, reject) => {
-                let readyTimer = null;
-                let cleanup = () => {};
-                const ready = () => {
-                    cleanup();
-                    resolve();
-                };
-                const fail = () => {
-                    cleanup();
-                    reject(new Error('Audio preload failed'));
-                };
-                cleanup = () => {
-                    window.clearTimeout(readyTimer);
-                    audioEl.removeEventListener('canplaythrough', ready);
-                    audioEl.removeEventListener('error', fail);
-                };
-
-                audioEl.addEventListener('canplaythrough', ready, { once: true });
-                audioEl.addEventListener('error', fail, { once: true });
-                readyTimer = window.setTimeout(ready, 5000);
-                audioEl.src = audioUrl;
-                audioEl.load();
-
-                if (audioEl.readyState >= 4) {
-                    ready();
-                }
-            });
-
-            progress.complete('audio');
-        } catch {
-            progress.invalid('audio');
-            return;
-        }
+        const audioEl = new Audio();
+        audioEl.loop = true;
+        audioEl.muted = false;
+        audioEl.autoplay = false;
+        audioEl.controls = false;
+        audioEl.preload = 'metadata';
+        audioEl.src = url;
 
         let isPlay = false;
+        let isPrimed = false;
         const music = document.getElementById('button-music');
 
         /**
@@ -86,7 +42,9 @@ export const audio = (() => {
                 music.innerHTML = statePlay;
             } catch (err) {
                 isPlay = false;
-                util.notify(err).error();
+                music.disabled = false;
+                music.innerHTML = statePause;
+                console.warn('Background music playback is waiting for another tap:', err);
             }
         };
 
@@ -99,11 +57,34 @@ export const audio = (() => {
             music.innerHTML = statePause;
         };
 
+        document.addEventListener('undangan.open.prepare', () => {
+            audioEl.preload = 'auto';
+            audioEl.volume = 0;
+            const primePromise = audioEl.play();
+            if (primePromise) {
+                primePromise
+                    .then(() => {
+                        isPrimed = true;
+                    })
+                    .catch(() => {
+                        isPrimed = false;
+                    });
+            }
+        });
+
         document.addEventListener('undangan.open', () => {
             music.classList.remove('d-none');
 
             if (playOnOpen) {
-                play();
+                audioEl.preload = 'auto';
+                audioEl.currentTime = 0;
+                audioEl.volume = 1;
+                if (isPrimed && !audioEl.paused) {
+                    isPlay = true;
+                    music.innerHTML = statePlay;
+                } else {
+                    play();
+                }
             }
         });
 
@@ -127,8 +108,6 @@ export const audio = (() => {
      * @returns {object}
      */
     const init = () => {
-        progress.add();
-
         return {
             load,
         };
